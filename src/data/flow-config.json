@@ -1,0 +1,29 @@
+{
+  "initial": {
+    "text": "修理のご依頼でしょうか？",
+    "buttons": [
+      { "label": "はい", "action": "yes" },
+      { "label": "いいえ", "action": "no" }
+    ]
+  },
+  "yes": {
+    "prompt": "お客様のお電話番号を教えていただけますでしょうか？",
+    "okLabel": "OK",
+    "manufacturer": {
+      "text": "メーカーはどちらでしょうか？",
+      "default": "未選択",
+      "options": ["三菱", "パナソニック", "TOTO", "LIXIL"]
+    }
+  },
+  "thankyou": {
+    "text": "ありがとうございます。お電話番号: "
+  },
+  "no": {
+    "text": "こちらは、修理受付専用の窓口です",
+    "backLabel": "戻る"
+  },
+  "common": {
+    "backLabel": "戻る",
+    "doneLabel": "完了"
+  }
+}

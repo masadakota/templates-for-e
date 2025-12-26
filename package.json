@@ -1,0 +1,22 @@
+{
+  "name": "call-flow",
+  "version": "1.0.0",
+  "description": "A web application for creating and managing flow diagrams.",
+  "main": "src/scripts/main.js",
+  "scripts": {
+    "start": "live-server src",
+    "test": "jest"
+  },
+  "keywords": [
+    "flow",
+    "diagram",
+    "web",
+    "application"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.0.0",
+    "live-server": "^1.2.1"
+  }
+}
