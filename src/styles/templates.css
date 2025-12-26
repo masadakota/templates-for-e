@@ -1,0 +1,57 @@
+.container {
+  padding: 1rem;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+/* アニメーション用 */
+.copy-flash-transition {
+  transition: background-color 0.75s ease;
+}
+
+.info {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* ラベルのテキスト選択を無効化 */
+label {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  white-space: nowrap;
+}
+
+/* 縦の区切り線 */
+.separator-vertical {
+  width: 1px;
+  background-color: #ccc;
+  align-self: stretch;
+}
+
+/* ステータス表示 */
+.status-display {
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 4px;
+}
+
+/* メインレイアウト - デフォルトは縦並び */
+.main-layout {
+  width: 100%;
+}
+
+/* 1000px以上の画面幅でのみ横並び（flex）を適用 */
+@media (min-width: 1000px) {
+  .main-layout {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 1000px;
+    margin: 0 auto;
+  }
+}
