@@ -140,7 +140,7 @@
               class="check-item"
               data-target="status-delay"
               />
-              <span id="status-delay-label"></span>
+              <span id="status-delay-label">お日にちがかかる可能性</span>
             </label>
             
             <label id="maker-checkbox-container">
@@ -249,7 +249,7 @@
       let statusNoteText = "備考要確認\n";
       let statusNameText = "奥様の名前の聴取をお願いします。\n";
       let statusPaidText = "有償警告";
-      let statusDelayText = "お日にちがかかる案内";
+      let statusDelayText = "お日にちがかかる可能性案内";
 
       // 入力のデフォルト値（ここで変更すると HTML の初期状態に依存せず設定できます）
       const DEFAULTS = {
@@ -403,11 +403,11 @@
           // チェックされていれば「三菱」、そうでなければ「三菱以外」
           const isMitsubishi = makerCheckbox.checked;
           if (isMitsubishi) {
-            // 三菱の場合の文言
-            statusDelayText = "通常よりお日にちがかかる案内";
+            // 三菱
+            statusDelayText = "通常よりお日にちがかかる可能性案内";
           } else {
-            // 三菱以外の場合の文言
-            statusDelayText = "お日にちがかかる案内";
+            // 三菱以外
+            statusDelayText = "お日にちがかかる可能性案内";
           }
           // 表示を再描画
           updateDisplays();
@@ -433,9 +433,9 @@
             // チェックが外れた場合は、メーカーチェックボックスの状態に応じて元に戻す
             const isMitsubishi = makerCheckbox && makerCheckbox.checked;
             if (isMitsubishi) {
-              statusDelayText = "通常よりお日にちがかかる案内";
+              statusDelayText = "通常よりお日にちがかかる可能性案内";
             } else {
-              statusDelayText = "お日にちがかかる案内";
+              statusDelayText = "お日にちがかかる可能性案内";
             }
             // 三菱チェックボックスを表示
             if (makerCheckboxContainer) {
@@ -548,16 +548,16 @@
         // maker によって statusDelayText を決める
         const isMitsubishi = makerCheckbox && makerCheckbox.checked;
         if (isMitsubishi) {
-          statusDelayText = "通常よりお日にちがかかる案内";
+          statusDelayText = "通常よりお日にちがかかる可能性案内";
         } else {
-          statusDelayText = "お日にちがかかる案内";
+          statusDelayText = "お日にちがかかる可能性案内";
         }
 
         // 補助ラベルの初期表示も更新
-        const delayLabel = document.getElementById("status-delay-label");
-        if (delayLabel) {
-          delayLabel.textContent = "お日にちがかかる案内";
-        }
+        // const delayLabel = document.getElementById("status-delay-label");
+        // if (delayLabel) {
+        //   delayLabel.textContent = "お日にちがかかる可能性案内";
+        // }
 
         // 有償警告表示を初期化
         updatePaidDisplay();
@@ -622,11 +622,11 @@
         });
 
         // checkbox ラベル等、常に表示したい補助ラベルを更新
-        const delayLabel = document.getElementById("status-delay-label");
-        if (delayLabel) {
-          // ラベルは常に「お日にちがかかる案内」を表示
-          delayLabel.textContent = "お日にちがかかる案内";
-        }
+        // const delayLabel = document.getElementById("status-delay-label");
+        // if (delayLabel) {
+        //   // ラベルは常に「お日にちがかかる可能性案内」を表示
+        //   delayLabel.textContent = "お日にちがかかる可能性案内";
+        // }
 
         // status-display要素の表示制御も更新
         updateStatusDisplay();
