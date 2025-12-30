@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <title>後処理テンプレ</title>
+    <title>テンプレート</title>
     <link rel="stylesheet" href="styles/templates.css" />
+    <link rel="stylesheet" href="styles/copy-handler.css" />
   </head>
   <body>
     <div class="container">
@@ -23,7 +24,7 @@
           <div
             style="
               display: flex;
-              gap: 1rem;
+              gap: 0.5rem;
               align-items: center;
               border: 2px solid #ccc;
               border-radius: 8px;
@@ -142,6 +143,13 @@
                   />
                   保証対象外部位有償案内
                 </label>
+
+                <div class="separator-horizontal"></div>
+
+                <label>
+                  <input type="checkbox" id="dealer-informed-checkbox" />
+                  販売店にて案内済み
+                </label>
               </div>
               <div class="separator-vertical"></div>
               <label style="vertical-align: middle">
@@ -231,44 +239,34 @@
             </label>
           </div>
 
-          <div>
-            <label>
-              不在状況:
-              <select id="absence-select">
-                <option value="不出">不出</option>
-                <option value="話中">話中</option>
-                <option value="留守電に吹き込み">留守電に吹き込み</option>
-                <option value="留守電">留守電</option>
-                <option value="「現在近くにおりません」アナウンス">「現在近くにおりません」アナウンス</option>
-              </select>
-            </label>
-          </div>
+
         </div>
 
         <div>
-          <div
-            id="results"
-            class="copyable"
-            style="
-              border: 3px solid #888;
-              width: 400px;
-              border-radius: 8px;
-              padding: 0.5rem;
-            "
-          >
+          <div id="results" class="results copyable">
             <div id="datetime-cc-name-container">
               <span id="current-datetime"></span><span id="cc-display">CC</span
               ><span id="name-display"></span>
             </div>
-            <span id="status-urgent"></span><span id="status-note"></span
-            ><span id="status-name-prefix"></span><span id="person-name"></span
-            ><span id="status-name-suffix"></span><span id="status-paid"></span
-            ><span id="status-display-paid" class="status-display"></span
-            ><br /><span id="status-delay"></span
+            <div>
+              <span id="status-urgent"></span>
+            </div>
+            <span id="status-note"></span><span id="status-name-prefix"></span
+            ><span id="person-name"></span><span id="status-name-suffix"></span>
+            <div>
+              <span id="status-paid"></span
+              ><span id="status-display-paid" class="status-display"></span>
+            </div>
+            <span id="status-delay"></span
             ><span id="status-display-delay" class="status-display"></span
             ><br />
           </div>
           <div style="color: #888; font-size: 0.9rem">↑右クリックでコピー</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <iframe src="components/outbound.html" scrolling="no" style="width: 100%; height: 200px; border: 2px solid #ccc; border-radius: 8px; overflow: hidden;"></iframe>
+          <iframe src="components/inbound.html" scrolling="no" style="width: 100%; height: 200px; border: 2px solid #ccc; border-radius: 8px; overflow: hidden;"></iframe>
         </div>
       </div>
     </div>

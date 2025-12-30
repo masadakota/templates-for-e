@@ -1,0 +1,4 @@
+/* アニメーション用 */
+.copy-flash-transition {
+  transition: background-color 0.75s ease;
+}

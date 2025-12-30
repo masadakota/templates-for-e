@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outbound</title>
+    <link rel="stylesheet" href="../styles/copy-handler.css" />
+    <link rel="stylesheet" href="../styles/templates.css" />
+  </head>
+  <body>
+    <h2>架電</h2>
+    <div>
+      <label>
+        不在状況:
+        <select id="absence-select">
+          <option value="不出">不出</option>
+          <option value="話中">話中</option>
+          <option value="留守電に吹き込み">留守電に吹き込み</option>
+          <option value="留守電">留守電</option>
+          <option value="「現在近くにおりません」アナウンス">
+            「現在近くにおりません」アナウンス
+          </option>
+        </select>
+      </label>
+      <div class="results copyable" style="min-width: fit-content;">test</div>
+    </div>
+    <script src="../copy-handler.js"></script>
+  </body>
+</html>

@@ -6,12 +6,12 @@
 // config/defaults.js で定義されたCONFIGオブジェクトが存在すれば使用、なければフォールバック
 function getConfig() {
   // グローバルのCONFIGオブジェクトがあればそれを使用
-  if (typeof CONFIG !== 'undefined') {
+  if (typeof CONFIG !== "undefined") {
     return CONFIG;
   }
 
   // フォールバック: defaults.jsが読み込まれていない場合のデフォルト値
-  console.warn('CONFIG not found. Using fallback defaults.');
+  console.warn("CONFIG not found. Using fallback defaults.");
   return {
     status: "未",
     maker: "三菱以外",
@@ -30,12 +30,12 @@ function getConfig() {
       statusNote: "備考要確認\n",
       statusName: "奥様の名前の聴取をお願いします。\n",
       statusPaid: "有償警告",
-      statusDelay: "お日にちがかかる可能性案内"
+      statusDelay: "お日にちがかかる可能性案内",
     },
     animation: {
-      flashColor: '#ffeb3b',
-      flashDuration: 500
-    }
+      flashColor: "#ffeb3b",
+      flashDuration: 500,
+    },
   };
 }
 
@@ -49,7 +49,7 @@ const DEFAULTS = {
   paidMakerWarranty: config.paidMakerWarranty,
   showCcName: config.showCcName,
   newyear: config.newyear,
-  checks: config.checks
+  checks: config.checks,
 };
 const ANIMATION_CONFIG = config.animation;
 
@@ -63,7 +63,10 @@ const state = {
   statusNoteText: DEFAULT_TEXTS.statusNote,
   statusNameText: DEFAULT_TEXTS.statusName,
   statusPaidText: DEFAULT_TEXTS.statusPaid,
-  statusDelayText: DEFAULT_TEXTS.statusDelay
+  statusDelayText: DEFAULT_TEXTS.statusDelay,
+  dealerInformed: false, // 販売店にて案内済みの状態
+  paidStatus: false, // 有償警告の案内済み状態
+  delayStatus: false, // お日にちがかかる可能性の案内済み状態
 };
 
 // targetId に対応する最新の表示文字列を返す
@@ -97,7 +100,11 @@ function updateStateText(key, value) {
 const elementFlashData = new WeakMap();
 
 // 指定した要素の背景色を一定時間変更する関数
-function flashElement(element, color = ANIMATION_CONFIG.flashColor, duration = ANIMATION_CONFIG.flashDuration) {
+function flashElement(
+  element,
+  color = ANIMATION_CONFIG.flashColor,
+  duration = ANIMATION_CONFIG.flashDuration
+) {
   if (!element) return;
 
   // 既存のフラッシュデータを取得または初期化
@@ -106,8 +113,8 @@ function flashElement(element, color = ANIMATION_CONFIG.flashColor, duration = A
   if (!flashData) {
     // 初回: 元の背景色を保存
     flashData = {
-      originalBackground: element.style.backgroundColor || '',
-      timerId: null
+      originalBackground: element.style.backgroundColor || "",
+      timerId: null,
     };
     elementFlashData.set(element, flashData);
   }
@@ -165,20 +172,29 @@ function initializeElements() {
     newyearCheckbox: document.getElementById("newyear-checkbox"),
     showCcNameCheckbox: document.getElementById("show-cc-name-checkbox"),
     paidRadios: document.querySelectorAll(".paid-radio"),
-    paidMakerWarrantyCheckbox: document.getElementById("paid-maker-warranty-checkbox"),
+    paidMakerWarrantyCheckbox: document.getElementById(
+      "paid-maker-warranty-checkbox"
+    ),
+    dealerInformedCheckbox: document.getElementById("dealer-informed-checkbox"),
     personSelect: document.getElementById("person-select"),
     updateDatetimeBtn: document.getElementById("update-datetime-btn"),
     nameInput: document.getElementById("name-input"),
     checkboxes: document.querySelectorAll(".check-item"),
     makerCheckboxContainer: document.getElementById("maker-checkbox-container"),
-    datetimeCcNameContainer: document.getElementById("datetime-cc-name-container")
+    datetimeCcNameContainer: document.getElementById(
+      "datetime-cc-name-container"
+    ),
   };
   return elements;
 }
 
 // ステータスチェックボックスの状態を子チェックボックスの状態に基づいて更新する関数
 function updateStatusCheckboxState() {
-  if (!elements.statusCheckbox || !elements.paidStatusCheckbox || !elements.delayStatusCheckbox) {
+  if (
+    !elements.statusCheckbox ||
+    !elements.paidStatusCheckbox ||
+    !elements.delayStatusCheckbox
+  ) {
     return;
   }
 
@@ -214,24 +230,30 @@ function updateStatusDisplay() {
     statusDisplay.textContent = selectedStatus + "\n";
   }
 
-  // #status-display-paid の表示を paid-status-checkbox の値に基づいて更新
-  const statusDisplayPaidElement = document.getElementById("status-display-paid");
+  // #status-display-paid の表示を状態に基づいて更新
+  const statusDisplayPaidElement = document.getElementById(
+    "status-display-paid"
+  );
   if (statusDisplayPaidElement) {
-    const paidStatus =
-      elements.paidStatusCheckbox && elements.paidStatusCheckbox.checked ? "済" : "未";
-    statusDisplayPaidElement.textContent = paidStatus;
+    const paidStatusText = state.paidStatus ? "済" : "未";
+    statusDisplayPaidElement.textContent = paidStatusText;
     // 背景色を設定（済=薄い緑、未=薄いピンク）
-    statusDisplayPaidElement.style.backgroundColor = paidStatus === "済" ? "#d4edda" : "#f8d7da";
+    statusDisplayPaidElement.style.backgroundColor = state.paidStatus
+      ? "#d4edda"
+      : "#f8d7da";
   }
 
-  // #status-display-delay の表示を delay-status-checkbox の値に基づいて更新
-  const statusDisplayDelayElement = document.getElementById("status-display-delay");
+  // #status-display-delay の表示を状態に基づいて更新
+  const statusDisplayDelayElement = document.getElementById(
+    "status-display-delay"
+  );
   if (statusDisplayDelayElement) {
-    const delayStatus =
-      elements.delayStatusCheckbox && elements.delayStatusCheckbox.checked ? "済" : "未";
-    statusDisplayDelayElement.textContent = delayStatus;
+    const delayStatusText = state.delayStatus ? "済" : "未";
+    statusDisplayDelayElement.textContent = delayStatusText;
     // 背景色を設定（済=薄い緑、未=薄いピンク）
-    statusDisplayDelayElement.style.backgroundColor = delayStatus === "済" ? "#d4edda" : "#f8d7da";
+    statusDisplayDelayElement.style.backgroundColor = state.delayStatus
+      ? "#d4edda"
+      : "#f8d7da";
   }
 
   // #status-paid の表示状態に応じて #status-display-paid の表示を制御
@@ -256,11 +278,15 @@ function updatePaidDisplay() {
   if (!statusPaidElement) return;
 
   // ラジオボタンで選択された値を取得
-  const selectedRadio = document.querySelector('.paid-radio[name="paid"]:checked');
+  const selectedRadio = document.querySelector(
+    '.paid-radio[name="paid"]:checked'
+  );
   const selectedValue = selectedRadio ? selectedRadio.value : "";
 
   // メーカー保証期間内チェックボックスの状態を確認
-  const isMakerWarranty = elements.paidMakerWarrantyCheckbox && elements.paidMakerWarrantyCheckbox.checked;
+  const isMakerWarranty =
+    elements.paidMakerWarrantyCheckbox &&
+    elements.paidMakerWarrantyCheckbox.checked;
 
   // 表示内容を決定
   let displayText = "";
@@ -281,6 +307,23 @@ function updatePaidDisplay() {
   updateStatusDisplay();
 }
 
+// 状態に基づいてチェックボックスを更新する関数
+function updateCheckboxesFromState() {
+  // paid-status-checkboxを更新
+  if (elements.paidStatusCheckbox) {
+    elements.paidStatusCheckbox.checked = state.paidStatus;
+  }
+
+  // delay-status-checkboxを更新
+  if (elements.delayStatusCheckbox) {
+    elements.delayStatusCheckbox.checked = state.delayStatus;
+  }
+
+  // ステータスチェックボックスの状態を更新
+  updateStatusCheckboxState();
+  updateStatusDisplay();
+}
+
 // status-name専用の表示更新関数
 function updateStatusNameDisplay(isChecked) {
   const prefixElement = document.getElementById("status-name-prefix");
@@ -290,8 +333,10 @@ function updateStatusNameDisplay(isChecked) {
   if (isChecked) {
     // チェックされている場合：3つの要素に分けて表示
     if (prefixElement) prefixElement.textContent = "・";
-    if (personNameElement) personNameElement.textContent = elements.personSelect.value;
-    if (suffixElement) suffixElement.textContent = "の名前の聴取をお願いします。\n";
+    if (personNameElement)
+      personNameElement.textContent = elements.personSelect.value;
+    if (suffixElement)
+      suffixElement.textContent = "の名前の聴取をお願いします。\n";
   } else {
     // チェックされていない場合：すべて空に
     if (prefixElement) prefixElement.textContent = "";
@@ -374,7 +419,10 @@ function setupPersonSelectHandler() {
   if (elements.personSelect) {
     elements.personSelect.addEventListener("change", () => {
       const selectedPerson = elements.personSelect.value;
-      updateStateText('statusNameText', selectedPerson + "の名前の聴取をお願いします。\n");
+      updateStateText(
+        "statusNameText",
+        selectedPerson + "の名前の聴取をお願いします。\n"
+      );
 
       // person-name要素のみを更新（flashElementはMutationObserverが自動的に実行）
       const personNameElement = document.getElementById("person-name");
@@ -397,15 +445,12 @@ function setupStatusCheckboxHandler() {
 
       const isChecked = elements.statusCheckbox.checked;
 
-      // 子チェックボックスを連動させる
-      if (elements.paidStatusCheckbox) {
-        elements.paidStatusCheckbox.checked = isChecked;
-      }
-      if (elements.delayStatusCheckbox) {
-        elements.delayStatusCheckbox.checked = isChecked;
-      }
+      // 状態を更新
+      state.paidStatus = isChecked;
+      state.delayStatus = isChecked;
 
-      updateStatusDisplay();
+      // 状態に基づいてUIを更新
+      updateCheckboxesFromState();
     });
   }
 }
@@ -414,6 +459,10 @@ function setupStatusCheckboxHandler() {
 function setupPaidStatusCheckboxHandler() {
   if (elements.paidStatusCheckbox) {
     elements.paidStatusCheckbox.addEventListener("change", () => {
+      // 状態を更新
+      state.paidStatus = elements.paidStatusCheckbox.checked;
+
+      // UIを更新
       updateStatusCheckboxState();
       updateStatusDisplay();
     });
@@ -424,6 +473,10 @@ function setupPaidStatusCheckboxHandler() {
 function setupDelayStatusCheckboxHandler() {
   if (elements.delayStatusCheckbox) {
     elements.delayStatusCheckbox.addEventListener("change", () => {
+      // 状態を更新
+      state.delayStatus = elements.delayStatusCheckbox.checked;
+
+      // UIを更新
       updateStatusCheckboxState();
       updateStatusDisplay();
     });
@@ -443,10 +496,13 @@ function setupMakerCheckboxHandler() {
       const isMitsubishi = elements.makerCheckbox.checked;
       if (isMitsubishi) {
         // 三菱
-        updateStateText('statusDelayText', "通常よりお日にちがかかる可能性案内");
+        updateStateText(
+          "statusDelayText",
+          "通常よりお日にちがかかる可能性案内"
+        );
       } else {
         // 三菱以外
-        updateStateText('statusDelayText', "お日にちがかかる可能性案内");
+        updateStateText("statusDelayText", "お日にちがかかる可能性案内");
       }
       // 表示を再描画
       updateDisplays();
@@ -462,18 +518,22 @@ function setupNewyearCheckboxHandler() {
 
       if (elements.newyearCheckbox.checked) {
         // チェックされている場合は「年末年始トーク」に変更
-        updateStateText('statusDelayText', "年末年始トーク");
+        updateStateText("statusDelayText", "年末年始トーク");
         // 三菱チェックボックスを非表示
         if (elements.makerCheckboxContainer) {
           elements.makerCheckboxContainer.style.display = "none";
         }
       } else {
         // チェックが外れた場合は、メーカーチェックボックスの状態に応じて元に戻す
-        const isMitsubishi = elements.makerCheckbox && elements.makerCheckbox.checked;
+        const isMitsubishi =
+          elements.makerCheckbox && elements.makerCheckbox.checked;
         if (isMitsubishi) {
-          updateStateText('statusDelayText', "通常よりお日にちがかかる可能性案内");
+          updateStateText(
+            "statusDelayText",
+            "通常よりお日にちがかかる可能性案内"
+          );
         } else {
-          updateStateText('statusDelayText', "お日にちがかかる可能性案内");
+          updateStateText("statusDelayText", "お日にちがかかる可能性案内");
         }
         // 三菱チェックボックスを表示
         if (elements.makerCheckboxContainer) {
@@ -499,6 +559,20 @@ function setupPaidHandlers() {
   if (elements.paidMakerWarrantyCheckbox) {
     elements.paidMakerWarrantyCheckbox.addEventListener("change", () => {
       updatePaidDisplay();
+    });
+  }
+}
+
+// 販売店にて案内済みチェックボックス変更イベントハンドラ
+function setupDealerInformedCheckboxHandler() {
+  if (elements.dealerInformedCheckbox) {
+    elements.dealerInformedCheckbox.addEventListener("change", () => {
+      // 状態を更新
+      state.dealerInformed = elements.dealerInformedCheckbox.checked;
+      state.paidStatus = elements.dealerInformedCheckbox.checked;
+
+      // 状態に基づいてUIを更新
+      updateCheckboxesFromState();
     });
   }
 }
@@ -533,6 +607,7 @@ function setupAllEventHandlers() {
   setupMakerCheckboxHandler();
   setupNewyearCheckboxHandler();
   setupPaidHandlers();
+  setupDealerInformedCheckboxHandler();
   setupCheckboxesHandler();
 }
 
@@ -559,7 +634,8 @@ function applyDefaults() {
 
   // メーカー保証期間内チェックボックス
   if (elements.paidMakerWarrantyCheckbox) {
-    elements.paidMakerWarrantyCheckbox.checked = DEFAULTS.paidMakerWarranty ?? false;
+    elements.paidMakerWarrantyCheckbox.checked =
+      DEFAULTS.paidMakerWarranty ?? false;
   }
 
   // CC・名前表示チェックボックス
@@ -583,16 +659,26 @@ function applyDefaults() {
   });
 
   // statusDelayText を決める（年末年始トークが優先）
-  const isNewyear = elements.newyearCheckbox && elements.newyearCheckbox.checked;
+  const isNewyear =
+    elements.newyearCheckbox && elements.newyearCheckbox.checked;
   if (isNewyear) {
-    updateStateText('statusDelayText', "年末年始トーク");
+    updateStateText("statusDelayText", "年末年始トーク");
   } else {
-    const isMitsubishi = elements.makerCheckbox && elements.makerCheckbox.checked;
+    const isMitsubishi =
+      elements.makerCheckbox && elements.makerCheckbox.checked;
     if (isMitsubishi) {
-      updateStateText('statusDelayText', "通常よりお日にちがかかる可能性案内");
+      updateStateText("statusDelayText", "通常よりお日にちがかかる可能性案内");
     } else {
-      updateStateText('statusDelayText', "お日にちがかかる可能性案内");
+      updateStateText("statusDelayText", "お日にちがかかる可能性案内");
     }
+  }
+
+  // チェックボックスの状態を初期化
+  if (elements.paidStatusCheckbox) {
+    elements.paidStatusCheckbox.checked = state.paidStatus;
+  }
+  if (elements.delayStatusCheckbox) {
+    elements.delayStatusCheckbox.checked = state.delayStatus;
   }
 
   // 有償警告表示を初期化
@@ -604,15 +690,15 @@ function applyDefaults() {
 
 // id="results" 内の要素のテキスト変更を監視
 function setupMutationObserver() {
-  const resultsElement = document.getElementById('results');
+  const resultsElement = document.getElementById("results");
   if (!resultsElement) return;
 
   // 各要素の以前のテキストを保存
   const previousTextMap = new Map();
 
   // results内のすべてのspan要素の初期テキストを保存
-  resultsElement.querySelectorAll('span').forEach(span => {
-    previousTextMap.set(span, span.textContent || '');
+  resultsElement.querySelectorAll("span").forEach((span) => {
+    previousTextMap.set(span, span.textContent || "");
   });
 
   // MutationObserverを使って子要素の変更を監視
@@ -624,22 +710,23 @@ function setupMutationObserver() {
       let targetElement = null;
 
       // characterDataの変更（テキストノードの内容変更）
-      if (mutation.type === 'characterData') {
+      if (mutation.type === "characterData") {
         targetElement = mutation.target.parentElement;
       }
       // childListの変更（textContentによる直接設定）
-      else if (mutation.type === 'childList') {
+      else if (mutation.type === "childList") {
         targetElement = mutation.target;
       }
 
       // span要素の場合のみ処理（.status-displayクラスを除外）
-      if (targetElement &&
-          targetElement.tagName === 'SPAN' &&
-          resultsElement.contains(targetElement) &&
-          !targetElement.classList.contains('status-display')) {
-
-        const currentText = targetElement.textContent || '';
-        const previousText = previousTextMap.get(targetElement) || '';
+      if (
+        targetElement &&
+        targetElement.tagName === "SPAN" &&
+        resultsElement.contains(targetElement) &&
+        !targetElement.classList.contains("status-display")
+      ) {
+        const currentText = targetElement.textContent || "";
+        const previousText = previousTextMap.get(targetElement) || "";
 
         // 実際にテキストが変更された場合のみフラッシュ
         if (currentText !== previousText) {
@@ -650,7 +737,7 @@ function setupMutationObserver() {
     });
 
     // 変更された要素をフラッシュ
-    changedElements.forEach(element => {
+    changedElements.forEach((element) => {
       flashElement(element);
     });
   });
@@ -660,7 +747,7 @@ function setupMutationObserver() {
     childList: true,
     subtree: true,
     characterData: true,
-    characterDataOldValue: true
+    characterDataOldValue: true,
   });
 }
 
@@ -689,8 +776,8 @@ function initializeApp() {
 }
 
 // DOMの読み込みが完了したら初期化
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeApp);
 } else {
   // すでに読み込まれている場合は即座に実行
   initializeApp();

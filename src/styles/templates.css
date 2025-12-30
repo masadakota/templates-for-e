@@ -6,11 +6,6 @@ body {
   font-family: sans-serif;
 }
 
-/* アニメーション用 */
-.copy-flash-transition {
-  transition: background-color 0.75s ease;
-}
-
 .info {
   color: #666;
   margin-bottom: 20px;
@@ -32,11 +27,27 @@ label {
   align-self: stretch;
 }
 
+/* 横の区切り線 */
+.separator-horizontal {
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+}
+
 /* ステータス表示 */
 .status-display {
   padding-left: 3px;
   padding-right: 3px;
   border-radius: 4px;
+}
+
+/* 結果表示エリア */
+.results {
+  border: 3px solid #888;
+  max-width: 100%;
+  width: 400px;
+  border-radius: 8px;
+  padding: 0.5rem;
 }
 
 /* メインレイアウト - デフォルトは縦並び */
