@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>後処理テンプレ HTML版</title>
+    <link rel="stylesheet" href="../styles/templates.css" />
+    <link rel="stylesheet" href="../styles/copy-handler.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="margin-bottom: 0; margin-top: 0; font-size: 1.2rem">
+        後処理テンプレ HTML版
+      </h1>
+
+      <div class="main-layout" style="display: flex; flex-direction: column">
+        <div>
+          <div
+            id="copy-instruction"
+            style="
+              position: relative;
+              color: #888;
+              font-size: 0.9rem;
+              text-align: right;
+              margin-bottom: 4px;
+            "
+          >
+            ↓右クリックでコピー
+          </div>
+          <div id="results" class="results copyable">
+            <div id="datetime-name-container">
+              <span id="current-datetime"></span><span>CC</span
+              ><span id="name-display"></span>
+            </div>
+            <div>
+              <span id="status-urgent"></span>
+            </div>
+            <span id="status-note"></span><span id="status-name-prefix"></span
+            ><span id="person-name"></span><span id="status-name-suffix"></span>
+            <div>
+              <span id="status-paid"></span
+              ><span id="status-display-paid" class="status-display"></span
+              ><span id="dealer-informed-display"></span>
+            </div>
+            <span id="status-delay"></span
+            ><span id="status-display-delay" class="status-display"></span
+            ><br />
+          </div>
+          <div
+            style="
+              border-bottom: 1px solid #ccc;
+              margin-top: 12px;
+              margin-left: -12px;
+              margin-right: -12px;
+            "
+          ></div>
+        </div>
+
+        <div style="flex: 1; overflow-y: scroll; margin-right: -12px">
+          <div
+            style="
+              position: relative;
+              display: flex;
+              flex-direction: column;
+              gap: 0.3rem;
+              border: 2px solid #888;
+              border-radius: 8px;
+              padding: 10px;
+              padding-top: 40px;
+              margin-top: 12px;
+              margin-bottom: 12px;
+            "
+          >
+            <div class="badge" style="font-size: 0.9rem">
+              ショートカットボタン
+            </div>
+            <div style="display: flex; gap: 4px; flex-wrap: wrap">
+              <button
+                id="shortcut-yu-mi"
+                style="
+                  padding: 3px 8px;
+                  cursor: pointer;
+                  white-space: nowrap;
+                  font-size: 0.85rem;
+                "
+                title="10年保証有償警告/未"
+              >
+                10年保証/未
+              </button>
+              <button
+                id="shortcut-yu-sumi"
+                style="
+                  padding: 3px 8px;
+                  cursor: pointer;
+                  white-space: nowrap;
+                  font-size: 0.85rem;
+                "
+                title="10年保証有償警告/済"
+              >
+                10年保証/済
+              </button>
+              <button
+                id="shortcut-me-mi"
+                style="
+                  padding: 3px 8px;
+                  cursor: pointer;
+                  white-space: nowrap;
+                  font-size: 0.85rem;
+                "
+                title="メーカー保証期間内/未"
+              >
+                メーカー保証/未
+              </button>
+              <button
+                id="shortcut-me-sumi"
+                style="
+                  padding: 3px 8px;
+                  cursor: pointer;
+                  white-space: nowrap;
+                  font-size: 0.85rem;
+                "
+                title="メーカー保証期間内/済"
+              >
+                メーカー保証/済
+              </button>
+              <div style="white-space: nowrap">
+                <button
+                  id="shortcut-gai-mi"
+                  style="
+                    padding: 3px 8px;
+                    cursor: pointer;
+                    white-space: nowrap;
+                    font-size: 0.85rem;
+                  "
+                  title="保証対象外部位/未"
+                >
+                  保証対象外部位/未
+                </button>
+                <button
+                  id="shortcut-gai-sumi"
+                  style="
+                    padding: 3px 8px;
+                    cursor: pointer;
+                    white-space: nowrap;
+                    font-size: 0.85rem;
+                  "
+                  title="保証対象外部位/済"
+                >
+                  保証対象外部位/済
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="
+              border: 2px solid #888;
+              border-radius: 8px;
+              padding: 12px;
+              margin-bottom: 1rem;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+            "
+          >
+            <div
+              style="
+                position: relative;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+              "
+            >
+              <div
+                class="badge"
+                style="font-size: 0.9rem; margin-top: -12px; margin-left: -12px"
+              >
+                設定
+              </div>
+              <!-- <label style="white-space: nowrap">
+              <input type="checkbox" id="detailed-view-checkbox" />
+              詳細表示
+            </label> -->
+              <div
+                style="
+                  display: flex;
+                  gap: 0.5rem;
+                  align-items: center;
+                  flex-wrap: wrap;
+                "
+              ></div>
+              <button
+                id="reset-btn"
+                style="padding: 5px 10px; cursor: pointer; white-space: nowrap"
+              >
+                リセット
+              </button>
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                border: 2px solid #ccc;
+                border-radius: 8px;
+                padding: 10px;
+                width: fit-content;
+                flex-wrap: wrap;
+              "
+            >
+              <label style="white-space: nowrap">
+                <input type="checkbox" id="show-datetime-name-checkbox" />
+                表示
+              </label>
+
+              <button
+                id="update-datetime-btn"
+                style="padding: 5px 10px; cursor: pointer; white-space: nowrap"
+              >
+                日時更新
+              </button>
+
+              <label style="font-size: 0.9rem">
+                オペレーター名:
+                <input
+                  type="text"
+                  id="name-input"
+                  style="padding: 5px; width: 100px"
+                />
+              </label>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+              <label>
+                <input
+                  type="checkbox"
+                  class="check-item"
+                  data-target="status-urgent"
+                />
+                至急対応希望
+              </label>
+
+              <label>
+                <input
+                  type="checkbox"
+                  class="check-item"
+                  data-target="status-note"
+                />
+                備考要確認
+              </label>
+            </div>
+
+            <div
+              style="
+                border: 2px solid #ccc;
+                padding: 10px;
+                border-radius: 8px;
+                /* width: fit-content; */
+                /* width: 100%; */
+                display: flex;
+                gap: 0.5rem;
+                flex-direction: column;
+              "
+            >
+              <div style="display: flex">
+                <div style="flex: 1"></div>
+                <label style="margin-right: 12px">
+                  <input
+                    type="checkbox"
+                    id="status-checkbox"
+                    class="status-checkbox"
+                  />
+                  済
+                </label>
+              </div>
+              <div
+                style="
+                  border: 2px solid #ccc;
+                  padding: 10px;
+                  border-radius: 8px;
+                  /* width: fit-content; */
+                  display: flex;
+                  gap: 0 0.5rem;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    flex-wrap: wrap;
+                    flex: 1;
+                  "
+                >
+                  <label>
+                    <input
+                      type="radio"
+                      name="paid"
+                      value="有償警告"
+                      id="paid-base-radio"
+                      class="paid-radio"
+                      checked
+                    />
+                    有償警告
+                  </label>
+
+                  <label>
+                    └<input type="checkbox" id="paid-maker-warranty-checkbox" />
+                    メーカー保証期間内
+                  </label>
+
+                  <label>
+                    <input
+                      type="radio"
+                      name="paid"
+                      value="保証対象外部位有償案内"
+                      id="paid-out-of-warranty-radio"
+                      class="paid-radio"
+                    />
+                    保証対象外部位有償案内
+                  </label>
+
+                  <div class="separator-horizontal"></div>
+
+                  <label>
+                    <input type="checkbox" id="dealer-informed-checkbox" />
+                    販売店にて案内済み
+                  </label>
+                </div>
+                <div class="separator-vertical"></div>
+                <label style="vertical-align: middle">
+                  <input type="checkbox" id="paid-status-checkbox" />
+                  済
+                </label>
+              </div>
+
+              <div
+                style="
+                  gap: 1rem;
+                  /* flex-wrap: wrap; */
+                  flex: 1;
+                  border: 2px solid #ccc;
+                  padding: 10px;
+                  border-radius: 8px;
+                  display: flex;
+                  gap: 0 0.5rem;
+                "
+              >
+                <div style="flex: 1">
+                  <div>お日にちがかかる可能性</div>
+
+                  <div style="display: flex; flex-wrap: wrap; gap: 1rem">
+                    <label>
+                      <input
+                        type="checkbox"
+                        id="mitsubishi-checkbox"
+                        class="mitsubishi-checkbox"
+                      />
+                      三菱
+                    </label>
+                    <label>
+                      <input
+                        type="checkbox"
+                        id="newyear-checkbox"
+                        class="newyear-checkbox"
+                      />
+                      年末年始
+                    </label>
+                  </div>
+                </div>
+                <div class="separator-vertical"></div>
+                <label>
+                  <input type="checkbox" id="delay-status-checkbox" />
+                  済
+                </label>
+              </div>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                flex-wrap: wrap;
+                border: 2px solid #ccc;
+                padding: 10px;
+                border-radius: 8px;
+                width: fit-content;
+              "
+            >
+              <label>
+                <input
+                  type="checkbox"
+                  class="check-item"
+                  data-target="status-name"
+                />
+                名前の聴取
+              </label>
+
+              <label>
+                <select id="person-select">
+                  <option value="奥様">奥様</option>
+                  <option value="ご主人様">ご主人様</option>
+                  <option value="ご子息様">ご子息様</option>
+                  <option value="ご息女様">ご息女様</option>
+                  <option value="お母様">お母様</option>
+                  <option value="お父様">お父様</option>
+                  <option value="折り返しTEL先の方">折り返しTEL先の方</option>
+                </select>
+              </label>
+            </div>
+
+            <div style="height: 500px; background-color: #888">Test</div>
+          </div>
+        </div>
+
+        <!-- <div style="display: flex; flex-direction: column; gap: 1rem">
+          <iframe
+            src="../components/outbound.html"
+            scrolling="no"
+            style="
+              width: 100%;
+              height: 200px;
+              border: 2px solid #ccc;
+              border-radius: 8px;
+              overflow: hidden;
+            "
+          ></iframe>
+          <iframe
+            src="../components/inbound.html"
+            scrolling="no"
+            style="
+              width: 100%;
+              height: 200px;
+              border: 2px solid #ccc;
+              border-radius: 8px;
+              overflow: hidden;
+            "
+          ></iframe>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Configuration -->
+    <script src="../config/defaults.js"></script>
+
+    <!-- Legacy scripts (will be gradually migrated) -->
+    <script src="../scripts/templates.js"></script>
+    <script src="../config/copy-handler-config.js"></script>
+    <script src="../copy-handler.js"></script>
+
+    <!-- New State Management (ES Module) -->
+    <script type="module" src="../scripts/app.js"></script>
+  </body>
+</html>

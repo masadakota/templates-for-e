@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コールセンター支援ツール</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .app-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .app-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .app-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .app-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .app-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: #667eea;
+      color: white;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .app-badge.coming-soon {
+      background: #ccc;
+    }
+
+    .footer {
+      text-align: center;
+      color: white;
+      margin-top: 3rem;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    .tech-stack {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    .tech-stack span {
+      display: inline-block;
+      margin-right: 0.5rem;
+      padding: 0.2rem 0.5rem;
+      background: #f0f0f0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>コールセンター支援ツール</h1>
+      <p>業務効率化のための各種Webアプリケーション</p>
+    </div>
+
+    <div class="apps-grid">
+      <!-- 後処理テンプレ -->
+      <a href="templates/index.html" class="app-card">
+        <div class="app-icon">📝</div>
+        <h2 class="app-title">後処理テンプレ</h2>
+        <p class="app-description">
+          チェックボックスとフォーム入力から定型文を自動生成。
+          右クリックでクリップボードにコピー可能。
+        </p>
+        <div>
+          <span class="app-badge">稼働中</span>
+        </div>
+        <div class="tech-stack">
+          <span>Vanilla JS</span>
+          <span>State Management</span>
+          <span>ES Modules</span>
+        </div>
+      </a>
+
+      <!-- フローダイアグラム（将来的な拡張） -->
+      <a href="#" class="app-card" onclick="alert('準備中です'); return false;">
+        <div class="app-icon">🔀</div>
+        <h2 class="app-title">フローダイアグラム</h2>
+        <p class="app-description">
+          コールフローを視覚的に表示。
+          インタラクティブな操作で分岐を確認。
+        </p>
+        <div>
+          <span class="app-badge coming-soon">準備中</span>
+        </div>
+        <div class="tech-stack">
+          <span>Canvas API</span>
+          <span>State Management</span>
+        </div>
+      </a>
+
+      <!-- 今後追加予定のアプリ用プレースホルダー -->
+      <a href="#" class="app-card" onclick="alert('準備中です'); return false;">
+        <div class="app-icon">➕</div>
+        <h2 class="app-title">新しいツール</h2>
+        <p class="app-description">
+          今後、業務に必要なツールを随時追加していきます。
+        </p>
+        <div>
+          <span class="app-badge coming-soon">計画中</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer">
+      <p>file:// プロトコルで動作 | Webサーバー不要 | モダンブラウザ対応</p>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+        詳細は <a href="CLAUDE.md" style="color: white; text-decoration: underline;">CLAUDE.md</a> を参照
+      </p>
+    </div>
+  </div>
+</body>
+</html>
