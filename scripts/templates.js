@@ -80,6 +80,8 @@ function getTextFor(targetId) {
       return "・" + state.statusNameText;
     case "status-delay":
       return "・" + state.statusDelayText;
+    case "model-check":
+      return "・型番確認\n";
     default:
       return "";
   }
@@ -149,10 +151,10 @@ function getCurrentDateTime() {
 // 現在の日時を表示する関数
 function displayCurrentDateTime() {
   const formattedDateTime = getCurrentDateTime();
-  const datetimeElement = document.getElementById("current-datetime");
-  if (datetimeElement) {
-    datetimeElement.textContent = formattedDateTime;
-  }
+  const datetimeElements = document.querySelectorAll(".current-datetime");
+  datetimeElements.forEach((el) => {
+    el.textContent = formattedDateTime;
+  });
 }
 
 // ==========================================
@@ -184,7 +186,9 @@ function initializeElements() {
     resetBtn: document.getElementById("reset-btn"),
     nameInput: document.getElementById("name-input"),
     checkboxes: document.querySelectorAll(".check-item"),
-    datetimeNameContainer: document.getElementById("datetime-name-container"),
+    datetimeNameContainers: document.querySelectorAll(
+      ".datetime-name-container"
+    ),
     shortcutYuMi: document.getElementById("shortcut-yu-mi"),
     shortcutYuSumi: document.getElementById("shortcut-yu-sumi"),
     shortcutMeMi: document.getElementById("shortcut-me-mi"),
@@ -237,55 +241,58 @@ function updateStatusDisplay() {
     statusDisplay.textContent = selectedStatus + "\n";
   }
 
-  // #status-display-paid の表示を状態に基づいて更新
-  const statusDisplayPaidElement = document.getElementById(
-    "status-display-paid"
+  // .status-display-paid の表示を状態に基づいて更新
+  const statusDisplayPaidElements = document.querySelectorAll(
+    ".status-display-paid"
   );
-  if (statusDisplayPaidElement) {
+  statusDisplayPaidElements.forEach((el) => {
     const paidStatusText = state.paidStatus ? "済" : "未";
-    statusDisplayPaidElement.textContent = paidStatusText;
+    el.textContent = paidStatusText;
     // 背景色を設定（済=薄い緑、未=薄いピンク）
-    statusDisplayPaidElement.style.backgroundColor = state.paidStatus
-      ? "#d4edda"
-      : "#f8d7da";
-  }
+    el.style.backgroundColor = state.paidStatus ? "#d4edda" : "#f8d7da";
+  });
 
-  // #status-display-delay の表示を状態に基づいて更新
-  const statusDisplayDelayElement = document.getElementById(
-    "status-display-delay"
+  // .status-display-delay の表示を状態に基づいて更新
+  const statusDisplayDelayElements = document.querySelectorAll(
+    ".status-display-delay"
   );
-  if (statusDisplayDelayElement) {
+  statusDisplayDelayElements.forEach((el) => {
     const delayStatusText = state.delayStatus ? "済" : "未";
-    statusDisplayDelayElement.textContent = delayStatusText;
+    el.textContent = delayStatusText;
     // 背景色を設定（済=薄い緑、未=薄いピンク）
-    statusDisplayDelayElement.style.backgroundColor = state.delayStatus
-      ? "#d4edda"
-      : "#f8d7da";
-  }
+    el.style.backgroundColor = state.delayStatus ? "#d4edda" : "#f8d7da";
+  });
 
-  // #status-paid の表示状態に応じて #status-display-paid の表示を制御
-  const statusPaidElement = document.getElementById("status-paid");
-  if (statusPaidElement && statusDisplayPaidElement) {
-    const isPaidVisible = statusPaidElement.textContent.trim() !== "";
-    statusDisplayPaidElement.style.display = isPaidVisible ? "" : "none";
-  }
+  // .status-paid の表示状態に応じて .status-display-paid の表示を制御
+  const statusPaidElements = document.querySelectorAll(".status-paid");
+  statusPaidElements.forEach((statusPaidEl, index) => {
+    const isPaidVisible = statusPaidEl.textContent.trim() !== "";
+    if (statusDisplayPaidElements[index]) {
+      statusDisplayPaidElements[index].style.display = isPaidVisible
+        ? ""
+        : "none";
+    }
+  });
 
-  // #status-delay の表示状態に応じて #status-display-delay の表示を制御
-  const statusDelayElement = document.getElementById("status-delay");
-  if (statusDelayElement && statusDisplayDelayElement) {
-    const isDelayVisible = statusDelayElement.textContent.trim() !== "";
-    statusDisplayDelayElement.style.display = isDelayVisible ? "" : "none";
-  }
+  // .status-delay の表示状態に応じて .status-display-delay の表示を制御
+  const statusDelayElementsForDisplay =
+    document.querySelectorAll(".status-delay");
+  statusDelayElementsForDisplay.forEach((statusDelayEl, index) => {
+    const isDelayVisible = statusDelayEl.textContent.trim() !== "";
+    if (statusDisplayDelayElements[index]) {
+      statusDisplayDelayElements[index].style.display = isDelayVisible
+        ? ""
+        : "none";
+    }
+  });
 }
 
 // 有償警告表示を更新する関数
 function updatePaidDisplay() {
-  const statusPaidElement = document.getElementById("status-paid");
-  const dealerInformedDisplayElement = document.getElementById(
-    "dealer-informed-display"
+  const statusPaidElements = document.querySelectorAll(".status-paid");
+  const dealerInformedDisplayElements = document.querySelectorAll(
+    ".dealer-informed-display"
   );
-
-  if (!statusPaidElement) return;
 
   // ラジオボタンで選択された値を取得
   const selectedRadio = document.querySelector(
@@ -311,14 +318,14 @@ function updatePaidDisplay() {
     }
   }
 
-  statusPaidElement.textContent = displayText;
+  statusPaidElements.forEach((el) => {
+    el.textContent = displayText;
+  });
 
   // 販売店にて案内済みの表示を更新
-  if (dealerInformedDisplayElement) {
-    dealerInformedDisplayElement.textContent = state.dealerInformed
-      ? " (販売店にて案内済み)"
-      : "";
-  }
+  dealerInformedDisplayElements.forEach((el) => {
+    el.textContent = state.dealerInformed ? " (販売店にて案内済み)" : "";
+  });
 
   // status-display要素の表示制御も更新
   updateStatusDisplay();
@@ -343,21 +350,22 @@ function updateCheckboxesFromState() {
 
 // status-name専用の表示更新関数
 function updateStatusNameDisplay(isChecked) {
-  const prefixElement = document.getElementById("status-name-prefix");
-  const personNameElement = document.getElementById("person-name");
-  const suffixElement = document.getElementById("status-name-suffix");
+  const prefixElements = document.querySelectorAll(".status-name-prefix");
+  const personNameElements = document.querySelectorAll(".person-name");
+  const suffixElements = document.querySelectorAll(".status-name-suffix");
 
   if (isChecked) {
     // チェックされている場合：3つの要素に分けて表示
-    if (prefixElement) prefixElement.textContent = "・";
-    if (personNameElement)
-      personNameElement.textContent = elements.personSelect.value;
-    if (suffixElement) suffixElement.textContent = "の名前の聴取\n";
+    prefixElements.forEach((el) => (el.textContent = "・"));
+    personNameElements.forEach(
+      (el) => (el.textContent = elements.personSelect.value)
+    );
+    suffixElements.forEach((el) => (el.textContent = "の名前の聴取\n"));
   } else {
     // チェックされていない場合：すべて空に
-    if (prefixElement) prefixElement.textContent = "";
-    if (personNameElement) personNameElement.textContent = "";
-    if (suffixElement) suffixElement.textContent = "";
+    prefixElements.forEach((el) => (el.textContent = ""));
+    personNameElements.forEach((el) => (el.textContent = ""));
+    suffixElements.forEach((el) => (el.textContent = ""));
   }
 }
 
@@ -368,41 +376,125 @@ function updateDisplays() {
     // status-name の場合は専用関数を使用
     if (cb.dataset.target === "status-name") {
       updateStatusNameDisplay(cb.checked);
+    } else if (cb.dataset.target === "model-check") {
+      // model-check の場合は専用の表示先を使用
+      const displays = document.querySelectorAll(".model-check-display");
+      displays.forEach((display) => {
+        display.textContent = cb.checked ? getTextFor(cb.dataset.target) : "";
+      });
     } else {
-      const display = document.getElementById(cb.dataset.target);
-      display.textContent = cb.checked ? getTextFor(cb.dataset.target) : "";
+      const displays = document.querySelectorAll("." + cb.dataset.target);
+      displays.forEach((display) => {
+        display.textContent = cb.checked ? getTextFor(cb.dataset.target) : "";
+      });
     }
   });
 
   // status-delay要素を直接更新（チェックボックスが削除されたため）
-  const statusDelayElement = document.getElementById("status-delay");
-  if (statusDelayElement) {
-    statusDelayElement.textContent = "・" + state.statusDelayText;
-  }
+  const statusDelayElements = document.querySelectorAll(".status-delay");
+  statusDelayElements.forEach((el) => {
+    el.textContent = "・" + state.statusDelayText;
+  });
+
+  // status-noteとmodel-checkの両方がfalseの時、親div要素を非表示にする
+  updateNoteAndModelCheckVisibility();
 
   // status-display要素の表示制御も更新
   updateStatusDisplay();
 }
 
+// phone-guidance-at-storeの表示/非表示を制御する関数
+function updatePhoneGuidanceVisibility() {
+  const checkbox = document.getElementById("phone-guidance-at-store-checkbox");
+  const element = document.getElementById("phone-guidance-at-store");
+
+  if (checkbox && element) {
+    element.style.display = checkbox.checked ? "" : "none";
+  }
+}
+
+// dealer-cost-coverageの表示/非表示を制御する関数
+function updateDealerCostCoverageVisibility() {
+  const checkbox = document.getElementById("dealer-cost-coverage-checkbox");
+  const select = document.getElementById("dealer-cost-coverage-select");
+  const element = document.getElementById("dealer-cost-coverage");
+
+  if (checkbox && element && select) {
+    if (checkbox.checked) {
+      const coverageTypes = {
+        full: "全額",
+        partial: "一部",
+      };
+
+      const coverageType = coverageTypes[select.value];
+      element.textContent = coverageType
+        ? `費用が発生した場合、●●店/●●様(連絡先)が${coverageType}負担するとのこと。`
+        : "";
+      element.style.display = "";
+    } else {
+      element.textContent = "";
+      element.style.display = "none";
+    }
+  }
+}
+
+// status-noteとmodel-checkの表示/非表示を制御する関数
+function updateNoteAndModelCheckVisibility() {
+  console.log("updateNoteAndModelCheckVisibility called");
+  // status-noteとmodel-checkのチェックボックスを取得
+  const statusNoteCheckbox = document.querySelector(
+    'input[data-target="status-note"]'
+  );
+  const modelCheckCheckbox = document.querySelector(
+    'input[data-target="model-check"]'
+  );
+
+  // チェック状態を取得
+  const isStatusNoteChecked = statusNoteCheckbox
+    ? statusNoteCheckbox.checked
+    : false;
+  const isModelCheckChecked = modelCheckCheckbox
+    ? modelCheckCheckbox.checked
+    : false;
+
+  // 両方がfalseの場合は非表示
+  const shouldHide = !isStatusNoteChecked && !isModelCheckChecked;
+
+  // teams-results-containerを取得して表示/非表示を切り替え
+  const teamsContainer = document.getElementById("teams-results-container");
+
+  if (teamsContainer) {
+    // 両方がfalseなら非表示、それ以外は表示
+    teamsContainer.style.display = shouldHide ? "none" : "";
+  }
+  // #results-for-rsystem-labelの表示/非表示も切り替え
+  const rsystemLabel = document.getElementById("results-for-rsystem-label");
+  if (rsystemLabel) {
+    rsystemLabel.style.display = shouldHide ? "none" : "";
+  }
+}
+
 // 名前表示を更新する関数
 function updateNameDisplay() {
   const nameValue = elements.nameInput.value.trim();
-  const nameDisplayElement = document.getElementById("name-display");
-  if (nameDisplayElement) {
-    nameDisplayElement.textContent = nameValue;
-  }
+  const nameDisplayElements = document.querySelectorAll(".name-display");
+  nameDisplayElements.forEach((el) => {
+    el.textContent = nameValue;
+  });
 }
 
 // CC・名前表示の表示/非表示を更新する関数
 function updateDatetimeNameVisibility() {
-  if (!elements.showDatetimeNameCheckbox || !elements.datetimeNameContainer) {
+  if (!elements.showDatetimeNameCheckbox || !elements.datetimeNameContainers) {
     return;
   }
 
   const isVisible = elements.showDatetimeNameCheckbox.checked;
 
   // trueなら表示、falseなら非表示（div全体を制御）
-  elements.datetimeNameContainer.style.display = isVisible ? "" : "none";
+  elements.datetimeNameContainers.forEach((container) => {
+    container.style.display = isVisible ? "" : "none";
+  });
 }
 
 // ==========================================
@@ -666,10 +758,10 @@ function setupPersonSelectHandler() {
       updateStateText("statusNameText", selectedPerson + "の名前の聴取\n");
 
       // person-name要素のみを更新（flashElementはMutationObserverが自動的に実行）
-      const personNameElement = document.getElementById("person-name");
-      if (personNameElement) {
-        personNameElement.textContent = selectedPerson;
-      }
+      const personNameElements = document.querySelectorAll(".person-name");
+      personNameElements.forEach((el) => {
+        el.textContent = selectedPerson;
+      });
     });
   }
 }
@@ -816,20 +908,148 @@ function setupDealerInformedCheckboxHandler() {
 
 // チェックボックス変更イベントハンドラ
 function setupCheckboxesHandler() {
+  console.log("setupCheckboxesHandler called");
   elements.checkboxes.forEach((cb) => {
     cb.addEventListener("change", () => {
       // status-name の場合は専用関数を使用
       if (cb.dataset.target === "status-name") {
         updateStatusNameDisplay(cb.checked);
+        // falseになった時、モーダルを表示
+        if (!cb.checked) {
+          showStatusNoteConfirmModal(cb);
+        } else {
+          // status-name が true になったら status-note も true にする
+          const statusNoteCheckbox = document.querySelector(
+            'input[data-target="status-note"]'
+          );
+          if (statusNoteCheckbox && !statusNoteCheckbox.checked) {
+            statusNoteCheckbox.checked = true;
+            // status-note の表示も更新
+            const displays = document.querySelectorAll(".status-note");
+            displays.forEach((display) => {
+              display.textContent = getTextFor("status-note");
+            });
+          }
+        }
+      } else if (cb.dataset.target === "model-check") {
+        // model-check の場合は専用の表示先を使用
+        const displays = document.querySelectorAll(".model-check-display");
+        displays.forEach((display) => {
+          display.textContent = cb.checked ? getTextFor(cb.dataset.target) : "";
+        });
       } else {
-        const display = document.getElementById(cb.dataset.target);
-        display.textContent = cb.checked ? getTextFor(cb.dataset.target) : "";
+        const displays = document.querySelectorAll("." + cb.dataset.target);
+        displays.forEach((display) => {
+          display.textContent = cb.checked ? getTextFor(cb.dataset.target) : "";
+        });
       }
 
       // status-display要素の表示制御も更新
       updateStatusDisplay();
+
+      // teams-results-containerの表示/非表示を更新
+      updateNoteAndModelCheckVisibility();
     });
   });
+}
+
+// status-noteの確認モーダルを表示する関数
+function showStatusNoteConfirmModal(statusNameCheckbox) {
+  const modal = document.getElementById("statusNoteConfirmModal");
+  const yesButton = document.getElementById("statusNoteConfirmYes");
+  const noButton = document.getElementById("statusNoteConfirmNo");
+
+  if (!modal || !yesButton || !noButton) return;
+
+  // Bootstrapのモーダルインスタンスを取得または作成
+  const bootstrapModal = new bootstrap.Modal(modal);
+
+  // 「はい」ボタンのクリックハンドラー
+  const handleYes = () => {
+    // status-noteチェックボックスをfalseにする
+    const statusNoteCheckbox = document.querySelector(
+      'input[data-target="status-note"]'
+    );
+    if (statusNoteCheckbox) {
+      statusNoteCheckbox.checked = false;
+      // status-note の表示も更新
+      const displays = document.querySelectorAll(".status-note");
+      displays.forEach((display) => {
+        display.textContent = "";
+      });
+      // teams-results-containerの表示/非表示を更新
+      updateNoteAndModelCheckVisibility();
+    }
+
+    // status-nameの表示を更新
+    updateStatusNameDisplay(false);
+
+    // モーダルを閉じる
+    bootstrapModal.hide();
+
+    // イベントリスナーを削除
+    yesButton.removeEventListener("click", handleYes);
+    noButton.removeEventListener("click", handleNo);
+  };
+
+  // 「いいえ」ボタンのクリックハンドラー
+  const handleNo = () => {
+    // status-nameチェックボックスを元に戻す（trueに）
+    // statusNameCheckbox.checked = true;
+
+    // モーダルを閉じる
+    bootstrapModal.hide();
+
+    // イベントリスナーを削除
+    yesButton.removeEventListener("click", handleYes);
+    noButton.removeEventListener("click", handleNo);
+  };
+
+  // イベントリスナーを追加
+  yesButton.addEventListener("click", handleYes);
+  noButton.addEventListener("click", handleNo);
+
+  // モーダルが閉じられた時のクリーンアップ
+  modal.addEventListener(
+    "hidden.bs.modal",
+    () => {
+      yesButton.removeEventListener("click", handleYes);
+      noButton.removeEventListener("click", handleNo);
+    },
+    { once: true }
+  );
+
+  // モーダルを表示
+  bootstrapModal.show();
+}
+
+// phone-guidance-at-storeチェックボックスのハンドラ
+function setupPhoneGuidanceCheckboxHandler() {
+  const checkbox = document.getElementById("phone-guidance-at-store-checkbox");
+
+  if (checkbox) {
+    checkbox.addEventListener("change", () => {
+      updatePhoneGuidanceVisibility();
+    });
+  }
+}
+
+// dealer-cost-coverageチェックボックスとselectのハンドラ
+function setupDealerCostCoverageCheckboxHandler() {
+  const checkbox = document.getElementById("dealer-cost-coverage-checkbox");
+  const select = document.getElementById("dealer-cost-coverage-select");
+
+  if (checkbox) {
+    checkbox.addEventListener("change", () => {
+      updateDealerCostCoverageVisibility();
+    });
+  }
+
+  if (select) {
+    select.addEventListener("change", () => {
+      updateDealerCostCoverageVisibility();
+    });
+  }
 }
 
 // すべてのイベントハンドラを設定
@@ -849,6 +1069,8 @@ function setupAllEventHandlers() {
   setupPaidHandlers();
   setupDealerInformedCheckboxHandler();
   setupCheckboxesHandler();
+  setupPhoneGuidanceCheckboxHandler();
+  setupDealerCostCoverageCheckboxHandler();
 }
 
 // ==========================================
@@ -934,10 +1156,10 @@ function applyDefaults() {
   updateStatusDisplay();
 
   // status-delay要素にテキストを設定（チェックボックスが削除されたため直接設定）
-  const statusDelayElement = document.getElementById("status-delay");
-  if (statusDelayElement) {
-    statusDelayElement.textContent = "・" + state.statusDelayText;
-  }
+  const statusDelayElements = document.querySelectorAll(".status-delay");
+  statusDelayElements.forEach((el) => {
+    el.textContent = "・" + state.statusDelayText;
+  });
 }
 
 // id="results" 内の要素のテキスト変更を監視

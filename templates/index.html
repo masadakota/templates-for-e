@@ -2,49 +2,164 @@
 <html lang="ja">
   <head>
     <title>後処理テンプレ HTML版</title>
+    <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../styles/globals.css" />
+    <link rel="stylesheet" href="../styles/tailwind-like.css" />
+    <link rel="stylesheet" href="../styles/bootstrap-custom.css" />
     <link rel="stylesheet" href="../styles/templates.css" />
     <link rel="stylesheet" href="../styles/copy-handler.css" />
   </head>
-  <body>
-    <div class="container">
-      <h1 style="margin-bottom: 0; margin-top: 0; font-size: 1.2rem">
-        後処理テンプレ HTML版
-      </h1>
+  <body class="bg-foreground/30">
+    <div class="container bg-muted">
+      <h1 class="mt-0 mb-2" style="font-size: 1.2rem">後処理テンプレ</h1>
+
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="pills-home-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-home"
+            type="button"
+            role="tab"
+            aria-controls="pills-home"
+            aria-selected="true"
+          >
+            受電
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="pills-profile-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            架電
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="pills-contact-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-contact"
+            type="button"
+            role="tab"
+            aria-controls="pills-contact"
+            aria-selected="false"
+          >
+            テスト
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-home"
+          role="tabpanel"
+          aria-labelledby="pills-home-tab"
+        >
+          ...
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+          ...
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-contact"
+          role="tabpanel"
+          aria-labelledby="pills-contact-tab"
+        >
+          ...
+        </div>
+      </div>
 
       <div class="main-layout" style="display: flex; flex-direction: column">
-        <div>
+        <div class="lg:flex-1">
+          <div
+            class="lg:flex-col"
+            style="display: flex; gap: 4px; flex-wrap: nowrap"
+          >
+            <div style="max-width: 100%">
+              <div
+                id="results-for-rsystem-label"
+                class="text-sm"
+                style="display: none"
+              >
+                R-system
+              </div>
+              <div id="results" class="results copyable">
+                <div class="datetime-name-container">
+                  <span class="current-datetime"></span><span>CC</span
+                  ><span class="name-display"></span>
+                </div>
+                <div>
+                  <span class="status-urgent"></span>
+                </div>
+                <div id="phone-guidance-at-store" style="display: none">
+                  お客様来店中のため、お電話を代わっていただき、案内。<br /><br />
+                </div>
+                <div id="dealer-cost-coverage" style="display: none"></div>
+                <span class="status-name-prefix"></span
+                ><span class="person-name"></span
+                ><span class="status-name-suffix"></span>
+                <div>
+                  <span class="status-paid"></span
+                  ><span class="status-display-paid status-display"></span
+                  ><span class="dealer-informed-display"></span>
+                </div>
+                <span class="status-delay"></span
+                ><span class="status-display-delay status-display"></span><br />
+              </div>
+            </div>
+
+            <div
+              id="teams-results-container"
+              style="max-width: 100%; display: none"
+            >
+              <div class="text-sm">Teams</div>
+              <div id="results-chat" class="results copyable">
+                <div class="datetime-name-container">
+                  <span class="current-datetime"></span><span>CC</span
+                  ><span class="name-display"></span>
+                </div>
+                <div>
+                  <span class="status-urgent"></span>
+                </div>
+                <div>
+                  <span class="model-check-display"></span>
+                </div>
+                <span class="status-note"></span>
+                <div>
+                  <span class="status-paid"></span
+                  ><span class="status-display-paid status-display"></span
+                  ><span class="dealer-informed-display"></span>
+                </div>
+                <span class="status-delay"></span
+                ><span class="status-display-delay status-display"></span><br />
+              </div>
+            </div>
+          </div>
           <div
             id="copy-instruction"
-            style="
-              position: relative;
-              color: #888;
-              font-size: 0.9rem;
-              text-align: right;
-              margin-bottom: 4px;
-            "
+            class="text-sm text-muted-foreground"
+            style="position: relative; text-align: center; margin-bottom: 4px"
           >
-            ↓右クリックでコピー
+            ↑右クリックでコピー
           </div>
-          <div id="results" class="results copyable">
-            <div id="datetime-name-container">
-              <span id="current-datetime"></span><span>CC</span
-              ><span id="name-display"></span>
-            </div>
-            <div>
-              <span id="status-urgent"></span>
-            </div>
-            <span id="status-note"></span><span id="status-name-prefix"></span
-            ><span id="person-name"></span><span id="status-name-suffix"></span>
-            <div>
-              <span id="status-paid"></span
-              ><span id="status-display-paid" class="status-display"></span
-              ><span id="dealer-informed-display"></span>
-            </div>
-            <span id="status-delay"></span
-            ><span id="status-display-delay" class="status-display"></span
-            ><br />
-          </div>
+
           <div
+            class="lg:hidden"
             style="
               border-bottom: 1px solid #ccc;
               margin-top: 12px;
@@ -54,7 +169,17 @@
           ></div>
         </div>
 
-        <div style="flex: 1; overflow-y: scroll; margin-right: -12px">
+        <div
+          id="inspector"
+          class="lg:h-full lg:!flex-initial"
+          style="
+            flex: 1;
+            overflow-y: scroll;
+            margin-right: -12px;
+            max-width: 100%;
+            width: 500px;
+          "
+        >
           <div
             style="
               position: relative;
@@ -69,17 +194,18 @@
               margin-bottom: 12px;
             "
           >
-            <div class="badge" style="font-size: 0.9rem">
+            <div class="box-label" style="font-size: 0.9rem">
               ショートカットボタン
             </div>
             <div style="display: flex; gap: 4px; flex-wrap: wrap">
               <button
                 id="shortcut-yu-mi"
+                type="button"
+                class="btn btn-outline-primary"
                 style="
-                  padding: 3px 8px;
-                  cursor: pointer;
-                  white-space: nowrap;
                   font-size: 0.85rem;
+                  padding-left: 6px;
+                  padding-right: 6px;
                 "
                 title="10年保証有償警告/未"
               >
@@ -87,11 +213,12 @@
               </button>
               <button
                 id="shortcut-yu-sumi"
+                type="button"
+                class="btn btn-outline-primary"
                 style="
-                  padding: 3px 8px;
-                  cursor: pointer;
-                  white-space: nowrap;
                   font-size: 0.85rem;
+                  padding-left: 6px;
+                  padding-right: 6px;
                 "
                 title="10年保証有償警告/済"
               >
@@ -99,11 +226,12 @@
               </button>
               <button
                 id="shortcut-me-mi"
+                type="button"
+                class="btn btn-outline-primary"
                 style="
-                  padding: 3px 8px;
-                  cursor: pointer;
-                  white-space: nowrap;
                   font-size: 0.85rem;
+                  padding-left: 6px;
+                  padding-right: 6px;
                 "
                 title="メーカー保証期間内/未"
               >
@@ -111,11 +239,12 @@
               </button>
               <button
                 id="shortcut-me-sumi"
+                type="button"
+                class="btn btn-outline-primary"
                 style="
-                  padding: 3px 8px;
-                  cursor: pointer;
-                  white-space: nowrap;
                   font-size: 0.85rem;
+                  padding-left: 6px;
+                  padding-right: 6px;
                 "
                 title="メーカー保証期間内/済"
               >
@@ -124,27 +253,29 @@
               <div style="white-space: nowrap">
                 <button
                   id="shortcut-gai-mi"
+                  type="button"
+                  class="btn btn-outline-primary"
                   style="
-                    padding: 3px 8px;
-                    cursor: pointer;
-                    white-space: nowrap;
                     font-size: 0.85rem;
+                    padding-left: 8px;
+                    padding-right: 8px;
                   "
                   title="保証対象外部位/未"
                 >
-                  保証対象外部位/未
+                  保証対象外/未
                 </button>
                 <button
                   id="shortcut-gai-sumi"
+                  type="button"
+                  class="btn btn-outline-primary"
                   style="
-                    padding: 3px 8px;
-                    cursor: pointer;
-                    white-space: nowrap;
                     font-size: 0.85rem;
+                    padding-left: 8px;
+                    padding-right: 8px;
                   "
                   title="保証対象外部位/済"
                 >
-                  保証対象外部位/済
+                  保証対象外/済
                 </button>
               </div>
             </div>
@@ -171,7 +302,7 @@
               "
             >
               <div
-                class="badge"
+                class="box-label"
                 style="font-size: 0.9rem; margin-top: -12px; margin-left: -12px"
               >
                 設定
@@ -190,7 +321,14 @@
               ></div>
               <button
                 id="reset-btn"
-                style="padding: 5px 10px; cursor: pointer; white-space: nowrap"
+                type="button"
+                class="btn btn-outline-primary"
+                style="
+                  padding: 5px 10px;
+                  cursor: pointer;
+                  white-space: nowrap;
+                  font-size: 0.9rem;
+                "
               >
                 リセット
               </button>
@@ -214,6 +352,8 @@
 
               <button
                 id="update-datetime-btn"
+                type="button"
+                class="btn btn-outline-primary"
                 style="padding: 5px 10px; cursor: pointer; white-space: nowrap"
               >
                 日時更新
@@ -237,15 +377,6 @@
                   data-target="status-urgent"
                 />
                 至急対応希望
-              </label>
-
-              <label>
-                <input
-                  type="checkbox"
-                  class="check-item"
-                  data-target="status-note"
-                />
-                備考要確認
               </label>
             </div>
 
@@ -325,6 +456,15 @@
                     <input type="checkbox" id="dealer-informed-checkbox" />
                     販売店にて案内済み
                   </label>
+                  <label>
+                    <input type="checkbox" id="dealer-cost-coverage-checkbox" />
+                    販売店が費用を
+                    <select id="dealer-cost-coverage-select">
+                      <option value="full">全額</option>
+                      <option value="partial">一部</option>
+                    </select>
+                    負担
+                  </label>
                 </div>
                 <div class="separator-vertical"></div>
                 <label style="vertical-align: middle">
@@ -373,6 +513,11 @@
                   済
                 </label>
               </div>
+
+              <label>
+                <input type="checkbox" id="phone-guidance-at-store-checkbox" />
+                店舗にて電話を代わっていただき案内
+              </label>
             </div>
 
             <div
@@ -404,8 +549,29 @@
                   <option value="ご息女様">ご息女様</option>
                   <option value="お母様">お母様</option>
                   <option value="お父様">お父様</option>
-                  <option value="折り返しTEL先の方">折り返しTEL先の方</option>
+                  <option value="折り返し先の方">折り返し先の方</option>
                 </select>
+              </label>
+            </div>
+
+            <div class="border-2 border-border p-2 rounded-md">
+              <div class="text-sm text-muted-foreground font-bold">Teams</div>
+              <label>
+                <input
+                  type="checkbox"
+                  class="check-item"
+                  data-target="model-check"
+                />
+                型番確認
+              </label>
+
+              <label>
+                <input
+                  type="checkbox"
+                  class="check-item"
+                  data-target="status-note"
+                />
+                備考要確認
               </label>
             </div>
 
@@ -440,6 +606,49 @@
       </div>
     </div>
 
+    <!-- Modal for status-note confirmation -->
+    <div
+      class="modal"
+      id="statusNoteConfirmModal"
+      tabindex="-1"
+      aria-labelledby="statusNoteConfirmModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="statusNoteConfirmModalLabel">確認</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Teams用テンプレの「備考要確認」を非表示にしますか？
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="statusNoteConfirmNo"
+              data-bs-dismiss="modal"
+            >
+              いいえ
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="statusNoteConfirmYes"
+            >
+              はい
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Configuration -->
     <script src="../config/defaults.js"></script>
 
@@ -450,5 +659,6 @@
 
     <!-- New State Management (ES Module) -->
     <script type="module" src="../scripts/app.js"></script>
+    <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
   </body>
 </html>

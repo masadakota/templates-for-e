@@ -1,0 +1,185 @@
+/**
+ * shadcn/ui inspired black component theme for Bootstrap
+ * Components (buttons, nav pills, etc.) use black/dark colors
+ * Background remains white (Bootstrap default)
+ *
+ * CSS Variables are defined in globals.css
+ */
+
+/* ===== Nav Pills - Black Active State ===== */
+.nav-pills .nav-link {
+  background-color: transparent;
+  color: #6c757d;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.nav-pills .nav-link.active {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+/* ===== Nav Tabs - Black Underline ===== */
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+  background-color: transparent;
+  color: #6c757d;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #212529;
+  border-bottom-color: #dee2e6;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--foreground);
+  background-color: transparent;
+  border-bottom-color: var(--primary);
+}
+
+/* ===== Buttons - Black Primary ===== */
+.btn {
+  border-radius: var(--radius-button);
+  /* font-weight: 500; */
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: color-mix(in srgb, var(--primary), black 10%);
+  border-color: color-mix(in srgb, var(--primary), black 10%);
+  color: var(--primary-foreground);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border-color: var(--secondary);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: color-mix(in srgb, var(--secondary), black 8%);
+  color: var(--secondary-foreground);
+  border-color: color-mix(in srgb, var(--secondary), black 8%);
+}
+
+.btn-outline-primary {
+  background-color: var(--midground-10);
+  /* background-color: var(--secondary); */
+  color: var(--primary);
+  border-color: var(--border);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: color-mix(in srgb, var(--midground-10), black 5%);
+  /* background-color: color-mix(in srgb, var(--secondary), black 5%); */
+  color: var(--primary);
+  border-color: var(--border);
+}
+
+.btn-outline-secondary {
+  background-color: transparent;
+  color: var(--muted-foreground);
+  border-color: var(--border);
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border-color: var(--border);
+}
+
+/* ===== Form Controls ===== */
+.form-control,
+.form-select {
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring), transparent 90%);
+}
+
+/* ===== Checkboxes and Radio ===== */
+.form-check-input:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.form-check-input:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring), transparent 90%);
+}
+
+/* ===== Cards ===== */
+.card {
+  border-radius: var(--radius);
+  border: 1px solid #dee2e6;
+}
+
+/* ===== Accordion ===== */
+.accordion-item {
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.accordion-button {
+  font-weight: 500;
+}
+
+.accordion-button:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring), transparent 90%);
+}
+
+/* ===== Badges ===== */
+.badge {
+  border-radius: calc(var(--radius) - 2px);
+  font-weight: 500;
+}
+
+.badge.bg-primary {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
+/* ===== List Groups ===== */
+.list-group-item.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* ===== Focus Styles ===== */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap コンポーネントサンプル</title>
+  <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="../styles/globals.css">
+  <link rel="stylesheet" href="../styles/bootstrap-custom.css">
+  <style>
+    body {
+      padding: 2rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      border: 1px solid hsl(var(--border));
+    }
+    h1 {
+      margin-bottom: 2rem;
+      color: hsl(var(--foreground));
+      font-weight: 700;
+    }
+    .section-title {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: hsl(var(--foreground));
+    }
+    hr {
+      border-color: hsl(var(--border));
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bootstrap コンポーネントサンプル</h1>
+    <p class="text-muted">Accordion と Tab の使い方を紹介します</p>
+
+    <hr class="my-4">
+
+    <!-- ========== タブセクション ========== -->
+    <h2 class="section-title" style="margin-top: 0;">📑 タブ (Tabs)</h2>
+
+    <!-- 1. 基本的なタブ -->
+    <h3 class="h5 mt-4 mb-3">1. 基本的なタブ</h3>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">ホーム</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">プロフィール</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">お問い合わせ</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" type="button" role="tab" disabled>無効</button>
+      </li>
+    </ul>
+    <div class="tab-content border border-top-0 p-3" id="myTabContent">
+      <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <h5>ホームタブ</h5>
+        <p>これは基本的なタブの例です。タブをクリックすると、対応するコンテンツが表示されます。</p>
+        <ul>
+          <li>アクティブなタブは青色で表示されます</li>
+          <li>最後のタブは無効化されています</li>
+          <li>タブの切り替えは即座に行われます</li>
+        </ul>
+      </div>
+      <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <h5>プロフィールタブ</h5>
+        <p>ユーザー情報を表示するタブの例です。</p>
+        <div class="row">
+          <div class="col-md-6">
+            <strong>名前:</strong> 山田太郎
+          </div>
+          <div class="col-md-6">
+            <strong>メール:</strong> yamada@example.com
+          </div>
+        </div>
+        <div class="mt-2">
+          <strong>所属:</strong> 開発部
+        </div>
+      </div>
+      <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <h5>お問い合わせフォーム</h5>
+        <form>
+          <div class="mb-3">
+            <label for="contactName" class="form-label">お名前</label>
+            <input type="text" class="form-control" id="contactName" placeholder="山田太郎">
+          </div>
+          <div class="mb-3">
+            <label for="contactEmail" class="form-label">メールアドレス</label>
+            <input type="email" class="form-control" id="contactEmail" placeholder="name@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="contactMessage" class="form-label">メッセージ</label>
+            <textarea class="form-control" id="contactMessage" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">送信</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 2. ピルスタイルのタブ -->
+    <h3 class="h5 mt-5 mb-3">2. ピルスタイルのタブ</h3>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">概要</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-features-tab" data-bs-toggle="pill" data-bs-target="#pills-features" type="button" role="tab" aria-controls="pills-features" aria-selected="false">機能</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-pricing-tab" data-bs-toggle="pill" data-bs-target="#pills-pricing" type="button" role="tab" aria-controls="pills-pricing" aria-selected="false">料金</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">サービス概要</h5>
+            <p class="card-text">ピルスタイルのタブは丸みを帯びた見た目で、よりモダンな印象を与えます。</p>
+            <span class="badge bg-primary">新機能</span>
+            <span class="badge bg-success">推奨</span>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="pills-features" role="tabpanel" aria-labelledby="pills-features-tab">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">主な機能</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">✅ レスポンシブデザイン</li>
+              <li class="list-group-item">✅ カスタマイズ可能</li>
+              <li class="list-group-item">✅ アクセシビリティ対応</li>
+              <li class="list-group-item">✅ 高速パフォーマンス</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="pills-pricing" role="tabpanel" aria-labelledby="pills-pricing-tab">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body text-center">
+                <h5 class="card-title">無料プラン</h5>
+                <h2>¥0</h2>
+                <p class="text-muted">/ 月</p>
+                <button class="btn btn-outline-primary">選択</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-primary">
+              <div class="card-body text-center">
+                <h5 class="card-title">スタンダード</h5>
+                <h2>¥1,000</h2>
+                <p class="text-muted">/ 月</p>
+                <button class="btn btn-primary">選択</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body text-center">
+                <h5 class="card-title">プレミアム</h5>
+                <h2>¥3,000</h2>
+                <p class="text-muted">/ 月</p>
+                <button class="btn btn-outline-primary">選択</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 垂直タブ -->
+    <h3 class="h5 mt-5 mb-3">3. 垂直タブ（サイドバー型）</h3>
+    <div class="row">
+      <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <button class="nav-link active" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="true">⚙️ 設定</button>
+          <button class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill" data-bs-target="#v-pills-account" type="button" role="tab" aria-controls="v-pills-account" aria-selected="false">👤 アカウント</button>
+          <button class="nav-link" id="v-pills-security-tab" data-bs-toggle="pill" data-bs-target="#v-pills-security" type="button" role="tab" aria-controls="v-pills-security" aria-selected="false">🔒 セキュリティ</button>
+          <button class="nav-link" id="v-pills-notifications-tab" data-bs-toggle="pill" data-bs-target="#v-pills-notifications" type="button" role="tab" aria-controls="v-pills-notifications" aria-selected="false">🔔 通知</button>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane show active" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+            <h5>一般設定</h5>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="darkMode" checked>
+              <label class="form-check-label" for="darkMode">ダークモード</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="autoSave">
+              <label class="form-check-label" for="autoSave">自動保存</label>
+            </div>
+            <div class="mt-3">
+              <label for="language" class="form-label">言語</label>
+              <select class="form-select" id="language">
+                <option selected>日本語</option>
+                <option>English</option>
+                <option>中文</option>
+              </select>
+            </div>
+          </div>
+          <div class="tab-pane" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
+            <h5>アカウント情報</h5>
+            <form>
+              <div class="mb-3">
+                <label for="accountEmail" class="form-label">メールアドレス</label>
+                <input type="email" class="form-control" id="accountEmail" value="user@example.com">
+              </div>
+              <div class="mb-3">
+                <label for="accountName" class="form-label">ユーザー名</label>
+                <input type="text" class="form-control" id="accountName" value="山田太郎">
+              </div>
+              <button type="submit" class="btn btn-primary">保存</button>
+            </form>
+          </div>
+          <div class="tab-pane" id="v-pills-security" role="tabpanel" aria-labelledby="v-pills-security-tab">
+            <h5>セキュリティ設定</h5>
+            <div class="alert alert-warning" role="alert">
+              <strong>注意:</strong> パスワードを変更すると、すべてのデバイスからログアウトされます。
+            </div>
+            <button class="btn btn-outline-danger">パスワードを変更</button>
+            <button class="btn btn-outline-secondary ms-2">二段階認証を有効化</button>
+          </div>
+          <div class="tab-pane" id="v-pills-notifications" role="tabpanel" aria-labelledby="v-pills-notifications-tab">
+            <h5>通知設定</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="emailNotif" checked>
+              <label class="form-check-label" for="emailNotif">メール通知</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="pushNotif" checked>
+              <label class="form-check-label" for="pushNotif">プッシュ通知</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="smsNotif">
+              <label class="form-check-label" for="smsNotif">SMS通知</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. リンクスタイルのタブ -->
+    <h3 class="h5 mt-5 mb-3">4. アンダーラインスタイル</h3>
+    <ul class="nav nav-underline mb-3" id="underline-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="underline-all-tab" data-bs-toggle="tab" data-bs-target="#underline-all" type="button" role="tab">すべて</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="underline-active-tab" data-bs-toggle="tab" data-bs-target="#underline-active" type="button" role="tab">進行中</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="underline-completed-tab" data-bs-toggle="tab" data-bs-target="#underline-completed" type="button" role="tab">完了</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="underline-tabContent">
+      <div class="tab-pane show active" id="underline-all" role="tabpanel">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action">タスク1: プロジェクト計画書の作成</a>
+          <a href="#" class="list-group-item list-group-item-action">タスク2: デザインレビュー</a>
+          <a href="#" class="list-group-item list-group-item-action">タスク3: 実装完了</a>
+          <a href="#" class="list-group-item list-group-item-action">タスク4: テスト実施</a>
+        </div>
+      </div>
+      <div class="tab-pane" id="underline-active" role="tabpanel">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action active">タスク1: プロジェクト計画書の作成</a>
+          <a href="#" class="list-group-item list-group-item-action">タスク2: デザインレビュー</a>
+        </div>
+      </div>
+      <div class="tab-pane" id="underline-completed" role="tabpanel">
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action list-group-item-success">
+            <div class="d-flex w-100 justify-content-between">
+              <h6 class="mb-1">タスク3: 実装完了</h6>
+              <small>✓</small>
+            </div>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action list-group-item-success">
+            <div class="d-flex w-100 justify-content-between">
+              <h6 class="mb-1">タスク4: テスト実施</h6>
+              <small>✓</small>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- ========== Accordionセクション ========== -->
+    <h2 class="section-title">🗂️ Accordion</h2>
+    <p class="text-muted">クリックして展開・折りたたみができます</p>
+
+    <!-- 基本的なAccordion -->
+    <h2 class="section-title">1. 基本的なAccordion</h2>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Accordion Item #1
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>これは最初のアイテムのアコーディオンボディです。</strong>
+            デフォルトで表示されており、最初の項目が開いた状態になっています。
+            他の項目をクリックすると、この項目は自動的に閉じます。
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Accordion Item #2
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>これは2番目のアイテムのアコーディオンボディです。</strong>
+            デフォルトでは非表示になっており、ヘッダーをクリックすると表示されます。
+            <ul class="mt-2">
+              <li>リスト項目1</li>
+              <li>リスト項目2</li>
+              <li>リスト項目3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Accordion Item #3
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>これは3番目のアイテムのアコーディオンボディです。</strong>
+            内部にはどんなHTML要素でも配置できます。
+            <div class="alert alert-info mt-2" role="alert">
+              これはアラートコンポーネントの例です。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- フラッシュスタイルのAccordion -->
+    <h2 class="section-title">2. フラッシュスタイル（枠線なし）</h2>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            フラッシュ Accordion Item #1
+          </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            フラッシュスタイルは外側の枠線がなく、よりシンプルな見た目になります。
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            フラッシュ Accordion Item #2
+          </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            サイドバーやナビゲーションメニューに適しています。
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+            フラッシュ Accordion Item #3
+          </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">
+            最後のアイテムです。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 常に開くAccordion（複数同時展開可能） -->
+    <h2 class="section-title">3. 常に開くAccordion（複数同時展開）</h2>
+    <p class="text-muted small">data-bs-parent属性を削除することで、複数のアイテムを同時に開くことができます</p>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            設定
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+          <div class="accordion-body">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="setting1" checked>
+              <label class="form-check-label" for="setting1">
+                通知を有効にする
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="setting2">
+              <label class="form-check-label" for="setting2">
+                自動保存を有効にする
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+            アカウント情報
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <form>
+              <div class="mb-3">
+                <label for="username" class="form-label">ユーザー名</label>
+                <input type="text" class="form-control" id="username" value="user@example.com">
+              </div>
+              <div class="mb-3">
+                <label for="displayName" class="form-label">表示名</label>
+                <input type="text" class="form-control" id="displayName" value="山田太郎">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            ヘルプ
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <h6>よくある質問</h6>
+            <p><strong>Q: パスワードを忘れました</strong></p>
+            <p>A: ログイン画面から「パスワードを忘れた方」をクリックしてください。</p>
+            <p><strong>Q: アカウントを削除するには？</strong></p>
+            <p>A: 設定画面の「アカウント管理」から削除できます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- カスタムスタイルのAccordion -->
+    <h2 class="section-title">4. カスタムスタイル</h2>
+    <div class="accordion" id="accordionCustom">
+      <div class="accordion-item border-primary">
+        <h2 class="accordion-header">
+          <button class="accordion-button bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#custom-collapseOne" aria-expanded="true" aria-controls="custom-collapseOne">
+            <strong>📝 後処理テンプレ</strong>
+          </button>
+        </h2>
+        <div id="custom-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionCustom">
+          <div class="accordion-body">
+            <p>チェックボックスとフォーム入力から定型文を自動生成します。</p>
+            <a href="../templates/index.html" class="btn btn-sm btn-outline-primary">アプリを開く →</a>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item border-success">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#custom-collapseTwo" aria-expanded="false" aria-controls="custom-collapseTwo">
+            <strong>🔀 フローダイアグラム</strong>
+          </button>
+        </h2>
+        <div id="custom-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionCustom">
+          <div class="accordion-body">
+            <p>コールフローを視覚的に表示します。</p>
+            <span class="badge bg-secondary">準備中</span>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item border-info">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-info text-white" type="button" data-bs-toggle="collapse" data-bs-target="#custom-collapseThree" aria-expanded="false" aria-controls="custom-collapseThree">
+            <strong>➕ 新しいツール</strong>
+          </button>
+        </h2>
+        <div id="custom-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionCustom">
+          <div class="accordion-body">
+            <p>今後、業務に必要なツールを随時追加していきます。</p>
+            <span class="badge bg-secondary">計画中</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 戻るリンク -->
+    <div class="mt-4 text-center">
+      <a href="../index.html" class="btn btn-outline-secondary">← トップページに戻る</a>
+    </div>
+  </div>
+
+  <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
+
+  <!-- デモ用のJavaScript（オプション） -->
+  <script>
+    // Accordionのイベントをリッスン（デモ用）
+    document.addEventListener('DOMContentLoaded', function() {
+      const accordions = document.querySelectorAll('.accordion');
+
+      accordions.forEach(accordion => {
+        accordion.addEventListener('show.bs.collapse', function(event) {
+          console.log('Accordion opened:', event.target.id);
+        });
+
+        accordion.addEventListener('hide.bs.collapse', function(event) {
+          console.log('Accordion closed:', event.target.id);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

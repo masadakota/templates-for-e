@@ -22,6 +22,7 @@ const CONFIG = {
     "status-urgent": false,  // 至急対応希望
     "status-note": false,     // 備考要確認
     "status-name": false,     // 名前の聴取
+    "model-check": false,     // 型番確認
     // "status-delay": true      // お日にちがかかる可能性
   },
 

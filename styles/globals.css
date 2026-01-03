@@ -1,0 +1,65 @@
+/**
+ * Global CSS Variables
+ * shadcn/ui inspired design tokens
+ */
+
+:root {
+  --radius: 8px; /* 0.625rem; */
+  --radius-button: 4px;
+  --card: rgb(255, 255, 255);
+  --card-foreground: rgb(38, 38, 38);
+  --popover: rgb(255, 255, 255);
+  --popover-foreground: rgb(38, 38, 38);
+  --primary: rgb(52, 52, 52);
+  --primary-foreground: rgb(251, 251, 251);
+  --secondary: rgb(247, 247, 247);
+  --secondary-foreground: rgb(52, 52, 52);
+  --muted: rgb(247, 247, 247);
+  --muted-foreground: rgb(142, 142, 142);
+  --accent: rgb(247, 247, 247);
+  --accent-foreground: rgb(52, 52, 52);
+  --destructive: rgb(190, 44, 38);
+  --border: rgb(200, 200, 200);
+  /* --border: rgb(235, 235, 235); */
+  --input: rgb(235, 235, 235);
+  --ring: rgb(181, 181, 181);
+  --chart-1: rgb(226, 129, 74);
+  --chart-2: rgb(83, 166, 223);
+  --chart-3: rgb(82, 115, 208);
+  --chart-4: rgb(255, 192, 88);
+  --chart-5: rgb(255, 166, 75);
+  --sidebar: rgb(251, 251, 251);
+  --sidebar-foreground: rgb(38, 38, 38);
+  --sidebar-primary: rgb(52, 52, 52);
+  --sidebar-primary-foreground: rgb(251, 251, 251);
+  --sidebar-accent: rgb(247, 247, 247);
+  --sidebar-accent-foreground: rgb(52, 52, 52);
+  --sidebar-border: rgb(235, 235, 235);
+  --sidebar-ring: rgb(181, 181, 181);
+  --background: rgb(255, 255, 255);
+  --foreground: rgb(38, 38, 38);
+
+  /* Custom: Intermediate colors (midground) */
+  --midground: rgb(146, 146, 146);     /* Alias for midground-50 */
+  --midground-10: rgb(234, 234, 234);  /* 10% foreground, 90% background */
+  --midground-20: rgb(212, 212, 212);  /* 20% foreground, 80% background */
+  --midground-30: rgb(190, 190, 190);  /* 30% foreground, 70% background */
+  --midground-40: rgb(168, 168, 168);  /* 40% foreground, 60% background */
+  --midground-50: rgb(146, 146, 146);  /* 50% foreground, 50% background */
+  --midground-60: rgb(125, 125, 125);  /* 60% foreground, 40% background */
+  --midground-70: rgb(103, 103, 103);  /* 70% foreground, 30% background */
+  --midground-80: rgb(81, 81, 81);     /* 80% foreground, 20% background */
+  --midground-90: rgb(59, 59, 59);     /* 90% foreground, 10% background */
+}
+
+/* :root {
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --ring: 0 0% 9%;
+  --radius: 4px;
+} */

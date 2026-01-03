@@ -23,6 +23,7 @@ export function createInitialState(config = {}) {
       "status-urgent": false,
       "status-note": false,
       "status-name": false,
+      "model-check": false,
       // "status-delay": true,
     },
     texts: {
@@ -48,8 +49,8 @@ export function createInitialState(config = {}) {
     // Text content state
     texts: {
       statusUrgent: texts.statusUrgent,
-      statusNote: texts.statusNote,
       statusName: texts.statusName,
+      statusNote: texts.statusNote,
       statusPaid: texts.statusPaid,
       statusDelay: texts.statusDelay,
     },
@@ -57,8 +58,9 @@ export function createInitialState(config = {}) {
     // Checkbox/radio states
     checkboxes: {
       statusUrgent: checks["status-urgent"],
-      statusNote: checks["status-note"],
       statusName: checks["status-name"],
+      statusNote: checks["status-note"],
+      modelCheck: checks["model-check"],
       // statusDelay: checks["status-delay"],
       mitsubishi: mergedConfig.maker === "三菱",
       newyear: mergedConfig.newyear,

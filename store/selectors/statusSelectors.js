@@ -82,23 +82,6 @@ export function getPaidDisplayText(state) {
 }
 
 /**
- * Get delay text based on maker and newyear settings
- * @param {Object} state - Application state
- * @returns {string} Delay text
- */
-export function getDelayText(state) {
-  if (state.checkboxes.newyear) {
-    return '年末年始トーク';
-  }
-
-  if (state.checkboxes.maker) {
-    return '通常よりお日にちがかかる可能性案内';
-  }
-
-  return 'お日にちがかかる可能性案内';
-}
-
-/**
  * Get person name text for display
  * @param {Object} state - Application state
  * @returns {string} Person name text
