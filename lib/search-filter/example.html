@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SearchFilter - 使用例</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    /* 検索UI */
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 3rem 0.75rem 1rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, background-color 0.2s ease;
+    }
+
+    .clear-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .clear-btn:hover {
+      background: #c0392b;
+    }
+
+    .result-count {
+      color: #666;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    /* アイテムリスト */
+    .items-container {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .item {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .item:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .item.hidden {
+      display: none;
+    }
+
+    .item-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: #333;
+    }
+
+    .item-description {
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    /* 空の状態 */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .empty-state-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .empty-state-message {
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    /* ログ出力 */
+    .log-output {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #1e293b;
+      color: #e2e8f0;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .log-output .log-entry {
+      margin-bottom: 0.25rem;
+      padding: 0.25rem 0;
+    }
+
+    .log-output .log-search {
+      color: #fbbf24;
+    }
+
+    .log-output .log-clear {
+      color: #34d399;
+    }
+  </style>
+</head>
+<body>
+  <h1>SearchFilter ライブラリ - デモ</h1>
+  <p class="subtitle">汎用的なリアルタイム検索・フィルタリングの動作例</p>
+
+  <!-- 検索UI -->
+  <div class="search-wrapper">
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="フルーツを検索... (例: apple, banana)"
+      autocomplete="off"
+    />
+    <button id="clear-btn" class="clear-btn">×</button>
+  </div>
+  <div id="result-count" class="result-count"></div>
+
+  <!-- アイテムリスト -->
+  <div class="items-container" id="items-container">
+    <div class="item">
+      <div class="item-title">Apple 🍎</div>
+      <div class="item-description">赤くて甘い果物。ビタミンCが豊富。</div>
+    </div>
+    <div class="item">
+      <div class="item-title">Banana 🍌</div>
+      <div class="item-description">黄色い果物。カリウムが豊富で栄養満点。</div>
+    </div>
+    <div class="item">
+      <div class="item-title">Cherry 🍒</div>
+      <div class="item-description">小さくて赤い果物。デザートによく使われる。</div>
+    </div>
+    <div class="item">
+      <div class="item-title">Orange 🍊</div>
+      <div class="item-description">オレンジ色の柑橘類。ビタミンCが豊富。</div>
+    </div>
+    <div class="item">
+      <div class="item-title">Grape 🍇</div>
+      <div class="item-description">紫色の小さな果物。ワインの原料。</div>
+    </div>
+    <div class="item">
+      <div class="item-title">Strawberry 🍓</div>
+      <div class="item-description">赤いベリー系の果物。甘くて人気。</div>
+    </div>
+    <div class="item">
+      <div class="item-title">Watermelon 🍉</div>
+      <div class="item-description">大きな緑色の果物。夏によく食べられる。</div>
+    </div>
+    <div class="item">
+      <div class="item-title">Pineapple 🍍</div>
+      <div class="item-description">黄色いトロピカルフルーツ。酸味と甘みがある。</div>
+    </div>
+  </div>
+
+  <!-- 検索結果なし -->
+  <div id="no-results" class="empty-state" style="display: none;">
+    <div class="empty-state-icon">🔍</div>
+    <div class="empty-state-title">検索結果が見つかりません</div>
+    <div class="empty-state-message">別のキーワードで検索してみてください</div>
+  </div>
+
+  <!-- イベントログ -->
+  <div class="log-output" id="logOutput">
+    <div class="log-entry">SearchFilter イベントログ:</div>
+  </div>
+
+  <script type="module">
+    import SearchFilter from './SearchFilter.js';
+
+    // SearchFilterの初期化
+    const filter = new SearchFilter({
+      searchInputId: 'searchInput',
+      clearButtonId: 'clearBtn',
+      resultCountId: 'resultCount',
+      itemSelector: '.item',
+      containerSelector: '#itemsContainer',
+      noResultsId: 'noResults',
+
+      // コールバックでイベントログを出力
+      onSearch: (result) => {
+        const log = document.getElementById('logOutput');
+        const entry = document.createElement('div');
+        entry.className = 'log-entry log-search';
+        entry.textContent = `🔍 検索: "${result.keyword}" → ${result.visibleCount}/${result.totalCount} 件表示`;
+        log.appendChild(entry);
+        log.scrollTop = log.scrollHeight;
+      },
+
+      onClear: () => {
+        const log = document.getElementById('logOutput');
+        const entry = document.createElement('div');
+        entry.className = 'log-entry log-clear';
+        entry.textContent = '✅ 検索クリア';
+        log.appendChild(entry);
+        log.scrollTop = log.scrollHeight;
+      }
+    });
+
+    // 初期化
+    filter.init();
+
+    // グローバルスコープに公開（デバッグ用）
+    window.filter = filter;
+
+    console.log('SearchFilter initialized!');
+    console.log('試してみてください:');
+    console.log('- filter.getKeyword()');
+    console.log('- filter.getVisibleItems()');
+    console.log('- filter.getHiddenItems()');
+    console.log('- filter.filter("apple")');
+    console.log('- filter.clear()');
+  </script>
+</body>
+</html>

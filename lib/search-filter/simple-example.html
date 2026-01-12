@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SearchFilter - 最小構成の例</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* 必須: 非表示クラス */
+    .hidden {
+      display: none;
+    }
+
+    /* 必須: クリアボタンの表示制御 */
+    .clear-btn.visible {
+      opacity: 1;
+    }
+
+    /* 以下はスタイリング（任意） */
+    .search-input {
+      width: 100%;
+      padding: 0.5rem 2rem 0.5rem 0.5rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    .result-count {
+      color: #666;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .search-item {
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <h1>SearchFilter - 最小構成</h1>
+  <p>デフォルト設定でたった1行で動作します</p>
+
+  <!-- 検索UI（デフォルトのID/クラスを使用） -->
+  <div class="search-container">
+    <div class="search-wrapper">
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="検索..."
+      />
+      <button id="clear-btn" class="clear-btn">×</button>
+    </div>
+    <div id="result-count" class="result-count"></div>
+  </div>
+
+  <!-- アイテムコンテナ（デフォルトID: items-container） -->
+  <div id="items-container">
+    <!-- フィルタリング対象（デフォルトクラス: search-item） -->
+    <div class="search-item">Apple 🍎</div>
+    <div class="search-item">Banana 🍌</div>
+    <div class="search-item">Cherry 🍒</div>
+    <div class="search-item">Orange 🍊</div>
+    <div class="search-item">Grape 🍇</div>
+  </div>
+
+  <!-- 検索結果なし（デフォルトID: no-results） -->
+  <div id="no-results" class="empty-state" style="display: none;">
+    🔍 検索結果が見つかりません
+  </div>
+
+  <!-- 空の状態（デフォルトID: empty-state） -->
+  <div id="empty-state" class="empty-state" style="display: none;">
+    📝 アイテムがありません
+  </div>
+
+  <script type="module">
+    import SearchFilter from './SearchFilter.js';
+
+    // たった1行で動作！
+    new SearchFilter().init();
+  </script>
+
+  <hr style="margin: 2rem 0;">
+  <h2>使い方</h2>
+  <pre style="background: #f5f5f5; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>&lt;!-- 1. 必要なHTML要素を配置（kebab-case） --&gt;
+&lt;input type="text" id="search-input" /&gt;
+&lt;button id="clear-btn"&gt;×&lt;/button&gt;
+&lt;div id="result-count"&gt;&lt;/div&gt;
+
+&lt;div id="items-container"&gt;
+  &lt;div class="search-item"&gt;Item 1&lt;/div&gt;
+  &lt;div class="search-item"&gt;Item 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="no-results" style="display: none;"&gt;
+  検索結果なし
+&lt;/div&gt;
+
+&lt;!-- 2. CSSで.hiddenクラスを定義 --&gt;
+&lt;style&gt;
+  .hidden { display: none; }
+  .clear-btn.visible { opacity: 1; }
+&lt;/style&gt;
+
+&lt;!-- 3. たった1行のJavaScript --&gt;
+&lt;script type="module"&gt;
+  import SearchFilter from './SearchFilter.js';
+  new SearchFilter().init();
+&lt;/script&gt;</code></pre>
+
+  <h3>デフォルト設定（kebab-case）</h3>
+  <ul>
+    <li><strong>検索input:</strong> <code>id="search-input"</code></li>
+    <li><strong>クリアボタン:</strong> <code>id="clear-btn"</code></li>
+    <li><strong>結果カウント:</strong> <code>id="result-count"</code></li>
+    <li><strong>アイテム:</strong> <code>class="search-item"</code></li>
+    <li><strong>コンテナ:</strong> <code>id="items-container"</code></li>
+    <li><strong>検索結果なし:</strong> <code>id="no-results"</code></li>
+    <li><strong>空の状態:</strong> <code>id="empty-state"</code></li>
+    <li><strong>非表示クラス:</strong> <code>.hidden</code></li>
+    <li><strong>クリアボタン表示:</strong> <code>.visible</code></li>
+  </ul>
+
+  <h3>カスタマイズが必要な場合</h3>
+  <pre style="background: #f5f5f5; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>new SearchFilter({
+  itemSelector: '.custom-item',  // カスタムクラス
+  debounceMs: 300               // 大量データ用
+}).init();</code></pre>
+</body>
+</html>

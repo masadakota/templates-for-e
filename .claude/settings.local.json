@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"\" \"d:\\\\projects\\\\web\\\\templates-for-e\\\\lib\\\\search-filter\\\\example.html\")",
+      "Bash(start \"\" \"d:\\\\projects\\\\web\\\\templates-for-e\\\\logs\\\\index.html\")"
+    ]
+  }
+}

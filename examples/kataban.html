@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../styles/globals.css" />
+    <link rel="stylesheet" href="../styles/tailwind-like.css" />
+    <link rel="stylesheet" href="../styles/bootstrap-custom.css" />
+    <link rel="stylesheet" href="../styles/templates.css" />
+    <link rel="stylesheet" href="../lib/copy-handler/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <table>
+        <tr>
+          <td>1</td>
+          <td>製品情報1：三菱:ABC-DEF123:電気給湯器</td>
+          <td>2</td>
+          <td>製品情報2：三菱:GHI-JKL456:電気給湯器</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>製品情報3：三菱:LMN-OPQ789:電気給湯器</td>
+          <td>4</td>
+          <td>製品情報4：</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>製品情報5：TOTOトイレリフォーム:XXX-DEF123</td>
+          <td>6</td>
+          <td>製品情報6：TOTOトイレリフォーム:YYY-JKL456</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>製品情報7：INAXシャワートイレ:ZZZ-OPQ789</td>
+          <td>8</td>
+          <td>製品情報8：</td>
+        </tr>
+      </table>
+      <div class="flex flex-col gap-2 my-4">
+        <h2 class="text-base">型番抽出</h2>
+        <label for="inputText">入力:</label>
+        <textarea
+          id="inputText"
+          rows="5"
+          cols="50"
+          placeholder="ここにテキストを入力してください"
+        ></textarea>
+      </div>
+
+      <label>選択:</label>
+      <div id="buttonContainer" class="flex flex-wrap gap-1 my-4">
+        <!-- ボタンがここに表示されます -->
+      </div>
+
+      <div class="flex gap-2 items-center mb-2">
+        <label for="result">結果:</label>
+        <div id="copyMessage" class="hidden" style="color: #0078d4">
+          コピーしました。
+        </div>
+      </div>
+      <div id="result" class="copyable">
+        <!-- ここに結果を表示 -->
+      </div>
+    </div>
+
+    <script>
+      const textarea = document.getElementById("inputText");
+      const resultDiv = document.getElementById("result");
+      const buttonContainer = document.getElementById("buttonContainer");
+      const copyMessage = document.getElementById("copyMessage");
+
+      // コピー成功メッセージを表示するタイムアウトID
+      let messageTimeoutId = null;
+
+      // コピー成功時のコールバック関数（共通）
+      function showCopyMessage(text, element) {
+        // 既存のタイムアウトをクリア
+        if (messageTimeoutId !== null) {
+          clearTimeout(messageTimeoutId);
+        }
+
+        // メッセージを表示
+        copyMessage.classList.remove("hidden");
+
+        // 1.5秒後に非表示
+        messageTimeoutId = setTimeout(() => {
+          copyMessage.classList.add("hidden");
+          messageTimeoutId = null;
+        }, 1500);
+      }
+
+      // CopyHandler のグローバル設定（index.js 読み込み前に設定）
+      window.COPY_HANDLER_CONFIG = {
+        // flashColor: '#b4dfff',
+        // transitionClass: 'copy-flash-transition',
+        onCopySuccess: showCopyMessage
+      };
+
+      // 選択された文字列を管理する配列
+      let selectedTokens = [];
+
+      // 結果表示を更新する関数
+      function updateResultDisplay() {
+        resultDiv.innerHTML = "";
+        const concatenated = selectedTokens.join(", ");
+
+        const div = document.createElement("div");
+        div.textContent = concatenated;
+        div.style.padding = "5px";
+        div.style.margin = "2px 0";
+        // div.style.backgroundColor = "#f0f0f0";
+        div.style.border = "1px solid #ccc";
+        resultDiv.appendChild(div);
+
+        // 自動コピー: CopyHandler を使用（グローバル設定が自動適用される）
+        if (concatenated) {
+          CopyHandler.getInstance().copyWithFlash(resultDiv, concatenated);
+        }
+      }
+
+      textarea.addEventListener("input", function (event) {
+        const text = event.target.value;
+
+        // 選択状態をリセット
+        selectedTokens = [];
+
+        // 改行で分割して、各行を処理
+        const lines = text.split(/\n/);
+
+        // 一時的にボタンを保存する配列
+        const allButtons = [];
+
+        // ボタンを表示
+        buttonContainer.innerHTML = "";
+        lines.forEach((line, lineIndex) => {
+          if (line.trim() === "") return; // 空行はスキップ
+
+          // 各行内でTab, ":", "：" で分割
+          const tokens = line
+            .split(/[\t：:]+/)
+            .map((item) => item.trim())
+            .filter((item) => item !== "");
+
+          // 行用のコンテナを作成
+          const lineContainer = document.createElement("div");
+          lineContainer.className = "flex flex-wrap gap-1 mb-2";
+
+          tokens.forEach((token) => {
+            const button = document.createElement("button");
+            button.textContent = token;
+            button.dataset.token = token; // ボタンにトークンを保存
+
+            // スタイルを直接適用
+            button.style.padding = "4px 8px";
+            button.style.fontSize = "14px";
+            // button.style.border = "1px solid #007bff";
+            button.style.borderWidth = "1px";
+            button.style.borderRadius = "4px";
+            button.style.backgroundColor = "transparent";
+            // button.style.color = "#007bff";
+            button.style.cursor = "pointer";
+            button.style.transition = "all 0.2s";
+
+            // ホバー効果
+            button.addEventListener("mouseenter", function () {
+              if (!this.classList.contains("active")) {
+                this.style.backgroundColor = "#e7f3ff";
+              }
+            });
+            button.addEventListener("mouseleave", function () {
+              if (!this.classList.contains("active")) {
+                this.style.backgroundColor = "transparent";
+              }
+            });
+
+            // ボタンクリックイベント
+            button.addEventListener("click", function () {
+              const tokenValue = this.dataset.token;
+              const index = selectedTokens.indexOf(tokenValue);
+
+              if (index > -1) {
+                // すでに選択されている場合は除去
+                selectedTokens.splice(index, 1);
+                this.style.backgroundColor = "";
+                this.style.borderColor = "";
+                this.classList.remove("active");
+              } else {
+                // 選択されていない場合は追加（元の順序を保つために挿入位置を決定）
+                const allTokensList = allButtons.map(
+                  (btn) => btn.dataset.token
+                );
+                const insertIndex = allTokensList.indexOf(tokenValue);
+
+                // selectedTokensの適切な位置に挿入
+                let targetIndex = 0;
+                for (let i = 0; i < selectedTokens.length; i++) {
+                  const selectedTokenIndex = allTokensList.indexOf(
+                    selectedTokens[i]
+                  );
+                  if (selectedTokenIndex < insertIndex) {
+                    targetIndex = i + 1;
+                  }
+                }
+                selectedTokens.splice(targetIndex, 0, tokenValue);
+
+                this.style.backgroundColor = "yellow";
+                // this.style.borderColor = "orange";
+                this.classList.add("active");
+              }
+
+              updateResultDisplay();
+            });
+
+            allButtons.push(button); // ボタンを配列に保存
+            lineContainer.appendChild(button);
+          });
+
+          buttonContainer.appendChild(lineContainer);
+        });
+
+        // 1. Tab, 改行で文字列を分割してstring型の配列にする
+        const splitArray = text
+          .split(/[\t\n]+/)
+          .filter((item) => item.trim() !== "");
+
+        // 2. "製品情報" が含まれる値のみ抽出する
+        const filteredArray = splitArray.filter((item) =>
+          item.includes("製品情報")
+        );
+
+        // 3. ":", "：" で分割する
+        const resultArray = filteredArray.map((item) => {
+          return item.split(/[：:]/);
+        });
+
+        // 4. console.logでその配列を出力する
+        console.log(resultArray);
+
+        // 英数字で始まり、2文字以上の文字列のみ抽出
+        const extracted = [];
+        resultArray.forEach((arr) => {
+          arr.forEach((str) => {
+            const trimmed = str.trim();
+            // 英数字で始まり、2文字以上の条件
+            if (/^[a-zA-Z0-9]/.test(trimmed) && trimmed.length >= 2) {
+              extracted.push(trimmed);
+            }
+          });
+        });
+
+        // "TOTO", "LIXIL", "INAX" で始まる文字列を除外
+        const excludePrefixes = ["TOTO", "LIXIL", "INAX"];
+        const filtered = extracted.filter((str) => {
+          return !excludePrefixes.some((prefix) => str.startsWith(prefix));
+        });
+
+        // filteredに含まれる文字列を自動選択
+        selectedTokens = [...filtered];
+        allButtons.forEach((button) => {
+          if (filtered.includes(button.dataset.token)) {
+            button.style.backgroundColor = "yellow";
+            // button.style.borderColor = "orange";
+            button.classList.add("active");
+          }
+        });
+
+        // 結果表示を更新
+        updateResultDisplay();
+      });
+    </script>
+    <script src="../lib/copy-handler/index.js"></script>
+  </body>
+</html>

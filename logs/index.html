@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>マニュアル</title>
+    <link rel="stylesheet" href="../styles/globals.css" />
+    <link rel="stylesheet" href="../styles/tailwind-like.css" />
+    <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../styles/common.css" />
+    <link rel="stylesheet" href="../lib/copy-handler/styles.css" />
+
+    <style>
+      /* Custom styles for log page */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--background);
+        color: var(--foreground);
+        box-sizing: border-box;
+      }
+
+      .container {
+        background-color: var(--background);
+        padding: 1.5rem;
+        max-width: 600px;
+        margin: 0 auto;
+        min-height: 100vh;
+      }
+
+      h1 {
+        margin-bottom: 1.5rem;
+        font-size: 1.75rem;
+        font-weight: 600;
+      }
+
+      /* Search container */
+      .search-container {
+        margin-bottom: 1.5rem;
+      }
+
+      .search-wrapper {
+        position: relative;
+        /* max-width: 500px; */
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 0.625rem 2.5rem 0.625rem 1rem;
+        border: 2px solid var(--foreground);
+        border-radius: var(--radius);
+        font-size: 1rem;
+        transition: border-color 0.2s ease;
+      }
+
+      .search-input:focus {
+        outline: none;
+        /* border-color: var(--ring); */
+        /* box-shadow: 0 0 0 3px rgba(181, 181, 181, 0.8); */
+      }
+
+      .clear-btn {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--muted-foreground);
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-button);
+        font-size: 1.25rem;
+        line-height: 1;
+        opacity: 0;
+        transition: opacity 0.2s ease, background-color 0.2s ease;
+        pointer-events: none;
+      }
+
+      .clear-btn.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .clear-btn:hover {
+        background-color: var(--muted);
+        color: var(--foreground);
+      }
+
+      /* Result count */
+      .result-count {
+        margin-top: 0.5rem;
+        color: var(--muted-foreground);
+        font-size: 0.875rem;
+      }
+
+      /* Log entries container */
+      .log-entries {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      /* Individual search item */
+      .search-item {
+        padding: 1rem;
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .search-item.hidden {
+        display: none;
+      }
+
+      .search-item:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Empty states */
+      .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--muted-foreground);
+      }
+
+      .empty-state-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .empty-state-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--foreground);
+      }
+
+      .empty-state-message {
+        font-size: 0.875rem;
+      }
+
+      .copyable {
+        position: relative;
+        border-radius: var(--radius);
+        /* transition: background-color 0.2s ease; */
+        border: 2px solid var(--accent);
+        /* border: 1px solid var(--border); */
+        width: fit-content;
+        padding: 8px;
+        padding-right: 30px;
+      }
+
+      .copyable::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        width: 20px;
+        height: 20px;
+        opacity: 1;
+        cursor: pointer;
+        background-color: var(--accent);
+        mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/></svg>');
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: 16px 16px;
+        -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/></svg>');
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        -webkit-mask-size: 16px 16px;
+      }
+
+      .card {
+        /* border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem; */
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 12px;
+      }
+      .card h2,
+      .card-title {
+        font-weight: bold;
+        font-size: 1rem;
+        color: var(--foreground);
+        background-color: #ddd;
+        margin-top: -12px;
+        margin-left: -12px;
+        margin-right: -12px;
+        padding: 6px 12px;
+      }
+      .card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        /* color: var(--muted-foreground); */
+        border-left: 4px solid var(--muted-foreground);
+        padding-left: 0.5rem;
+      }
+
+      .card hr {
+        margin-top: 4px;
+        margin-bottom: 4px;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        .search-item {
+          padding: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-foreground/30 bg-muted">
+    <div class="container bg-muted">
+      <div class="flex justify-between items-center gap-4">
+        <h1 class="text-lg">マニュアル</h1>
+        <!-- <div class="text-muted-foreground text-sm">
+          青い枠内のテキストは、右クリックでコピーできます。
+        </div> -->
+        <!-- Search UI -->
+        <div class="search-container flex-1">
+          <div class="search-wrapper">
+            <input
+              type="text"
+              id="search-input"
+              class="search-input"
+              placeholder="検索キーワードを入力..."
+              autocomplete="off"
+              aria-label="ログ検索"
+            />
+            <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">
+              ×
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        id="result-count"
+        class="result-count"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+      <!-- Log entries container -->
+      <div class="log-entries" id="items-container">
+        <div class="search-item card">
+          <h2>有償警告</h2>
+          <label>
+            <input
+              type="checkbox"
+              id="yusho-keikoku-checkbox"
+              data-target-class="yusho-keikoku"
+              data-true-value="済"
+              data-false-value="未"
+            />
+            済
+          </label>
+          <div class="copyable">
+            ・有償警告案内<span class="yusho-keikoku">未</span><br />
+            ・年末年始トーク案内<span class="yusho-keikoku">未</span>
+          </div>
+          <div class="copyable">
+            ・メーカー保証期間内の有償警告案内<span class="yusho-keikoku"
+              >未</span
+            ><br />
+            ・年末年始トーク案内<span class="yusho-keikoku">未</span>
+          </div>
+        </div>
+
+        <div class="search-item card">
+          <h2>保証対象外部位</h2>
+          <div>
+            <h3>トーク</h3>
+            <div>
+              今回の症状は、保証対象外のため、有償になります。費用については、メーカーとご相談ください。
+            </div>
+          </div>
+
+          <hr />
+
+          <div>
+            <h3>備考</h3>
+            <label style="margin-right: 12px">
+              <input
+                type="checkbox"
+                id="taishogai-status-checkbox"
+                data-target-class="taishogai-status"
+                data-true-value="済"
+                data-false-value="未"
+              />
+              済
+            </label>
+
+            <div class="copyable">
+              ・保証対象外部位案内<span class="taishogai-status">未</span><br />
+              ・年末年始トーク案内<span class="taishogai-status">未</span>
+            </div>
+          </div>
+
+          <hr />
+
+          <div>
+            <h3 class="mb-1">申し送り事項</h3>
+            <select
+              id="taishogai-bui-select"
+              data-target-class="taishogai-bui"
+              style="
+                margin-bottom: 0.75rem;
+                border-radius: 4px;
+                background-color: var(--background);
+                color: var(--foreground);
+              "
+            >
+              <option value="便座のひび" selected>便座のひび</option>
+              <option value="天板のひび">天板のひび</option>
+            </select>
+            <input
+              id="taishogai-bui-input"
+              data-target-class="taishogai-bui"
+              placeholder="自由に入力"
+            />
+            <div class="copyable">
+              対象外部位（<span class="taishogai-bui">便座のひび</span
+              >）のため、修理のお取次ぎお願いします。
+            </div>
+          </div>
+        </div>
+        <div class="search-item">
+          店舗より、製品が10年保証に入っていることを確認済み。
+        </div>
+
+        <div class="search-item">
+          <div class="card-title">IHクッキングヒーター 天板にひび（割れ）</div>
+          <div>保証対象外部位</div>
+        </div>
+
+        <div class="search-item card">
+          xx/xx xx:xx CC■<br />
+          対応者: ■<br />
+          店舗より、製品が10年保証に入っていることを確認済み。型番: ■。
+        </div>
+
+        <div class="search-item card">
+          <h2>連絡希望時間/訪問希望日</h2>
+          <h3>申し送り事項</h3>
+          <div class="copyable">
+            連絡は■～■時、■時以降ご希望との申告がございました。
+          </div>
+          <div class="copyable">訪問は■/■ご希望との申告がございました。</div>
+          <div class="hidden">れんらく, ほうもん</div>
+        </div>
+
+        <div class="search-item card">
+          <h2>販売店連携</h2>
+          <h3>トーク (→お客様)</h3>
+          <p>
+            今回の症状は、製品ではなく施工の問題の可能性もあるため、販売店と相談させていただきます。もし製品ではなく、施工の問題の可能性が高いと判断した場合は、販売店から連絡いたします。
+          </p>
+          <p>
+            メーカーの修理になる可能性もあるため、10年保証の案内と、メーカーの修理の流れについて、ご案内させていただきます。
+          </p>
+
+          <p>[10年保証のトークスクリプト]</p>
+
+          <h3>トーク (→販売店)</h3>
+          <div>
+            先程、お客様から修理依頼のお電話をいただきまして、その故障の問題が施工と製品のどちらにあるのか、私共の窓口では判断できないため、ご相談させていただきたく、お電話いたしました。
+          </div>
+          <div></div>
+
+          <div class="box flex flex-col gap-2">
+            <div class="font-bold">メーカー修理の場合</div>
+
+            <h3>備考</h3>
+            <div class="copyable">
+              <div>x/x x:x CC■</div>
+              <div>対応者: ■店/■様</div>
+              <div>メーカー修理をご希望。修理依頼を承る。</div>
+            </div>
+
+            <h3>申し送り事項</h3>
+            <div class="copyable">
+              販売店よりメーカー修理のご希望がございました。
+            </div>
+          </div>
+          <div class="hidden">はんばいてんれんけい</div>
+        </div>
+      </div>
+
+      <!-- No results message (hidden by default) -->
+      <div id="no-results" class="empty-state" style="display: none">
+        <div class="empty-state-icon">🔍</div>
+        <div class="empty-state-title">検索結果が見つかりません</div>
+        <div class="empty-state-message">
+          別のキーワードで検索してみてください
+        </div>
+      </div>
+
+      <!-- Empty state (shown when no logs exist) -->
+      <div id="empty-state" class="empty-state" style="display: none">
+        <div class="empty-state-icon">📝</div>
+        <div class="empty-state-title">履歴がありません</div>
+        <div class="empty-state-message">まだログが記録されていません</div>
+      </div>
+    </div>
+
+    <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../lib/search-filter/search-filter.min.js"></script>
+    <script>
+      // SearchFilterを初期化（デフォルト設定を使用）
+      new SearchFilter().init();
+    </script>
+    <script src="../lib/copy-handler/config.js"></script>
+    <script src="../lib/copy-handler/index.js"></script>
+    <script src="../lib/checkbox-text-toggler/index.js"></script>
+  </body>
+</html>
