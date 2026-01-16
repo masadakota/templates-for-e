@@ -21,22 +21,35 @@
       }
 
       .container {
-        background-color: var(--background);
-        padding: 1.5rem;
+        background-color: var(--muted);
+        /* background-color: var(--background); */
+        padding: 12px;
+        padding-top: 0;
         max-width: 600px;
         margin: 0 auto;
         min-height: 100vh;
       }
 
       h1 {
-        margin-bottom: 1.5rem;
+        /* margin-bottom: 1.5rem; */
         font-size: 1.75rem;
         font-weight: 600;
       }
 
-      /* Search container */
-      .search-container {
-        margin-bottom: 1.5rem;
+      /* Sticky header */
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        background-color: var(--muted);
+        padding-top: 12px;
+        padding-bottom: 12px;
+        z-index: 10;
+        margin-left: -12px;
+        margin-right: -12px;
+        padding-left: 12px;
+        padding-right: 12px;
+        /* margin-bottom: 1rem; */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
       .search-wrapper {
@@ -46,7 +59,8 @@
 
       .search-input {
         width: 100%;
-        padding: 0.625rem 2.5rem 0.625rem 1rem;
+        padding: 6px 12px;
+        /* padding: 0.625rem 2.5rem 0.625rem 1rem; */
         border: 2px solid var(--foreground);
         border-radius: var(--radius);
         font-size: 1rem;
@@ -87,13 +101,6 @@
         color: var(--foreground);
       }
 
-      /* Result count */
-      .result-count {
-        margin-top: 0.5rem;
-        color: var(--muted-foreground);
-        font-size: 0.875rem;
-      }
-
       /* Log entries container */
       .log-entries {
         display: flex;
@@ -130,13 +137,6 @@
         margin-bottom: 1rem;
       }
 
-      .empty-state-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        color: var(--foreground);
-      }
-
       .empty-state-message {
         font-size: 0.875rem;
       }
@@ -152,33 +152,14 @@
         padding-right: 30px;
       }
 
-      .copyable::after {
-        content: "";
-        position: absolute;
-        top: 4px;
-        right: 4px;
-        width: 20px;
-        height: 20px;
-        opacity: 1;
-        cursor: pointer;
-        background-color: var(--accent);
-        mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/></svg>');
-        mask-repeat: no-repeat;
-        mask-position: center;
-        mask-size: 16px 16px;
-        -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/></svg>');
-        -webkit-mask-repeat: no-repeat;
-        -webkit-mask-position: center;
-        -webkit-mask-size: 16px 16px;
-      }
 
       .card {
         /* border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 1rem; */
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* gap: 0.75rem; */
         padding: 12px;
       }
       .card h2,
@@ -194,11 +175,16 @@
       }
       .card h3 {
         font-size: 1rem;
-        font-weight: 600;
+        font-weight: bold;
         margin-bottom: 0.5rem;
         /* color: var(--muted-foreground); */
         border-left: 4px solid var(--muted-foreground);
         padding-left: 0.5rem;
+      }
+      .card h4 {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 4px;
       }
 
       .card hr {
@@ -206,12 +192,19 @@
         margin-bottom: 4px;
       }
 
+      .talk {
+        background-color: lightyellow;
+        padding: 8px;
+        border-radius: var(--radius);
+        margin-bottom: 8px;
+      }
+
+      .card .copyable {
+        margin-bottom: 8px;
+      }
+
       /* Mobile responsiveness */
       @media (max-width: 768px) {
-        body {
-          padding: 1rem;
-        }
-
         h1 {
           font-size: 1.5rem;
         }
@@ -223,14 +216,14 @@
     </style>
   </head>
   <body class="bg-foreground/30 bg-muted">
-    <div class="container bg-muted">
-      <div class="flex justify-between items-center gap-4">
+    <div class="sticky-header">
+      <div
+        class="flex justify-between items-center gap-4 mx-auto"
+        style="max-width: 600px"
+      >
         <h1 class="text-lg">マニュアル</h1>
-        <!-- <div class="text-muted-foreground text-sm">
-          青い枠内のテキストは、右クリックでコピーできます。
-        </div> -->
         <!-- Search UI -->
-        <div class="search-container flex-1">
+        <div class="flex-1">
           <div class="search-wrapper">
             <input
               type="text"
@@ -246,9 +239,15 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="container bg-muted">
       <div
         id="result-count"
-        class="result-count"
+        style="
+          /* margin-top: 0.5rem; */
+          color: var(--muted-foreground);
+          font-size: 0.875rem;
+        "
         role="status"
         aria-live="polite"
       ></div>
@@ -281,11 +280,8 @@
 
         <div class="search-item card">
           <h2>保証対象外部位</h2>
-          <div>
-            <h3>トーク</h3>
-            <div>
-              今回の症状は、保証対象外のため、有償になります。費用については、メーカーとご相談ください。
-            </div>
+          <div class="talk">
+            今回の症状は、保証対象外のため、有償になります。費用については、メーカーとご相談ください。
           </div>
 
           <hr />
@@ -341,6 +337,37 @@
           店舗より、製品が10年保証に入っていることを確認済み。
         </div>
 
+        <div class="search-item card">
+          <h2>お客様が直接メーカーに修理依頼をした</h2>
+          <h3>訪問前/訪問中</h3>
+          <div class="talk">
+            恐れ入りますが、当窓口を通していない修理は10年保証対象外でございます。
+            お手数をおかけいたしますが、お客様が直接メーカーに依頼した修理は、お客様ご自身でキャンセルしていただきますようお願いいたします。
+            そして、こちらのお電話で、10年保証対象の修理依頼を受け付けます。
+          </div>
+          <h4>備考:</h4>
+          <div class="copyable">
+            直接メーカーに依頼した修理をお客様ご自身でキャンセルしていただくよう案内。<br />
+            当窓口で10年保証対象の修理依頼を承る。
+          </div>
+          <h3>訪問後</h3>
+          <div class="talk">
+            恐れ入りますが、当窓口を通していない修理は10年保証対象外でございます。
+          </div>
+
+          <div class="hidden">えあこん</div>
+        </div>
+
+        <div class="search-item card">
+          <h2>エアコンの修理依頼</h2>
+          <div class="talk">
+            こちらの窓口はリフォーム製品の10年保証の窓口のため、ご購入店舗へお問い合わせください。
+          </div>
+          <h4>備考:</h4>
+          <div class="copyable">購入店舗へ問い合わせていただくよう案内。</div>
+          <div class="hidden">えあこん</div>
+        </div>
+
         <div class="search-item">
           <div class="card-title">IHクッキングヒーター 天板にひび（割れ）</div>
           <div>保証対象外部位</div>
@@ -365,17 +392,18 @@
         <div class="search-item card">
           <h2>販売店連携</h2>
           <h3>トーク (→お客様)</h3>
-          <p>
-            今回の症状は、製品ではなく施工の問題の可能性もあるため、販売店と相談させていただきます。もし製品ではなく、施工の問題の可能性が高いと判断した場合は、販売店から連絡いたします。
-          </p>
-          <p>
-            メーカーの修理になる可能性もあるため、10年保証の案内と、メーカーの修理の流れについて、ご案内させていただきます。
-          </p>
-
-          <p>[10年保証のトークスクリプト]</p>
+          <div class="talk">
+            <p>
+              今回の症状は、製品ではなく施工の問題の可能性もあるため、販売店と相談させていただきます。もし製品ではなく、施工の問題の可能性が高いと判断した場合は、販売店から連絡いたします。
+            </p>
+            <p>
+              メーカーの修理になる可能性もあるため、10年保証の案内と、メーカーの修理の流れについて、ご案内させていただきます。
+            </p>
+            <p>[10年保証のトークスクリプト]</p>
+          </div>
 
           <h3>トーク (→販売店)</h3>
-          <div>
+          <div class="talk">
             先程、お客様から修理依頼のお電話をいただきまして、その故障の問題が施工と製品のどちらにあるのか、私共の窓口では判断できないため、ご相談させていただきたく、お電話いたしました。
           </div>
           <div></div>
@@ -397,21 +425,33 @@
           </div>
           <div class="hidden">はんばいてんれんけい</div>
         </div>
+
+        <div class="search-item card">
+          <h2>販売店連携（メーカー修理不可）</h2>
+          <div>給湯器（エコキュートなど）の外部配管/...</div>
+          <h3>トーク (→お客様)</h3>
+          <div class="talk">
+            今回の症状は、製品ではなく施工の問題のため、販売店からご連絡いたします。
+          </div>
+
+          <h3>トーク (→販売店)</h3>
+          <div class="talk">
+            先程、お客様から●●の修理依頼のお電話をいただきまして、故障の内容が施工のため、販売店様でご対応いただきたく、お電話いたしました。
+          </div>
+          <div></div>
+          <div class="hidden">はんばいてんれんけい</div>
+        </div>
       </div>
 
       <!-- No results message (hidden by default) -->
       <div id="no-results" class="empty-state" style="display: none">
-        <div class="empty-state-icon">🔍</div>
-        <div class="empty-state-title">検索結果が見つかりません</div>
-        <div class="empty-state-message">
-          別のキーワードで検索してみてください
-        </div>
+        <div>データがありません</div>
       </div>
 
       <!-- Empty state (shown when no logs exist) -->
       <div id="empty-state" class="empty-state" style="display: none">
         <div class="empty-state-icon">📝</div>
-        <div class="empty-state-title">履歴がありません</div>
+        <div>履歴がありません</div>
         <div class="empty-state-message">まだログが記録されていません</div>
       </div>
     </div>
@@ -423,6 +463,13 @@
       new SearchFilter().init();
     </script>
     <script src="../lib/copy-handler/config.js"></script>
+    <script>
+      // logs/index.html用のコピーアイコン表示設定
+      // デフォルト設定を上書き
+      // if (window.COPY_HANDLER_CONFIG) {
+      //   window.COPY_HANDLER_CONFIG.showCopyIcon = false; // true: 表示, false: 非表示
+      // }
+    </script>
     <script src="../lib/copy-handler/index.js"></script>
     <script src="../lib/checkbox-text-toggler/index.js"></script>
   </body>

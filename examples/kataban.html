@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>型番抽出</title>
     <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="../styles/globals.css" />
     <link rel="stylesheet" href="../styles/tailwind-like.css" />
@@ -16,7 +16,7 @@
       <table>
         <tr>
           <td>1</td>
-          <td>製品情報1：三菱:ABC-DEF123:電気給湯器</td>
+          <td>製品情報1：三菱:1234567:ABC-DEF123:電気給湯器</td>
           <td>2</td>
           <td>製品情報2：三菱:GHI-JKL456:電気給湯器</td>
         </tr>
@@ -61,14 +61,14 @@
           コピーしました。
         </div>
       </div>
-      <div id="result" class="copyable">
+      <div id="results" class="copyable">
         <!-- ここに結果を表示 -->
       </div>
     </div>
 
     <script>
       const textarea = document.getElementById("inputText");
-      const resultDiv = document.getElementById("result");
+      const resultsDiv = document.getElementById("results");
       const buttonContainer = document.getElementById("buttonContainer");
       const copyMessage = document.getElementById("copyMessage");
 
@@ -96,7 +96,7 @@
       window.COPY_HANDLER_CONFIG = {
         // flashColor: '#b4dfff',
         // transitionClass: 'copy-flash-transition',
-        onCopySuccess: showCopyMessage
+        onCopySuccess: showCopyMessage,
       };
 
       // 選択された文字列を管理する配列
@@ -104,7 +104,7 @@
 
       // 結果表示を更新する関数
       function updateResultDisplay() {
-        resultDiv.innerHTML = "";
+        resultsDiv.innerHTML = "";
         const concatenated = selectedTokens.join(", ");
 
         const div = document.createElement("div");
@@ -113,11 +113,11 @@
         div.style.margin = "2px 0";
         // div.style.backgroundColor = "#f0f0f0";
         div.style.border = "1px solid #ccc";
-        resultDiv.appendChild(div);
+        resultsDiv.appendChild(div);
 
         // 自動コピー: CopyHandler を使用（グローバル設定が自動適用される）
         if (concatenated) {
-          CopyHandler.getInstance().copyWithFlash(resultDiv, concatenated);
+          CopyHandler.getInstance().copyWithFlash(resultsDiv, concatenated);
         }
       }
 
@@ -244,8 +244,12 @@
         resultArray.forEach((arr) => {
           arr.forEach((str) => {
             const trimmed = str.trim();
-            // 英数字で始まり、2文字以上の条件
-            if (/^[a-zA-Z0-9]/.test(trimmed) && trimmed.length >= 2) {
+            // 英数字で始まり、2文字以上、英語を1文字以上含む条件
+            if (
+              /^[a-zA-Z0-9]/.test(trimmed) &&
+              trimmed.length >= 2 &&
+              /[a-zA-Z]/.test(trimmed)
+            ) {
               extracted.push(trimmed);
             }
           });
