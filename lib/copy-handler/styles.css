@@ -3,6 +3,11 @@
   transition: background-color 0.75s ease;
 }
 
+/* コピー可能要素 */
+.copyable {
+  position: relative;
+}
+
 /* コピーアイコン表示 */
 .copyable::after {
   content: "";
