@@ -6,6 +6,7 @@
     <title>コールセンター支援ツール</title>
     <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/globals.css" />
+    <link rel="stylesheet" href="styles/tailwind-like.css" />
     <style>
       * {
         margin: 0;
@@ -14,19 +15,38 @@
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
+        margin: 0;
+        padding: 0;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
+        flex-direction: column;
+        height: 100vh;
       }
 
-      .container {
-        max-width: 800px;
+      .nav-tabs {
+        justify-content: center;
+      }
+
+      .nav-tabs .nav-link:not(.active) {
+        color: var(--foreground);
+      }
+
+      .nav-tabs .nav-link:hover {
+        border-color: transparent;
+      }
+
+      .tab-content {
+        flex: 1;
+        overflow: hidden;
+      }
+
+      .tab-pane {
+        height: 100%;
+      }
+
+      .tab-content iframe {
         width: 100%;
+        height: 100%;
+        border: none;
       }
 
       .header {
@@ -125,101 +145,56 @@
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1>コールセンター支援ツール</h1>
-        <p>業務効率化のための各種Webアプリケーション</p>
-      </div>
-
-      <div class="apps-grid">
-        <!-- 後処理テンプレ -->
-        <a href="templates/index.html" class="app-card">
-          <div class="app-icon">📝</div>
-          <h2 class="app-title">後処理テンプレ</h2>
-          <p class="app-description">
-            チェックボックスとフォーム入力から定型文を自動生成。
-            右クリックでクリップボードにコピー可能。
-          </p>
-          <div>
-            <span class="app-badge">稼働中</span>
-          </div>
-          <div class="tech-stack">
-            <span>Vanilla JS</span>
-            <span>State Management</span>
-            <span>ES Modules</span>
-          </div>
-        </a>
-
-        <!-- フローダイアグラム（将来的な拡張） -->
-        <a
-          href="#"
-          class="app-card"
-          onclick="alert('準備中です'); return false;"
+  <body style="width: 100%">
+    <!-- <div class="container"> -->
+    <!-- BootstrapのTabを使用して切り替え -->
+    <ul class="nav nav-tabs bg-foreground/20" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="logs-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#logs"
+          type="button"
+          role="tab"
+          aria-controls="logs"
+          aria-selected="true"
         >
-          <div class="app-icon">🔀</div>
-          <h2 class="app-title">フローダイアグラム</h2>
-          <p class="app-description">
-            コールフローを視覚的に表示。 インタラクティブな操作で分岐を確認。
-          </p>
-          <div>
-            <span class="app-badge coming-soon">準備中</span>
-          </div>
-          <div class="tech-stack">
-            <span>Canvas API</span>
-            <span>State Management</span>
-          </div>
-        </a>
-
-        <a
-          href="bootstrap-test/index.html"
-          style="
-            color: white;
-            text-decoration: underline;
-            margin-top: 2rem;
-            display: inline-block;
-          "
+          マニュアル
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="kataban-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#kataban"
+          type="button"
+          role="tab"
+          aria-controls="kataban"
+          aria-selected="false"
         >
-          Bootstrap Test
-        </a>
-
-        <!-- 今後追加予定のアプリ用プレースホルダー -->
-        <a
-          href="#"
-          class="app-card"
-          onclick="alert('準備中です'); return false;"
-        >
-          <div class="app-icon">➕</div>
-          <h2 class="app-title">新しいツール</h2>
-          <p class="app-description">
-            今後、業務に必要なツールを随時追加していきます。
-          </p>
-          <div>
-            <span class="app-badge coming-soon">計画中</span>
-          </div>
-        </a>
+          型番抽出
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane show active"
+        id="logs"
+        role="tabpanel"
+        aria-labelledby="logs-tab"
+      >
+        <iframe src="logs/index.html" title="マニュアル"></iframe>
       </div>
-
-      <div class="footer">
-        <p>file:// プロトコルで動作 | Webサーバー不要 | モダンブラウザ対応</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem">
-          詳細は
-          <a href="CLAUDE.md" style="color: white; text-decoration: underline"
-            >CLAUDE.md</a
-          >
-          を参照
-        </p>
+      <div
+        class="tab-pane"
+        id="kataban"
+        role="tabpanel"
+        aria-labelledby="kataban-tab"
+      >
+        <iframe src="examples/kataban.html" title="型番抽出"></iframe>
       </div>
-
-      <details open>
-        <summary>Tab 1</summary>
-        Tab1 の内容
-      </details>
-
-      <details>
-        <summary>Tab 2</summary>
-        Tab2 の内容
-      </details>
     </div>
     <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
   </body>
