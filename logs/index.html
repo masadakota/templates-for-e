@@ -24,7 +24,7 @@
         background-color: var(--muted);
         /* background-color: var(--background); */
         padding: 12px;
-        padding-top: 0;
+        /* padding-top: 0; */
         max-width: 600px;
         margin: 0 auto;
         min-height: 100vh;
@@ -240,6 +240,29 @@
       </div>
     </div>
     <div class="container bg-muted">
+      <div class="flex gap-4 mb-2 items-center">
+        <div>
+          <label for="operator-name-input" class="text-sm"
+            >オペレーター名:</label
+          >
+          <input
+            type="text"
+            style="width: 100px"
+            data-target-class="operator-name"
+            id="operator-name-input"
+          />
+        </div>
+        <label>
+          <input
+            type="checkbox"
+            id="is-year-end-new-year-checkbox"
+            data-target-classes="delay-notice delay-notice-for-taishogai"
+            data-true-value="年末年始トーク"
+            data-priority="1"
+          />
+          年末年始
+        </label>
+      </div>
       <div
         id="result-count"
         style="
@@ -265,22 +288,34 @@
             />
             済
           </label>
+          <label>
+            <input
+              type="checkbox"
+              id="is-mitsubishi-checkbox"
+              data-target-class="delay-notice"
+              data-true-value="通常よりお日にちがかかる可能性案内"
+              data-priority="2"
+            />
+            三菱
+          </label>
           <div class="copyable">
             ・有償警告案内<span class="yusho-keikoku">未</span><br />
-            ・年末年始トーク案内<span class="yusho-keikoku">未</span>
+            ・<span class="delay-notice">お日にちがかかる可能性案内</span
+            ><span class="yusho-keikoku">未</span>
           </div>
           <div class="copyable">
             ・メーカー保証期間内の有償警告案内<span class="yusho-keikoku"
               >未</span
             ><br />
-            ・年末年始トーク案内<span class="yusho-keikoku">未</span>
+            ・<span class="delay-notice">お日にちがかかる可能性案内</span
+            ><span class="yusho-keikoku">未</span>
           </div>
         </div>
 
         <div class="search-item card">
           <h2>保証対象外部位</h2>
           <div class="talk">
-            今回の症状は、保証対象外のため、有償になります。費用については、メーカーとご相談ください。
+            今回の症状は、保証対象外のため、有償になります。費用については、メーカーに直接ご相談ください。
           </div>
 
           <hr />
@@ -300,7 +335,8 @@
 
             <div class="copyable">
               ・保証対象外部位案内<span class="taishogai-status">未</span><br />
-              ・年末年始トーク案内<span class="taishogai-status">未</span>
+              ・<span class="delay-notice-for-taishogai"></span
+              ><span class="taishogai-status">未</span>
             </div>
           </div>
 
@@ -325,7 +361,7 @@
             <input id="taishogai-bui-input" placeholder="自由に入力" />
             <div class="copyable">
               対象外部位（<span class="taishogai-bui">便座のひび</span
-              >）のため、修理のお取次ぎお願いします。
+              >）と思われるため、修理のお取次ぎお願いします。
             </div>
           </div>
         </div>
@@ -370,7 +406,8 @@
         </div>
 
         <div class="search-item card">
-          xx/xx xx:xx CC■<br />
+          <span class="timestamp"></span> CC<span class="operator-name">■</span
+          ><br />
           対応者: ■<br />
           店舗より、製品が10年保証に入っていることを確認済み。型番: ■。
         </div>
@@ -409,8 +446,12 @@
 
             <h3>備考</h3>
             <div class="copyable">
-              <div>x/x x:x CC■</div>
-              <div>対応者: ■店/■様</div>
+              <div>
+                <span class="timestamp"></span> CC<span class="operator-name"
+                  >■</span
+                >
+              </div>
+              <div>対応者: ■店/■様/■</div>
               <div>メーカー修理をご希望。修理依頼を承る。</div>
             </div>
 
@@ -432,7 +473,7 @@
 
           <h3>トーク (→販売店)</h3>
           <div class="talk">
-            先程、お客様から●●の修理依頼のお電話をいただきまして、故障の内容が施工のため、販売店様でご対応いただきたく、お電話いたしました。
+            先程、お客様から■の修理依頼のお電話をいただきまして、故障の内容が施工のため、販売店様でご対応いただきたく、お電話いたしました。
           </div>
           <div></div>
           <div class="hidden">はんばいてんれんけい</div>
@@ -468,5 +509,58 @@
     </script>
     <script src="../lib/copy-handler/index.js"></script>
     <script src="../lib/checkbox-text-toggler/index.js"></script>
+    <script>
+      // .timestampに現在の日時を表示して自動更新
+      function updateTimestamp() {
+        const now = new Date();
+        const month = now.getMonth() + 1; // 0-11なので+1
+        const day = now.getDate();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+
+        // "1/9 9:01" の形式
+        const formatted = `${month}/${day} ${hours}:${minutes
+          .toString()
+          .padStart(2, "0")}`;
+
+        // すべての.timestamp要素を更新
+        document.querySelectorAll(".timestamp").forEach((element) => {
+          element.textContent = formatted;
+        });
+      }
+
+      function scheduleNextUpdate() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const milliseconds = now.getMilliseconds();
+
+        // 次の分の00秒までの時間を計算（ミリ秒）
+        const delay = (60 - seconds) * 1000 - milliseconds;
+
+        setTimeout(() => {
+          updateTimestamp();
+          scheduleNextUpdate(); // 次の更新をスケジュール
+        }, delay);
+      }
+
+      // 初回実行
+      updateTimestamp();
+
+      // 次の更新をスケジュール
+      scheduleNextUpdate();
+
+      // .delay-notice と .delay-notice-for-taishogai に初期テキストを設定
+      function initDelayNotice() {
+        const delayNoticeText = "お日にちがかかる可能性案内";
+        document
+          .querySelectorAll(".delay-notice, .delay-notice-for-taishogai")
+          .forEach((element) => {
+            element.textContent = delayNoticeText;
+          });
+      }
+
+      // 初期化実行
+      initDelayNotice();
+    </script>
   </body>
 </html>
