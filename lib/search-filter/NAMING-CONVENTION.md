@@ -95,7 +95,7 @@ const options = {
     検索結果なし
   </div>
 
-  <script src="./search-filter.min.js"></script>
+  <script src="./search-filter.js"></script>
   <script>
     // JavaScript プロパティは camelCase
     new SearchFilter({

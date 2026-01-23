@@ -17,7 +17,7 @@ has been blocked by CORS policy
 
 ```html
 <!-- UMD版（file://プロトコル対応） -->
-<script src="../lib/search-filter/search-filter.min.js"></script>
+<script src="../lib/search-filter/search-filter.js"></script>
 <script>
   // グローバルスコープでSearchFilterが使える
   new SearchFilter().init();
@@ -25,7 +25,7 @@ has been blocked by CORS policy
 ```
 
 **ファイル:**
-- `lib/search-filter/search-filter.min.js` - file://プロトコル対応版
+- `lib/search-filter/search-filter.js` - file://プロトコル対応版
 
 **メリット:**
 - ✅ file://プロトコルで動作
@@ -94,8 +94,7 @@ chrome.exe --allow-file-access-from-files
 
 | ファイル | 形式 | file://対応 | 用途 |
 |---------|------|------------|------|
-| `search-filter.min.js` | UMD | ✅ | file://プロトコル用 |
-| `SearchFilter.js` | ES Module | ❌ | Webサーバー用 |
+| `search-filter.js` | UMD | ✅ | file://プロトコル用 |
 
 ---
 
@@ -130,7 +129,7 @@ chrome.exe --allow-file-access-from-files
   </div>
 
   <!-- UMD版を使用（file://で動作） -->
-  <script src="../lib/search-filter/search-filter.min.js"></script>
+  <script src="../lib/search-filter/search-filter.js"></script>
   <script>
     new SearchFilter().init();
   </script>
@@ -155,8 +154,7 @@ chrome.exe --allow-file-access-from-files
 ### Q: どちらを使うべき？
 
 **A:**
-- **file://で開く場合**: UMD版（`search-filter.min.js`）
-- **Webサーバーで開く場合**: ES Modules版（`SearchFilter.js`）
+- **file://で開く場合**: UMD版（`search-filter.js`）
 
 ---
 
@@ -169,7 +167,7 @@ chrome.exe --allow-file-access-from-files
 **解決:**
 ```html
 <!-- このスクリプトが読み込まれているか確認 -->
-<script src="../lib/search-filter/search-filter.min.js"></script>
+<script src="../lib/search-filter/search-filter.js"></script>
 ```
 
 ### エラー: "CORS policy"
@@ -184,6 +182,5 @@ chrome.exe --allow-file-access-from-files
 
 ## まとめ
 
-- **file://プロトコル**: `search-filter.min.js`（UMD版）を使う
-- **Webサーバー**: `SearchFilter.js`（ES Modules版）を使う
-- **どちらも機能は同じ**: デフォルト設定で`new SearchFilter().init()`で動作
+- **file://プロトコル**: `search-filter.js`（UMD版）を使う
+- デフォルト設定で`new SearchFilter().init()`で動作

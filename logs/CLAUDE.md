@@ -78,7 +78,7 @@ logs/
 
 **外部ライブラリ（通常のscriptタグで読み込み）:**
 - `../vendor/bootstrap/bootstrap.bundle.min.js` - UIフレームワーク
-- `../lib/search-filter/search-filter.min.js` - 検索・フィルタリング機能
+- `../lib/search-filter/search-filter.js` - 検索・フィルタリング機能
 - `../lib/copy-handler/` - クリップボードコピー機能
 - `../lib/checkbox-text-toggler/` - チェックボックス連動テキスト更新
 

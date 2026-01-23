@@ -82,10 +82,11 @@
         border: none;
         color: var(--muted-foreground);
         cursor: pointer;
-        padding: 0.25rem 0.5rem;
+        padding: 0.25rem;
         border-radius: var(--radius-button);
-        font-size: 1.25rem;
-        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         opacity: 0;
         transition: opacity 0.2s ease, background-color 0.2s ease;
         pointer-events: none;
@@ -94,6 +95,11 @@
       .clear-btn.visible {
         opacity: 1;
         pointer-events: auto;
+      }
+
+      .clear-btn svg {
+        width: 24px;
+        height: 24px;
       }
 
       .clear-btn:hover {
@@ -149,7 +155,7 @@
         /* border: 1px solid var(--border); */
         width: fit-content;
         padding: 8px;
-        padding-right: 30px;
+        /* padding-right: 30px; */ /* copy-handlerで制御 */
       }
 
       .card {
@@ -228,12 +234,26 @@
               type="text"
               id="search-input"
               class="search-input"
-              placeholder="検索キーワードを入力..."
+              placeholder="検索"
               autocomplete="off"
               aria-label="ログ検索"
             />
             <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">
-              ×
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </button>
           </div>
         </div>
@@ -365,8 +385,27 @@
             </div>
           </div>
         </div>
-        <div class="search-item">
-          店舗より、製品が10年保証に入っていることを確認済み。
+
+        <div class="search-item card">
+          <h2>浴室暖房乾燥機</h2>
+          <h3>トーク(→販売店)</h3>
+          <div class="talk">
+            <p>
+              先程、お客様から浴室暖房乾燥機の修理依頼のお電話が入りまして、その浴室暖房乾燥機が10年保証に入っているかの確認のために、お電話をさせていただきました。
+            </p>
+            <p>お客様情報をお伝えしてもよろしいでしょうか？</p>
+          </div>
+          <h3>備考</h3>
+          <div class="copyable">
+            店舗より、製品が10年保証に入っていることを確認済み。
+          </div>
+          <h3>その他</h3>
+          <h4>型番の例</h4>
+          <ul>
+            <li>MAX UFD-111A</li>
+            <li>TOTO TYB3111GAS 三乾王</li>
+          </ul>
+          <div class="hidden">よくだん, よくしつだんぼうかんそうき</div>
         </div>
 
         <div class="search-item card">
@@ -386,8 +425,6 @@
           <div class="talk">
             恐れ入りますが、当窓口を通していない修理は10年保証対象外でございます。
           </div>
-
-          <div class="hidden">えあこん</div>
         </div>
 
         <div class="search-item card">
@@ -406,7 +443,8 @@
         </div>
 
         <div class="search-item card">
-          <span class="timestamp"></span> CC<span class="operator-name">■</span
+          <span class="datetime-display"></span> CC<span class="operator-name"
+            >■</span
           ><br />
           対応者: ■<br />
           店舗より、製品が10年保証に入っていることを確認済み。型番: ■。
@@ -447,7 +485,8 @@
             <h3>備考</h3>
             <div class="copyable">
               <div>
-                <span class="timestamp"></span> CC<span class="operator-name"
+                <span class="datetime-display"></span> CC<span
+                  class="operator-name"
                   >■</span
                 >
               </div>
@@ -478,6 +517,29 @@
           <div></div>
           <div class="hidden">はんばいてんれんけい</div>
         </div>
+
+        <table class="copyable-table">
+          <tr>
+            <th></th>
+            <th>未</th>
+            <th>済</th>
+          </tr>
+          <tr>
+            <th>有償警告案内</th>
+            <td>有/未</td>
+            <td>有/済</td>
+          </tr>
+          <tr>
+            <th>メーカー保証期間内</th>
+            <td>メ/未</td>
+            <td>メ/済</td>
+          </tr>
+          <tr>
+            <th>保証対象外部位</th>
+            <td>外/未</td>
+            <td>外/済</td>
+          </tr>
+        </table>
       </div>
 
       <!-- No results message (hidden by default) -->
@@ -494,60 +556,29 @@
     </div>
 
     <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="../lib/search-filter/search-filter.min.js"></script>
+    <script src="../lib/search-filter/search-filter.js"></script>
     <script>
       // SearchFilterを初期化（デフォルト設定を使用）
       new SearchFilter().init();
     </script>
-    <script src="../lib/copy-handler/config.js"></script>
-    <script>
-      // logs/index.html用のコピーアイコン表示設定
-      // デフォルト設定を上書き
-      // if (window.COPY_HANDLER_CONFIG) {
-      //   window.COPY_HANDLER_CONFIG.showCopyIcon = false; // true: 表示, false: 非表示
-      // }
-    </script>
     <script src="../lib/copy-handler/index.js"></script>
-    <script src="../lib/checkbox-text-toggler/index.js"></script>
+    <script src="../lib/form-sync/index.js"></script>
+    <script src="../lib/datetime-display/index.js"></script>
     <script>
-      // .timestampに現在の日時を表示して自動更新
-      function updateTimestamp() {
-        const now = new Date();
-        const month = now.getMonth() + 1; // 0-11なので+1
-        const day = now.getDate();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
+      // CopyHandlerを初期化
+      const copyHandler = new CopyHandler({
+        // copyIconColor: "#dc3545", // コピーアイコンの色をカスタマイズ
+        // showCopyIcon: false,  // コピーアイコンを非表示
+        includeTh: false, // th要素をコピー対象外
+      });
+      copyHandler.init();
 
-        // "1/9 9:01" の形式
-        const formatted = `${month}/${day} ${hours}:${minutes
-          .toString()
-          .padStart(2, "0")}`;
+      // FormSyncを初期化
+      const formSync = new FormSync();
+      formSync.init();
 
-        // すべての.timestamp要素を更新
-        document.querySelectorAll(".timestamp").forEach((element) => {
-          element.textContent = formatted;
-        });
-      }
-
-      function scheduleNextUpdate() {
-        const now = new Date();
-        const seconds = now.getSeconds();
-        const milliseconds = now.getMilliseconds();
-
-        // 次の分の00秒までの時間を計算（ミリ秒）
-        const delay = (60 - seconds) * 1000 - milliseconds;
-
-        setTimeout(() => {
-          updateTimestamp();
-          scheduleNextUpdate(); // 次の更新をスケジュール
-        }, delay);
-      }
-
-      // 初回実行
-      updateTimestamp();
-
-      // 次の更新をスケジュール
-      scheduleNextUpdate();
+      // 日時表示を初期化
+      new DateTimeDisplay().init();
 
       // .delay-notice と .delay-notice-for-taishogai に初期テキストを設定
       function initDelayNotice() {

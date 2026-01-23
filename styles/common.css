@@ -18,3 +18,17 @@
 .card {
   all: unset; /* Bootstrapの影響をリセット */
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--border, #e5e7eb);
+  td, th {
+    border: 1px solid var(--border, #e5e7eb);
+    padding: 0.5rem 1rem;
+    text-align: left;
+  }
+  th {
+    background-color: #ddd;
+  }
+}

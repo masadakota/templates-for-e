@@ -212,6 +212,52 @@ import StateManager from './store/StateManager.js';
 const module = await import('./store/StateManager.js');
 ```
 
+### IIFE（即時実行関数式）の使用
+
+**file://プロトコルで動作するライブラリファイルを作成する場合、IIFEパターンを採用:**
+
+```javascript
+/**
+ * ライブラリの説明
+ */
+(function () {
+  'use strict';
+
+  class MyLibrary {
+    constructor(options = {}) {
+      // 実装
+    }
+
+    // メソッド
+    someMethod() {
+      // 実装
+    }
+  }
+
+  // グローバルスコープに公開
+  if (typeof window !== 'undefined') {
+    window.MyLibrary = MyLibrary;
+  }
+})();
+```
+
+**IIFEを使う理由:**
+- ✅ グローバルスコープの汚染を防ぐ
+- ✅ プライベート変数・関数を持てる
+- ✅ `'use strict'` を安全に適用できる
+- ✅ file://プロトコルで確実に動作
+- ✅ モジュールシステム不要でブラウザで直接実行可能
+
+**使用方法:**
+```html
+<!-- HTMLで読み込み -->
+<script src="../lib/my-library/index.js"></script>
+<script>
+  // グローバルスコープから使用
+  new MyLibrary().someMethod();
+</script>
+```
+
 ## StateManagerクラスの設計
 
 ### コンセプト
