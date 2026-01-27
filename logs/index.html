@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -13,7 +13,8 @@
     <style>
       /* Custom styles for log page */
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
         background-color: var(--background);
         color: var(--foreground);
@@ -21,11 +22,15 @@
       }
 
       .container {
+        all: unset;
+        box-sizing: border-box;
+        display: block;
         background-color: var(--muted);
         /* background-color: var(--background); */
         padding: 12px;
         /* padding-top: 0; */
-        max-width: 600px;
+        width: 500px;
+        max-width: 100%;
         margin: 0 auto;
         min-height: 100vh;
       }
@@ -44,11 +49,13 @@
         padding-top: 12px;
         padding-bottom: 12px;
         z-index: 10;
-        /* margin-left: -12px;
+        margin-top: -12px;
+
+        margin-left: -12px;
         margin-right: -12px;
         padding-left: 12px;
-        padding-right: 12px; */
-        /* margin-bottom: 1rem; */
+        padding-right: 12px;
+        margin-bottom: 1rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
@@ -88,7 +95,9 @@
         align-items: center;
         justify-content: center;
         opacity: 0;
-        transition: opacity 0.2s ease, background-color 0.2s ease;
+        transition:
+          opacity 0.2s ease,
+          background-color 0.2s ease;
         pointer-events: none;
       }
 
@@ -116,11 +125,13 @@
 
       /* Individual search item */
       .search-item {
-        padding: 1rem;
+        /* padding: 1rem;
         background-color: var(--card);
         border: 1px solid var(--border);
-        border-radius: var(--radius);
-        transition: opacity 0.2s ease, transform 0.2s ease;
+        border-radius: var(--radius); */
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
       }
 
       .search-item.hidden {
@@ -128,7 +139,7 @@
       }
 
       .search-item:hover {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); */
       }
 
       /* Empty states */
@@ -159,6 +170,11 @@
       }
 
       .card {
+        padding: 1rem;
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+
         /* border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 1rem; */
@@ -221,47 +237,51 @@
     </style>
   </head>
   <body class="bg-foreground/30 bg-muted">
-    <div class="sticky-header">
-      <div
-        class="flex justify-between items-center gap-4 mx-auto"
-        style="max-width: 600px"
-      >
-        <h1 class="text-lg">マニュアル</h1>
-        <!-- Search UI -->
-        <div class="flex-1">
-          <div class="search-wrapper">
-            <input
-              type="text"
-              id="search-input"
-              class="search-input"
-              placeholder="検索"
-              autocomplete="off"
-              aria-label="ログ検索"
-            />
-            <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+    <div class="container bg-muted">
+      <div class="sticky-header">
+        <div
+          class="flex justify-between items-center gap-4 mx-auto"
+          style="max-width: 100%"
+        >
+          <h1 class="text-lg">マニュアル</h1>
+          <!-- Search UI -->
+          <div class="flex-1">
+            <div class="search-wrapper">
+              <input
+                type="text"
+                id="search-input"
+                class="search-input"
+                placeholder="検索"
+                autocomplete="off"
+                aria-label="ログ検索"
+              />
+              <button
+                id="clear-btn"
+                class="clear-btn"
+                aria-label="検索をクリア"
               >
-                <path
-                  d="M18 6L6 18M6 6L18 18"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 6L6 18M6 6L18 18"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="container bg-muted">
       <div class="flex gap-4 mb-2 items-center">
-        <div>
+        <div style="width: fit-content">
           <label for="operator-name-input" class="text-sm"
             >オペレーター名:</label
           >
@@ -272,7 +292,7 @@
             id="operator-name-input"
           />
         </div>
-        <label>
+        <!-- <label>
           <input
             type="checkbox"
             id="is-year-end-new-year-checkbox"
@@ -281,7 +301,19 @@
             data-priority="1"
           />
           年末年始
-        </label>
+        </label> -->
+
+        <div>
+          <label for="hinichi-input" class="text-sm">日にちがかかる案内:</label>
+          <input
+            type="text"
+            style="width: 200px; font-size: 0.9rem"
+            data-target-classes="delay-notice delay-notice-for-taishogai"
+            id="delay-notice-input"
+            data-priority="1"
+            placeholder="お日にちがかかる可能性案内"
+          />
+        </div>
       </div>
       <div
         id="result-count"
@@ -383,6 +415,69 @@
               対象外部位（<span class="taishogai-bui">便座のひび</span
               >）と思われるため、修理のお取次ぎお願いします。
             </div>
+          </div>
+        </div>
+
+        <div class="search-item card">
+          <h2>CB</h2>
+          <div>
+            <span>案内: </span>
+            <label>
+              <input
+                type="radio"
+                name="outbound-annai"
+                value="outbound-annai-yusho"
+                checked
+              />有償警告
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="outbound-annai"
+                value="outbound-annai-maker"
+              />メーカー保証期間内
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="outbound-annai"
+                value="outbound-annai-taishogai"
+              />保証対象外部位
+            </label>
+          </div>
+          <div>
+            <span>故障内容: </span>
+            <label>
+              <input
+                type="radio"
+                name="outbound-koshonaiyo"
+                value="outbound-koshonaiyo-ok"
+                checked
+              />一致
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="outbound-koshonaiyo"
+                value="outbound-koshonaiyo-change"
+              />変更
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="outbound-koshonaiyo"
+                value="outbound-koshonaiyo-add"
+              />追加
+            </label>
+          </div>
+          <div class="copyable">
+            <div>
+              <span class="datetime-display"></span> CC<span
+                class="operator-name"
+              ></span>
+            </div>
+            <div id="outbound-annai"></div>
+            <div id="outbound-koshonaiyo"></div>
           </div>
         </div>
 
@@ -562,8 +657,9 @@
       new SearchFilter().init();
     </script>
     <script src="../lib/copy-handler/index.js"></script>
-    <script src="../lib/form-sync/index.js"></script>
+    <script src="../lib/form-updater/index.js"></script>
     <script src="../lib/datetime-display/index.js"></script>
+    <script src="./config.js"></script>
     <script>
       // CopyHandlerを初期化
       const copyHandler = new CopyHandler({
@@ -573,9 +669,9 @@
       });
       copyHandler.init();
 
-      // FormSyncを初期化
-      const formSync = new FormSync();
-      formSync.init();
+      // FormUpdaterを初期化
+      const formUpdater = new FormUpdater();
+      formUpdater.init();
 
       // 日時表示を初期化
       new DateTimeDisplay().init();
@@ -592,6 +688,79 @@
 
       // 初期化実行
       initDelayNotice();
+
+      /**
+       * 故障内容のラジオボタンの値からHTMLメッセージを取得
+       * @param {string} key - ラジオボタンの値
+       * @returns {string} HTMLメッセージ
+       */
+      function getOutboundKoshonaiyoHtml(key) {
+        const messages = {
+          "outbound-koshonaiyo-ok": "故障内容一致を確認。",
+          "outbound-koshonaiyo-change": "故障内容変更:<br />■<br />↓<br />■",
+          "outbound-koshonaiyo-add": "故障内容追記:",
+        };
+        return messages[key] || "";
+      }
+
+      document
+        .querySelectorAll('input[name="outbound-koshonaiyo"]')
+        .forEach((radio) => {
+          radio.addEventListener("change", (event) => {
+            const selectedValue = event.target.value;
+            const html = getOutboundKoshonaiyoHtml(selectedValue);
+            document.getElementById("outbound-koshonaiyo").innerHTML = html;
+          });
+        });
+
+      function getOutboundAnnaiHtml(key) {
+        console.log("key", key);
+        const htmlMap = {
+          "outbound-annai-yusho": `有償警告案内済、${ohinichiText}済`,
+          "outbound-annai-maker": `メーカー保証期間内の有償警告案内済、${ohinichiText}済`,
+          "outbound-annai-taishogai": `保証対象外部位案内済、${ohinichiText}済`,
+        };
+        return htmlMap[key] || null;
+      }
+
+      document
+        .querySelectorAll('input[name="outbound-annai"]')
+        .forEach((radio) => {
+          radio.addEventListener("change", (event) => {
+            const html = getOutboundAnnaiHtml(event.target.value);
+            document.getElementById("outbound-annai").innerHTML = html;
+          });
+        });
+
+      /**
+       * セレクターで要素を取得してイベントをディスパッチ
+       * @param {string} selector - CSSセレクター
+       * @param {string} eventType - イベントタイプ
+       * @returns {boolean} 要素が見つかってイベントをディスパッチできたらtrue
+       */
+      function dispatchEventBySelector(selector, eventType) {
+        const element = document.querySelector(selector);
+        if (!element) {
+          console.warn(`Element not found: ${selector}`);
+          return false;
+        }
+        element.dispatchEvent(new Event(eventType));
+        return true;
+      }
+
+      function init() {
+        dispatchEventBySelector(
+          'input[name="outbound-annai"]:checked',
+          "change",
+        );
+        dispatchEventBySelector(
+          'input[name="outbound-koshonaiyo"]:checked',
+          "change",
+        );
+        document.getElementById("delay-notice-input").value = ohinichiText;
+        dispatchEventBySelector('input[id="delay-notice-input"]', "input");
+      }
+      init();
     </script>
   </body>
 </html>

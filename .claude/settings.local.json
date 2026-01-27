@@ -4,7 +4,10 @@
       "Bash(start \"\" \"d:\\\\projects\\\\web\\\\templates-for-e\\\\lib\\\\search-filter\\\\example.html\")",
       "Bash(start \"\" \"d:\\\\projects\\\\web\\\\templates-for-e\\\\logs\\\\index.html\")",
       "Bash(del SearchFilter.js)",
-      "Bash(ren:*)"
+      "Bash(ren:*)",
+      "Bash(mv:*)",
+      "Bash(dir:*)",
+      "Bash(move lib\\form-sync lib\\form-updater)"
     ]
   }
 }
