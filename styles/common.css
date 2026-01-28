@@ -11,12 +11,13 @@
   color: var(--foreground, #000000);
 }
 
-.box:hover {
+/* .box:hover {
   border-color: var(--border-hover, #d1d5db);
-}
+} */
 
 .card {
   all: unset; /* Bootstrapの影響をリセット */
+  display: block;
 }
 
 table {

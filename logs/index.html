@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../styles/globals.css" />
     <link rel="stylesheet" href="../styles/tailwind-like.css" />
     <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <link rel="stylesheet" href="../styles/common.css" />
     <link rel="stylesheet" href="../lib/copy-handler/styles.css" />
 
@@ -224,6 +228,52 @@
         margin-bottom: 8px;
       }
 
+      /* 設定アイコンボタン */
+      .settings-icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        color: var(--muted-foreground);
+        border-radius: var(--radius);
+        cursor: pointer;
+        vertical-align: bottom;
+      }
+
+      /* 設定が開いている時のスタイル */
+      .settings-icon-btn.active {
+        color: var(--background);
+        border-radius: 8px 8px 0 0;
+        background-color: var(--muted-foreground);
+      }
+
+      /* .settings-icon-btn:hover:not(.active) {
+        background-color: var(--muted);
+        color: var(--foreground);
+      } */
+
+      .settings-icon-btn:hover:not(.active) i {
+        /* transform: rotate(90deg); */
+      }
+
+      /* .settings-icon-btn:active {
+        transform: scale(0.95);
+      } */
+
+      .settings-icon-btn i {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      /* 設定セクション */
+      #settings {
+        margin-top: 0;
+      }
+
       /* Mobile responsiveness */
       @media (max-width: 768px) {
         h1 {
@@ -280,7 +330,7 @@
           </div>
         </div>
       </div>
-      <div class="flex gap-4 mb-2 items-center">
+      <div class="flex justify-between items-center">
         <div style="width: fit-content">
           <label for="operator-name-input" class="text-sm"
             >オペレーター名:</label
@@ -302,19 +352,41 @@
           />
           年末年始
         </label> -->
-
-        <div>
-          <label for="hinichi-input" class="text-sm">日にちがかかる案内:</label>
-          <input
-            type="text"
-            style="width: 200px; font-size: 0.9rem"
-            data-target-classes="delay-notice delay-notice-for-taishogai"
-            id="delay-notice-input"
-            data-priority="1"
-            placeholder="お日にちがかかる可能性案内"
-          />
-        </div>
+        <!-- 設定アイコン -->
+        <button
+          id="settings-toggle"
+          class="settings-icon-btn"
+          aria-label="設定を開く"
+          title="設定"
+        >
+          <i class="bi bi-gear-fill"></i>
+        </button>
       </div>
+      <div
+        id="settings"
+        class="box border-2"
+        style="
+          border-top-right-radius: 0;
+          border-color: var(--muted-foreground);
+          display: none;
+        "
+      >
+        <h2 style="font-size: 1rem">設定</h2>
+        <label for="hinichi-input" class="text-sm"
+          >"お日にち..." を上書き:</label
+        >
+        <input
+          type="text"
+          style="width: 200px; font-size: 0.9rem"
+          data-target-classes="delay-notice delay-notice-for-taishogai"
+          id="delay-notice-input"
+          data-priority="1"
+          placeholder="お日にちがかかる可能性案内"
+        />
+      </div>
+
+      <div style="margin-bottom: 1rem"></div>
+
       <div
         id="result-count"
         style="
@@ -330,7 +402,7 @@
       <div class="log-entries" id="items-container">
         <div class="search-item card">
           <h2>有償警告</h2>
-          <label>
+          <!-- <label>
             <input
               type="checkbox"
               id="yusho-keikoku-checkbox"
@@ -339,7 +411,7 @@
               data-false-value="未"
             />
             済
-          </label>
+          </label> -->
           <label>
             <input
               type="checkbox"
@@ -350,17 +422,34 @@
             />
             三菱
           </label>
-          <div class="copyable">
-            ・有償警告案内<span class="yusho-keikoku">未</span><br />
-            ・<span class="delay-notice">お日にちがかかる可能性案内</span
-            ><span class="yusho-keikoku">未</span>
+
+          <div style="display: flex; gap: 8px">
+            <div class="copyable">
+              ・有償警告案内<span class="yusho-keikoku">未</span><br />
+              ・<span class="delay-notice">お日にちがかかる可能性案内</span
+              ><span class="yusho-keikoku">未</span>
+            </div>
+            <div class="copyable">
+              ・有償警告案内済<br />
+              ・<span class="delay-notice">お日にちがかかる可能性案内</span
+              ><span>済</span>
+            </div>
           </div>
-          <div class="copyable">
-            ・メーカー保証期間内の有償警告案内<span class="yusho-keikoku"
-              >未</span
-            ><br />
-            ・<span class="delay-notice">お日にちがかかる可能性案内</span
-            ><span class="yusho-keikoku">未</span>
+
+          <div style="display: flex; gap: 8px">
+            <div class="copyable">
+              ・メーカー保証期間内の有償警告案内<span class="yusho-keikoku"
+                >未</span
+              ><br />
+              ・<span class="delay-notice">お日にちがかかる可能性案内</span
+              ><span class="yusho-keikoku">未</span>
+            </div>
+
+            <div class="copyable">
+              ・メーカー保証期間内の有償警告案内済<br />
+              ・<span class="delay-notice">お日にちがかかる可能性案内</span
+              ><span>済</span>
+            </div>
           </div>
         </div>
 
@@ -373,7 +462,7 @@
           <hr />
 
           <div>
-            <h3>備考</h3>
+            <!-- <h3>備考</h3>
             <label style="margin-right: 12px">
               <input
                 type="checkbox"
@@ -383,20 +472,29 @@
                 data-false-value="未"
               />
               済
-            </label>
+            </label> -->
+            <div style="display: flex; gap: 8px">
+              <div class="copyable">
+                ・保証対象外部位案内<span class="taishogai-status">未</span
+                ><br />
+                ・<span class="delay-notice-for-taishogai"></span
+                ><span class="taishogai-status">未</span>
+              </div>
 
-            <div class="copyable">
-              ・保証対象外部位案内<span class="taishogai-status">未</span><br />
-              ・<span class="delay-notice-for-taishogai"></span
-              ><span class="taishogai-status">未</span>
+              <div class="copyable">
+                ・保証対象外部位案内<span class="taishogai-status">済</span
+                ><br />
+                ・<span class="delay-notice-for-taishogai"></span
+                ><span class="taishogai-status">済</span>
+              </div>
             </div>
           </div>
 
           <hr />
 
           <div>
-            <h3 class="mb-1">申し送り事項</h3>
-            <select
+            <h3 class="mb-1">伝達事項/申し送り事項</h3>
+            <!-- <select
               id="taishogai-bui-select"
               data-target-class="taishogai-bui"
               style="
@@ -408,19 +506,18 @@
             >
               <option value="便座のひび" selected>便座のひび</option>
               <option value="天板のひび">天板のひび</option>
-            </select>
+            </select> -->
             <!-- 空文字の場合は無視する必要がある。 -->
-            <input id="taishogai-bui-input" placeholder="自由に入力" />
+            <!-- <input id="taishogai-bui-input" placeholder="自由に入力" /> -->
             <div class="copyable">
-              対象外部位（<span class="taishogai-bui">便座のひび</span
-              >）と思われるため、修理のお取次ぎお願いします。
+              対象外部位（■）と思われるため、修理のお取次ぎお願いします。
             </div>
           </div>
         </div>
 
         <div class="search-item card">
           <h2>CB</h2>
-          <div>
+          <div style="display: flex; gap: 12px">
             <span>案内: </span>
             <label>
               <input
@@ -442,10 +539,10 @@
                 type="radio"
                 name="outbound-annai"
                 value="outbound-annai-taishogai"
-              />保証対象外部位
+              />保証対象外
             </label>
           </div>
-          <div>
+          <div style="display: flex; gap: 12px">
             <span>故障内容: </span>
             <label>
               <input
@@ -716,9 +813,9 @@
       function getOutboundAnnaiHtml(key) {
         console.log("key", key);
         const htmlMap = {
-          "outbound-annai-yusho": `有償警告案内済、${ohinichiText}済`,
-          "outbound-annai-maker": `メーカー保証期間内の有償警告案内済、${ohinichiText}済`,
-          "outbound-annai-taishogai": `保証対象外部位案内済、${ohinichiText}済`,
+          "outbound-annai-yusho": `有償警告案内済、${CONFIG.ohinichiText}済`,
+          "outbound-annai-maker": `メーカー保証期間内の有償警告案内済、${CONFIG.ohinichiText}済`,
+          "outbound-annai-taishogai": `保証対象外部位案内済、${CONFIG.ohinichiText}済`,
         };
         return htmlMap[key] || null;
       }
@@ -757,8 +854,25 @@
           'input[name="outbound-koshonaiyo"]:checked',
           "change",
         );
-        document.getElementById("delay-notice-input").value = ohinichiText;
+        document.getElementById("delay-notice-input").value =
+          CONFIG.ohinichiText;
         dispatchEventBySelector('input[id="delay-notice-input"]', "input");
+
+        // 設定トグル機能
+        const settingsToggle = document.getElementById("settings-toggle");
+        const settingsSection = document.getElementById("settings");
+
+        if (settingsToggle && settingsSection) {
+          settingsToggle.addEventListener("click", () => {
+            if (settingsSection.style.display === "none") {
+              settingsSection.style.display = "";
+              settingsToggle.classList.add("active");
+            } else {
+              settingsSection.style.display = "none";
+              settingsToggle.classList.remove("active");
+            }
+          });
+        }
       }
       init();
     </script>

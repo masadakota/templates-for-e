@@ -7,7 +7,8 @@
       "Bash(ren:*)",
       "Bash(mv:*)",
       "Bash(dir:*)",
-      "Bash(move lib\\form-sync lib\\form-updater)"
+      "Bash(move lib\\form-sync lib\\form-updater)",
+      "Bash(move settings-toggle slide-toggle)"
     ]
   }
 }
