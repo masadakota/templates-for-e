@@ -770,7 +770,10 @@
       formUpdater.init();
 
       // 日時表示を初期化
-      new DateTimeDisplay().init();
+      new DateTimeDisplay().init({
+        format: "MM/DD HH:■",
+        // format: "YYYY/MM/DD HH:mm:ss"
+      });
 
       // .delay-notice と .delay-notice-for-taishogai に初期テキストを設定
       function initDelayNotice() {
