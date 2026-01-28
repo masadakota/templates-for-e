@@ -372,12 +372,10 @@
         "
       >
         <h2 style="font-size: 1rem">設定</h2>
-        <label for="hinichi-input" class="text-sm"
-          >"お日にち..." を上書き:</label
-        >
+        <label for="hinichi-input">"お日にち..." を上書き:</label>
         <input
           type="text"
-          style="width: 200px; font-size: 0.9rem"
+          style="width: 200px"
           data-target-classes="delay-notice delay-notice-for-taishogai"
           id="delay-notice-input"
           data-priority="1"
@@ -573,7 +571,8 @@
                 class="operator-name"
               ></span>
             </div>
-            <div id="outbound-annai"></div>
+            <div>・<span id="outbound-annai"></span></div>
+            <div>・<span class="delay-notice"></span>済</div>
             <div id="outbound-koshonaiyo"></div>
           </div>
         </div>
@@ -813,9 +812,9 @@
       function getOutboundAnnaiHtml(key) {
         console.log("key", key);
         const htmlMap = {
-          "outbound-annai-yusho": `有償警告案内済、${CONFIG.ohinichiText}済`,
-          "outbound-annai-maker": `メーカー保証期間内の有償警告案内済、${CONFIG.ohinichiText}済`,
-          "outbound-annai-taishogai": `保証対象外部位案内済、${CONFIG.ohinichiText}済`,
+          "outbound-annai-yusho": `有償警告案内済`,
+          "outbound-annai-maker": `メーカー保証期間内の有償警告案内済`,
+          "outbound-annai-taishogai": `保証対象外部位案内済`,
         };
         return htmlMap[key] || null;
       }
