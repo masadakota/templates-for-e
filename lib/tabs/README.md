@@ -8,9 +8,7 @@
 - ✅ **Pure Vanilla JavaScript** - フレームワーク不要、依存関係なし
 - ✅ **軽量** - 約10KB（minify前）
 - ✅ **アクセシビリティ対応** - ARIA属性、キーボード操作対応
-- ✅ **カスタマイズ可能** - 複数のスタイルバリエーション
-- ✅ **レスポンシブ** - モバイル・タブレット対応
-- ✅ **ダークモード対応** - prefers-color-scheme対応
+- ✅ **別階層配置可能** - タブリストとパネルを別の場所に配置できる
 
 ## インストール
 
@@ -40,16 +38,17 @@ your-project/
   <link rel="stylesheet" href="lib/tabs/styles.css">
 </head>
 <body>
-  <!-- タブコンテナ -->
+  <!-- タブボタン -->
   <div class="tabs-container" id="my-tabs">
-    <!-- タブボタンリスト -->
     <div role="tablist" class="tabs-list">
       <button class="tab-button" data-tab="tab1" role="tab">タブ1</button>
       <button class="tab-button" data-tab="tab2" role="tab">タブ2</button>
       <button class="tab-button" data-tab="tab3" role="tab">タブ3</button>
     </div>
+  </div>
 
-    <!-- タブパネル -->
+  <!-- タブパネル（別の場所に配置可能） -->
+  <div id="content-area">
     <div class="tab-panels">
       <div class="tab-panel" data-tab-panel="tab1">
         <h2>タブ1のコンテンツ</h2>
@@ -72,6 +71,7 @@ your-project/
     // タブを初期化
     const tabs = new Tabs({
       container: '#my-tabs',
+      panelContainer: '#content-area',
       defaultTab: 'tab1'
     });
   </script>
@@ -104,7 +104,8 @@ const tabs = new Tabs(options);
 
 | オプション | 型 | デフォルト | 説明 |
 |----------|-----|----------|------|
-| `container` | string \| HTMLElement | **必須** | タブコンテナのセレクタまたは要素 |
+| `container` | string \| HTMLElement | **必須** | タブボタンのコンテナ |
+| `panelContainer` | string \| HTMLElement | `null` | タブパネルのコンテナ（未指定時はcontainerと同じ） |
 | `defaultTab` | string | `null` | 初期表示するタブのID |
 | `onChange` | function | `null` | タブ変更時のコールバック |
 | `tabSelector` | string | `'[data-tab]'` | タブボタンのセレクタ |
@@ -118,6 +119,7 @@ const tabs = new Tabs(options);
 ```javascript
 const tabs = new Tabs({
   container: '#my-tabs',
+  panelContainer: '#content-area',
   defaultTab: 'home',
   onChange: (tabId, previousTab) => {
     console.log(`タブが変更されました: ${previousTab} → ${tabId}`);
@@ -169,56 +171,6 @@ tabs.enableTab('tab3');   // タブ3を有効化
 
 ```javascript
 tabs.destroy();  // タブインスタンスを破棄
-```
-
-## スタイルバリエーション
-
-### デフォルトスタイル
-
-```html
-<div class="tabs-container">
-  <!-- ... -->
-</div>
-```
-
-### ピルスタイル
-
-丸みを帯びたボタン風のタブです。
-
-```html
-<div class="tabs-container pills">
-  <!-- ... -->
-</div>
-```
-
-### ボックススタイル
-
-ボックス型のタブです。
-
-```html
-<div class="tabs-container boxed">
-  <!-- ... -->
-</div>
-```
-
-### 縦タブ
-
-サイドバー風の縦タブレイアウトです。
-
-```html
-<div class="tabs-container vertical">
-  <!-- ... -->
-</div>
-```
-
-### アニメーション付き
-
-タブ切り替え時にフェードインアニメーションが適用されます。
-
-```html
-<div class="tabs-container animated">
-  <!-- ... -->
-</div>
 ```
 
 ## キーボード操作
@@ -288,93 +240,47 @@ const tabs = new Tabs({
   border-bottom-color: #10b981;
 }
 
-/* タブパネルのパディングを調整 */
+/* タブパネルのスタイル */
 .tab-panel {
-  padding: 32px;
+  padding: 24px;
+  background-color: #fff;
 }
 ```
 
-### CSS変数を使用
+## 別階層配置の例
 
-```css
-:root {
-  --tab-color: #666;
-  --tab-active-color: #2563eb;
-  --tab-border-color: #e0e0e0;
-}
+タブボタンとタブパネルを異なる階層に配置できます。
 
-.tab-button {
-  color: var(--tab-color);
-}
+```html
+<!-- ヘッダーにタブボタン -->
+<header class="sticky-header">
+  <div class="tabs-container" id="nav-tabs">
+    <div role="tablist" class="tabs-list">
+      <button class="tab-button" data-tab="home" role="tab">ホーム</button>
+      <button class="tab-button" data-tab="about" role="tab">概要</button>
+    </div>
+  </div>
+</header>
 
-.tab-button.active {
-  color: var(--tab-active-color);
-  border-bottom-color: var(--tab-active-color);
-}
-```
+<!-- メインコンテンツにタブパネル -->
+<main id="main-content">
+  <div class="tab-panels">
+    <div class="tab-panel" data-tab-panel="home">
+      <h1>ホームページ</h1>
+    </div>
+    <div class="tab-panel" data-tab-panel="about">
+      <h1>概要ページ</h1>
+    </div>
+  </div>
+</main>
 
-## 高度な使用例
-
-### 動的にタブを追加
-
-```javascript
-const container = document.querySelector('#my-tabs');
-const tabsList = container.querySelector('.tabs-list');
-const tabPanels = container.querySelector('.tab-panels');
-
-// 新しいタブボタンを追加
-const newButton = document.createElement('button');
-newButton.className = 'tab-button';
-newButton.setAttribute('data-tab', 'new-tab');
-newButton.setAttribute('role', 'tab');
-newButton.textContent = '新しいタブ';
-tabsList.appendChild(newButton);
-
-// 新しいタブパネルを追加
-const newPanel = document.createElement('div');
-newPanel.className = 'tab-panel';
-newPanel.setAttribute('data-tab-panel', 'new-tab');
-newPanel.setAttribute('role', 'tabpanel');
-newPanel.innerHTML = '<h2>新しいコンテンツ</h2>';
-tabPanels.appendChild(newPanel);
-
-// タブを再初期化
-tabs.destroy();
-tabs = new Tabs({ container: '#my-tabs' });
-```
-
-### 条件付きでタブを表示/非表示
-
-```javascript
-const tabs = new Tabs({
-  container: '#my-tabs',
-  onChange: (tabId) => {
-    // 特定のタブが選択されたときだけ別のタブを有効化
-    if (tabId === 'advanced') {
-      tabs.enableTab('expert');
-    } else {
-      tabs.disableTab('expert');
-    }
-  }
-});
-```
-
-### 外部イベントと連携
-
-```javascript
-// フォームの送信時に確認タブに移動
-document.querySelector('#my-form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  tabs.showTab('confirmation');
-});
-
-// データ読み込み完了後にタブを有効化
-fetch('/api/data')
-  .then(response => response.json())
-  .then(data => {
-    tabs.enableTab('results');
-    tabs.showTab('results');
+<script>
+  const tabs = new Tabs({
+    container: '#nav-tabs',
+    panelContainer: '#main-content',
+    defaultTab: 'home'
   });
+</script>
 ```
 
 ## トラブルシューティング
@@ -426,19 +332,18 @@ const tabs = new Tabs({
 
 MIT License
 
-## 貢献
-
-バグ報告や機能リクエストは、GitHubのIssuesでお願いします。
-
 ## 更新履歴
+
+### v1.1.0 (2026-01-31)
+- 別階層配置機能を追加（`panelContainer` オプション）
+- レスポンシブ対応コードを削除（シンプル化）
+- スタイルバリエーションを削除（基本タブのみ）
 
 ### v1.0.0 (2026-01-30)
 - 初回リリース
 - 基本的なタブ機能
 - アクセシビリティ対応
 - キーボード操作サポート
-- 複数のスタイルバリエーション
-- ブラウザ履歴との連携
 
 ## 参考
 

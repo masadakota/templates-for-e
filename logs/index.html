@@ -114,13 +114,6 @@
         color: var(--foreground);
       }
 
-      /* Log entries container */
-      .log-entries {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-
       /* Individual search item */
       .search-item {
         /* padding: 1rem;
@@ -282,11 +275,14 @@
   </head>
   <body class="bg-foreground/20 bg-muted">
     <div class="sticky-header">
-      <div class="tabs-container" id="main-tabs">
-        <div role="tablist" class="tabs-list" style="justify-content: center">
-          <button class="tab-button" data-tab="inbound" role="tab">受電</button>
-          <button class="tab-button" data-tab="outbound" role="tab">CB</button>
-        </div>
+      <div
+        role="tablist"
+        class="tabs-list"
+        id="main-tabs"
+        style="justify-content: center"
+      >
+        <button class="tab-button" data-tab="inbound" role="tab">受電</button>
+        <button class="tab-button" data-tab="outbound" role="tab">CB</button>
       </div>
     </div>
 
@@ -419,10 +415,12 @@
         aria-live="polite"
       ></div>
 
-      <!-- Log entries container -->
-      <div class="log-entries" id="items-container">
+      <div
+        id="items-container"
+        style="display: flex; flex-direction: column; gap: 0.75rem"
+      >
         <!-- タブパネル -->
-        <div class="tab-panels">
+        <div class="tab-panels" id="main-panels">
           <!-- 受電タブ -->
           <div class="tab-panel" data-tab-panel="inbound">
             <div class="search-item card">
@@ -660,7 +658,7 @@
               <div class="hidden">はんばいてんれんけい</div>
             </div>
 
-            <!-- <table class="copyable-table">
+            <!-- <table class="search-item copyable-table">
               <tr>
                 <th></th>
                 <th>未</th>
@@ -683,7 +681,7 @@
               </tr>
             </table> -->
           </div>
-          <!-- 受電タブ終了 -->
+          <!-- /受電タブ -->
 
           <!-- CBタブ -->
           <div class="tab-panel" data-tab-panel="outbound">
@@ -823,9 +821,9 @@
               </div>
             </div>
           </div>
-          <!-- CBタブ終了 -->
+          <!-- /CBタブ -->
         </div>
-        <!-- タブパネル終了 -->
+        <!-- /タブパネル -->
       </div>
 
       <!-- No results message (hidden by default) -->
@@ -1012,14 +1010,14 @@
       }
 
       function init() {
-        // Tabsを初期化（タブリストとパネルを別の階層で管理）
+        // Tabsを初期化
         const tabs = new Tabs({
           container: "#main-tabs",
-          panelContainer: "#items-container",
+          panelContainer: "#main-panels",
           defaultTab: "inbound",
-          onChange: (tabId, previousTab) => {
-            console.log(`Tab changed: ${previousTab} → ${tabId}`);
-          },
+          // onChange: (tabId, previousTab) => {
+          //   console.log(`Tab changed: ${previousTab} → ${tabId}`);
+          // },
         });
 
         //
