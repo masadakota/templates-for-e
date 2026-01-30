@@ -420,12 +420,11 @@
         style="display: flex; flex-direction: column; gap: 0.75rem"
       >
         <!-- タブパネル -->
-        <div class="tab-panels" id="main-panels">
-          <!-- 受電タブ -->
-          <div class="tabs-content" data-tab-panel="inbound">
-            <div class="search-item card">
-              <div class="card-title">有償警告</div>
-              <!-- <label>
+        <!-- 受電タブ -->
+        <div class="tabs-content" data-tab-panel="inbound">
+          <div class="search-item card">
+            <div class="card-title">有償警告</div>
+            <!-- <label>
                 <input
                   type="checkbox"
                   id="yusho-keikoku-checkbox"
@@ -435,57 +434,57 @@
                 />
                 済
               </label> -->
-              <label id="is-mitsubishi-label">
-                <input
-                  type="checkbox"
-                  id="is-mitsubishi-checkbox"
-                  data-target-class="delay-notice"
-                  data-true-value="通常よりお日にちがかかる可能性案内"
-                  data-priority="2"
-                />
-                三菱
-              </label>
+            <label id="is-mitsubishi-label">
+              <input
+                type="checkbox"
+                id="is-mitsubishi-checkbox"
+                data-target-class="delay-notice"
+                data-true-value="通常よりお日にちがかかる可能性案内"
+                data-priority="2"
+              />
+              三菱
+            </label>
 
-              <div style="display: flex; gap: 8px">
-                <div class="copyable">
-                  ・有償警告案内<span class="yusho-keikoku">未</span><br />
-                  ・<span class="delay-notice">お日にちがかかる可能性案内</span
-                  ><span class="yusho-keikoku">未</span>
-                </div>
-                <div class="copyable">
-                  ・有償警告案内済<br />
-                  ・<span class="delay-notice">お日にちがかかる可能性案内</span
-                  ><span>済</span>
-                </div>
+            <div style="display: flex; gap: 8px">
+              <div class="copyable">
+                ・有償警告案内<span class="yusho-keikoku">未</span><br />
+                ・<span class="delay-notice">お日にちがかかる可能性案内</span
+                ><span class="yusho-keikoku">未</span>
               </div>
-
-              <div style="display: flex; gap: 8px">
-                <div class="copyable">
-                  ・メーカー保証期間内の有償警告案内<span class="yusho-keikoku"
-                    >未</span
-                  ><br />
-                  ・<span class="delay-notice">お日にちがかかる可能性案内</span
-                  ><span class="yusho-keikoku">未</span>
-                </div>
-
-                <div class="copyable">
-                  ・メーカー保証期間内の有償警告案内済<br />
-                  ・<span class="delay-notice">お日にちがかかる可能性案内</span
-                  ><span>済</span>
-                </div>
+              <div class="copyable">
+                ・有償警告案内済<br />
+                ・<span class="delay-notice">お日にちがかかる可能性案内</span
+                ><span>済</span>
               </div>
             </div>
 
-            <div class="search-item card">
-              <div class="card-title">保証対象外部位</div>
-              <div class="talk">
-                今回の症状は、保証対象外のため、有償になります。費用については、メーカーに直接ご相談ください。
+            <div style="display: flex; gap: 8px">
+              <div class="copyable">
+                ・メーカー保証期間内の有償警告案内<span class="yusho-keikoku"
+                  >未</span
+                ><br />
+                ・<span class="delay-notice">お日にちがかかる可能性案内</span
+                ><span class="yusho-keikoku">未</span>
               </div>
 
-              <hr />
+              <div class="copyable">
+                ・メーカー保証期間内の有償警告案内済<br />
+                ・<span class="delay-notice">お日にちがかかる可能性案内</span
+                ><span>済</span>
+              </div>
+            </div>
+          </div>
 
-              <div>
-                <!-- <h3>備考</h3>
+          <div class="search-item card">
+            <div class="card-title">保証対象外部位</div>
+            <div class="talk">
+              今回の症状は、保証対象外のため、有償になります。費用については、メーカーに直接ご相談ください。
+            </div>
+
+            <hr />
+
+            <div>
+              <!-- <h3>備考</h3>
             <label style="margin-right: 12px">
               <input
                 type="checkbox"
@@ -496,169 +495,166 @@
               />
               済
             </label> -->
-                <div style="display: flex; gap: 8px">
-                  <div class="copyable">
-                    ・保証対象外部位案内<span class="taishogai-status">未</span
-                    ><br />
-                    ・<span class="delay-notice-for-taishogai"></span
-                    ><span class="taishogai-status">未</span>
-                  </div>
-
-                  <div class="copyable">
-                    ・保証対象外部位案内<span class="taishogai-status">済</span
-                    ><br />
-                    ・<span class="delay-notice-for-taishogai"></span
-                    ><span class="taishogai-status">済</span>
-                  </div>
-                </div>
-              </div>
-
-              <hr />
-
-              <div>
-                <h3 class="mb-1">伝達事項/申し送り事項</h3>
+              <div style="display: flex; gap: 8px">
                 <div class="copyable">
-                  対象外部位（■）と思われるため、修理のお取次ぎお願いします。
+                  ・保証対象外部位案内<span class="taishogai-status">未</span
+                  ><br />
+                  ・<span class="delay-notice-for-taishogai"></span
+                  ><span class="taishogai-status">未</span>
+                </div>
+
+                <div class="copyable">
+                  ・保証対象外部位案内<span class="taishogai-status">済</span
+                  ><br />
+                  ・<span class="delay-notice-for-taishogai"></span
+                  ><span class="taishogai-status">済</span>
                 </div>
               </div>
             </div>
 
-            <div class="search-item card">
-              <div class="card-title">浴室暖房乾燥機</div>
-              <h3>トーク(→販売店)</h3>
-              <div class="talk">
-                <p>
-                  先程、お客様から浴室暖房乾燥機の修理依頼のお電話が入りまして、その浴室暖房乾燥機が10年保証に入っているかの確認のために、お電話をさせていただきました。
-                </p>
-                <p>お客様情報をお伝えしてもよろしいでしょうか？</p>
+            <hr />
+
+            <div>
+              <h3 class="mb-1">伝達事項/申し送り事項</h3>
+              <div class="copyable">
+                対象外部位（■）と思われるため、修理のお取次ぎお願いします。
               </div>
+            </div>
+          </div>
+
+          <div class="search-item card">
+            <div class="card-title">浴室暖房乾燥機</div>
+            <h3>トーク(→販売店)</h3>
+            <div class="talk">
+              <p>
+                先程、お客様から浴室暖房乾燥機の修理依頼のお電話が入りまして、その浴室暖房乾燥機が10年保証に入っているかの確認のために、お電話をさせていただきました。
+              </p>
+              <p>お客様情報をお伝えしてもよろしいでしょうか？</p>
+            </div>
+            <h3>備考</h3>
+            <div class="copyable">
+              店舗より、製品が10年保証に入っていることを確認済み。
+            </div>
+            <h3>その他</h3>
+            <h4>型番の例</h4>
+            <ul>
+              <li>MAX UFD-111A</li>
+              <li>TOTO TYB3111GAS 三乾王</li>
+            </ul>
+            <div class="hidden">よくだん, よくしつだんぼうかんそうき</div>
+          </div>
+
+          <div class="search-item card">
+            <div class="card-title">お客様が直接メーカーに修理依頼をした</div>
+            <h3>訪問前/訪問中</h3>
+            <div class="talk">
+              恐れ入りますが、当窓口を通していない修理は10年保証対象外でございます。
+              お手数をおかけいたしますが、お客様が直接メーカーに依頼した修理は、お客様ご自身でキャンセルしていただきますようお願いいたします。
+              そして、こちらのお電話で、10年保証対象の修理依頼を受け付けます。
+            </div>
+            <h4>備考:</h4>
+            <div class="copyable">
+              直接メーカーに依頼した修理をお客様ご自身でキャンセルしていただくよう案内。<br />
+              当窓口で10年保証対象の修理依頼を承る。
+            </div>
+            <h3>訪問後</h3>
+            <div class="talk">
+              恐れ入りますが、当窓口を通していない修理は10年保証対象外でございます。
+            </div>
+          </div>
+
+          <div class="search-item card">
+            <div class="card-title">エアコンの修理依頼</div>
+            <div class="talk">
+              こちらの窓口はリフォーム製品の10年保証の窓口のため、ご購入店舗へお問い合わせください。
+            </div>
+            <h4>備考:</h4>
+            <div class="copyable">購入店舗へ問い合わせていただくよう案内。</div>
+            <div class="hidden">えあこん</div>
+          </div>
+
+          <div class="search-item card">
+            <div class="card-title">
+              IHクッキングヒーター 天板にひび（割れ）
+            </div>
+            <div>保証対象外部位</div>
+          </div>
+
+          <div class="search-item card">
+            <span class="datetime-display"></span> CC<span class="operator-name"
+              >■</span
+            ><br />
+            対応者: ■<br />
+            店舗より、製品が10年保証に入っていることを確認済み。型番: ■。
+          </div>
+
+          <div class="search-item card">
+            <div class="card-title">連絡希望時間/訪問希望日</div>
+            <h3>申し送り事項</h3>
+            <div class="copyable">連絡は■～■時、■時以降ご希望です。</div>
+            <div class="copyable">訪問は■/■ご希望です。</div>
+            <div class="hidden">れんらく, ほうもん</div>
+          </div>
+
+          <div class="search-item card">
+            <div class="card-title">販売店連携</div>
+            <h3>トーク (→お客様)</h3>
+            <div class="talk">
+              <p>
+                今回の症状は、製品ではなく施工の問題の可能性もあるため、販売店と相談させていただきます。もし製品ではなく、施工の問題の可能性が高いと判断した場合は、販売店から連絡いたします。
+              </p>
+              <p>
+                メーカーの修理になる可能性もあるため、10年保証の案内と、メーカーの修理の流れについて、ご案内させていただきます。
+              </p>
+              <p>[10年保証のトークスクリプト]</p>
+            </div>
+
+            <h3>トーク (→販売店)</h3>
+            <div class="talk">
+              先程、お客様から修理依頼のお電話をいただきまして、その故障の問題が施工と製品のどちらにあるのか、私共の窓口では判断できないため、ご相談させていただきたく、お電話いたしました。
+            </div>
+            <div></div>
+
+            <div class="box flex flex-col gap-2">
+              <div class="font-bold">メーカー修理の場合</div>
+
               <h3>備考</h3>
               <div class="copyable">
-                店舗より、製品が10年保証に入っていることを確認済み。
+                <div>
+                  <span class="datetime-display"></span> CC<span
+                    class="operator-name"
+                    >■</span
+                  >
+                </div>
+                <div>対応者: ■店/■様/■</div>
+                <div>メーカー修理をご希望。修理依頼を承る。</div>
               </div>
-              <h3>その他</h3>
-              <h4>型番の例</h4>
-              <ul>
-                <li>MAX UFD-111A</li>
-                <li>TOTO TYB3111GAS 三乾王</li>
-              </ul>
-              <div class="hidden">よくだん, よくしつだんぼうかんそうき</div>
-            </div>
 
-            <div class="search-item card">
-              <div class="card-title">お客様が直接メーカーに修理依頼をした</div>
-              <h3>訪問前/訪問中</h3>
-              <div class="talk">
-                恐れ入りますが、当窓口を通していない修理は10年保証対象外でございます。
-                お手数をおかけいたしますが、お客様が直接メーカーに依頼した修理は、お客様ご自身でキャンセルしていただきますようお願いいたします。
-                そして、こちらのお電話で、10年保証対象の修理依頼を受け付けます。
-              </div>
-              <h4>備考:</h4>
-              <div class="copyable">
-                直接メーカーに依頼した修理をお客様ご自身でキャンセルしていただくよう案内。<br />
-                当窓口で10年保証対象の修理依頼を承る。
-              </div>
-              <h3>訪問後</h3>
-              <div class="talk">
-                恐れ入りますが、当窓口を通していない修理は10年保証対象外でございます。
-              </div>
-            </div>
-
-            <div class="search-item card">
-              <div class="card-title">エアコンの修理依頼</div>
-              <div class="talk">
-                こちらの窓口はリフォーム製品の10年保証の窓口のため、ご購入店舗へお問い合わせください。
-              </div>
-              <h4>備考:</h4>
-              <div class="copyable">
-                購入店舗へ問い合わせていただくよう案内。
-              </div>
-              <div class="hidden">えあこん</div>
-            </div>
-
-            <div class="search-item card">
-              <div class="card-title">
-                IHクッキングヒーター 天板にひび（割れ）
-              </div>
-              <div>保証対象外部位</div>
-            </div>
-
-            <div class="search-item card">
-              <span class="datetime-display"></span> CC<span
-                class="operator-name"
-                >■</span
-              ><br />
-              対応者: ■<br />
-              店舗より、製品が10年保証に入っていることを確認済み。型番: ■。
-            </div>
-
-            <div class="search-item card">
-              <div class="card-title">連絡希望時間/訪問希望日</div>
               <h3>申し送り事項</h3>
-              <div class="copyable">連絡は■～■時、■時以降ご希望です。</div>
-              <div class="copyable">訪問は■/■ご希望です。</div>
-              <div class="hidden">れんらく, ほうもん</div>
+              <div class="copyable">
+                販売店よりメーカー修理のご希望がございました。
+              </div>
+            </div>
+            <div class="hidden">はんばいてんれんけい</div>
+          </div>
+
+          <div class="search-item card">
+            <div class="card-title">販売店連携（メーカー修理不可）</div>
+            <div>給湯器（エコキュートなど）の外部配管/...</div>
+            <h3>トーク (→お客様)</h3>
+            <div class="talk">
+              今回の症状は、製品ではなく施工の問題のため、販売店からご連絡いたします。
             </div>
 
-            <div class="search-item card">
-              <div class="card-title">販売店連携</div>
-              <h3>トーク (→お客様)</h3>
-              <div class="talk">
-                <p>
-                  今回の症状は、製品ではなく施工の問題の可能性もあるため、販売店と相談させていただきます。もし製品ではなく、施工の問題の可能性が高いと判断した場合は、販売店から連絡いたします。
-                </p>
-                <p>
-                  メーカーの修理になる可能性もあるため、10年保証の案内と、メーカーの修理の流れについて、ご案内させていただきます。
-                </p>
-                <p>[10年保証のトークスクリプト]</p>
-              </div>
-
-              <h3>トーク (→販売店)</h3>
-              <div class="talk">
-                先程、お客様から修理依頼のお電話をいただきまして、その故障の問題が施工と製品のどちらにあるのか、私共の窓口では判断できないため、ご相談させていただきたく、お電話いたしました。
-              </div>
-              <div></div>
-
-              <div class="box flex flex-col gap-2">
-                <div class="font-bold">メーカー修理の場合</div>
-
-                <h3>備考</h3>
-                <div class="copyable">
-                  <div>
-                    <span class="datetime-display"></span> CC<span
-                      class="operator-name"
-                      >■</span
-                    >
-                  </div>
-                  <div>対応者: ■店/■様/■</div>
-                  <div>メーカー修理をご希望。修理依頼を承る。</div>
-                </div>
-
-                <h3>申し送り事項</h3>
-                <div class="copyable">
-                  販売店よりメーカー修理のご希望がございました。
-                </div>
-              </div>
-              <div class="hidden">はんばいてんれんけい</div>
+            <h3>トーク (→販売店)</h3>
+            <div class="talk">
+              先程、お客様から■の修理依頼のお電話をいただきまして、故障の内容が施工のため、販売店様でご対応いただきたく、お電話いたしました。
             </div>
+            <div></div>
+            <div class="hidden">はんばいてんれんけい</div>
+          </div>
 
-            <div class="search-item card">
-              <div class="card-title">販売店連携（メーカー修理不可）</div>
-              <div>給湯器（エコキュートなど）の外部配管/...</div>
-              <h3>トーク (→お客様)</h3>
-              <div class="talk">
-                今回の症状は、製品ではなく施工の問題のため、販売店からご連絡いたします。
-              </div>
-
-              <h3>トーク (→販売店)</h3>
-              <div class="talk">
-                先程、お客様から■の修理依頼のお電話をいただきまして、故障の内容が施工のため、販売店様でご対応いただきたく、お電話いたしました。
-              </div>
-              <div></div>
-              <div class="hidden">はんばいてんれんけい</div>
-            </div>
-
-            <!-- <table class="search-item copyable-table">
+          <!-- <table class="search-item copyable-table">
               <tr>
                 <th></th>
                 <th>未</th>
@@ -680,149 +676,148 @@
                 <td>外/済</td>
               </tr>
             </table> -->
+        </div>
+        <!-- /受電タブ -->
+
+        <!-- CBタブ -->
+        <div class="tabs-content" data-tab-panel="outbound">
+          <div class="search-item card">
+            <div class="card-title">CB (修理依頼OK)</div>
+            <div class="card-content">
+              <div style="display: flex; gap: 4px; align-items: center">
+                <span>案内: </span>
+                <div class="radio-pills">
+                  <label>
+                    <input
+                      type="radio"
+                      name="outbound-annai"
+                      value="outbound-annai-yusho"
+                      checked
+                    />有償警告
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="outbound-annai"
+                      value="outbound-annai-maker"
+                    />メーカー保証期間内
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="outbound-annai"
+                      value="outbound-annai-taishogai"
+                    />保証対象外
+                  </label>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 4px; align-items: center">
+                <span>故障内容: </span>
+                <div class="radio-pills">
+                  <label>
+                    <input
+                      type="radio"
+                      name="outbound-koshonaiyo"
+                      value="outbound-koshonaiyo-ok"
+                      checked
+                    />一致
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="outbound-koshonaiyo"
+                      value="outbound-koshonaiyo-add"
+                    />追加
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="outbound-koshonaiyo"
+                      value="outbound-koshonaiyo-change"
+                    />変更
+                  </label>
+                </div>
+              </div>
+              <div class="copyable">
+                <div>
+                  <span class="datetime-display"></span> CC<span
+                    class="operator-name"
+                    >■</span
+                  >
+                </div>
+                <div>対応者:</div>
+                <div>・<span id="outbound-annai"></span></div>
+                <div>・<span class="delay-notice"></span>済</div>
+                <div id="outbound-koshonaiyo"></div>
+              </div>
+            </div>
           </div>
-          <!-- /受電タブ -->
 
-          <!-- CBタブ -->
-          <div class="tabs-content" data-tab-panel="outbound">
-            <div class="search-item card">
-              <div class="card-title">CB (修理依頼OK)</div>
-              <div class="card-content">
-                <div style="display: flex; gap: 4px; align-items: center">
-                  <span>案内: </span>
-                  <div class="radio-pills">
-                    <label>
-                      <input
-                        type="radio"
-                        name="outbound-annai"
-                        value="outbound-annai-yusho"
-                        checked
-                      />有償警告
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="outbound-annai"
-                        value="outbound-annai-maker"
-                      />メーカー保証期間内
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="outbound-annai"
-                        value="outbound-annai-taishogai"
-                      />保証対象外
-                    </label>
-                  </div>
-                </div>
+          <div class="search-item card">
+            <div class="card-title">CB (不出)</div>
+            <div class="card-content">
+              <div style="display: flex; gap: 4px; align-items: center">
+                <select id="fude-kaisu-select">
+                  <option value="fude-kaisu-1">1回目</option>
+                  <option value="fude-kaisu-2">2回目</option>
+                  <option value="fude-kaisu-3">3回目</option>
+                </select>
+              </div>
 
-                <div style="display: flex; gap: 4px; align-items: center">
-                  <span>故障内容: </span>
-                  <div class="radio-pills">
-                    <label>
-                      <input
-                        type="radio"
-                        name="outbound-koshonaiyo"
-                        value="outbound-koshonaiyo-ok"
-                        checked
-                      />一致
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="outbound-koshonaiyo"
-                        value="outbound-koshonaiyo-add"
-                      />追加
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="outbound-koshonaiyo"
-                        value="outbound-koshonaiyo-change"
-                      />変更
-                    </label>
-                  </div>
-                </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 4px;
+                  align-items: center;
+                  margin-bottom: 8px;
+                "
+              >
+                <span>種類: </span>
+                <select id="fude-type-select">
+                  <option value="rusuden-fukikomi">留守電吹き込み済み</option>
+                  <option value="rusuden">留守電</option>
+                  <option value="call">コール音</option>
+                  <option value="wachu">話中</option>
+                </select>
+                <input
+                  type="text"
+                  id="fude-type-override"
+                  placeholder="自由に入力"
+                />
+              </div>
+
+              <div>
+                <div class="font-bold">R-system</div>
                 <div class="copyable">
                   <div>
-                    <span class="datetime-display"></span> CC<span
+                    <span class="fude-kaisu"></span>
+                    <span class="datetime-display"></span> 架電 CC<span
                       class="operator-name"
                       >■</span
                     >
                   </div>
-                  <div>対応者:</div>
-                  <div>・<span id="outbound-annai"></span></div>
-                  <div>・<span class="delay-notice"></span>済</div>
-                  <div id="outbound-koshonaiyo"></div>
+                  <div class="fude-type"></div>
                 </div>
               </div>
-            </div>
 
-            <div class="search-item card">
-              <div class="card-title">CB (不出)</div>
-              <div class="card-content">
-                <div style="display: flex; gap: 4px; align-items: center">
-                  <select id="fude-kaisu-select">
-                    <option value="fude-kaisu-1">1回目</option>
-                    <option value="fude-kaisu-2">2回目</option>
-                    <option value="fude-kaisu-3">3回目</option>
-                  </select>
-                </div>
-
-                <div
-                  style="
-                    display: flex;
-                    gap: 4px;
-                    align-items: center;
-                    margin-bottom: 8px;
-                  "
-                >
-                  <span>種類: </span>
-                  <select id="fude-type-select">
-                    <option value="rusuden-fukikomi">留守電吹き込み済み</option>
-                    <option value="rusuden">留守電</option>
-                    <option value="call">コール音</option>
-                    <option value="wachu">話中</option>
-                  </select>
-                  <input
-                    type="text"
-                    id="fude-type-override"
-                    placeholder="自由に入力"
-                  />
-                </div>
-
-                <div>
-                  <div class="font-bold">R-system</div>
-                  <div class="copyable">
-                    <div>
-                      <span class="fude-kaisu"></span>
-                      <span class="datetime-display"></span> 架電 CC<span
-                        class="operator-name"
-                        >■</span
-                      >
-                    </div>
-                    <div class="fude-type"></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="font-bold">チャット</div>
-                  <div class="copyable">
-                    <div>
-                      <span class="fude-kaisu"></span>
-                      <span class="datetime-display"></span>
-                      <span class="fude-type"></span> CC<span
-                        class="operator-name"
-                        >■</span
-                      >
-                    </div>
+              <div>
+                <div class="font-bold">チャット</div>
+                <div class="copyable">
+                  <div>
+                    <span class="fude-kaisu"></span>
+                    <span class="datetime-display"></span>
+                    <span class="fude-type"></span> CC<span
+                      class="operator-name"
+                      >■</span
+                    >
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- /CBタブ -->
         </div>
+        <!-- /CBタブ -->
         <!-- /タブパネル -->
       </div>
 
@@ -853,7 +848,8 @@
     <script>
       // CopyHandlerを初期化
       const copyHandler = new CopyHandler({
-        // copyIconColor: "#dc3545", // コピーアイコンの色をカスタマイズ
+        copyIconColor: "var(--accent)", // コピーアイコンの色
+        flashColor: "color-mix(in srgb, var(--accent) 30%, transparent)", // コピー成功時のハイライト色
         // showCopyIcon: false,  // コピーアイコンを非表示
         includeTh: false, // th要素をコピー対象外
       });
@@ -864,7 +860,7 @@
       formUpdater.init();
 
       // 日時表示を初期化
-      new DateTimeDisplay().init({
+      new DateTimeDisplay({
         format: CONFIG.datetimeFormat,
         // format: "YYYY/MM/DD HH:mm:ss"
       });

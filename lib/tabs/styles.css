@@ -62,11 +62,6 @@
   pointer-events: none;
 }
 
-/* ===== タブパネル ===== */
-.tab-panels {
-  position: relative;
-}
-
 .tab-panel {
   display: none;
 }
