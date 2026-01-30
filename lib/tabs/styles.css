@@ -21,7 +21,7 @@
 }
 
 /* ===== タブボタン ===== */
-.tab-button {
+.tabs-trigger {
   flex: 0 0 auto;
   padding: 12px 24px;
   font-size: 14px;
@@ -37,26 +37,26 @@
   outline: none;
 }
 
-.tab-button:hover {
+.tabs-trigger:hover {
   color: #333;
   background-color: #ececec;
 }
 
-.tab-button:focus-visible {
+.tabs-trigger:focus-visible {
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
   z-index: 1;
 }
 
 /* アクティブなタブ */
-.tab-button.active {
+.tabs-trigger.active {
   color: #2563eb;
   background-color: #fff;
   border-bottom-color: #2563eb;
 }
 
 /* 無効化されたタブ */
-.tab-button[disabled],
-.tab-button[aria-disabled="true"] {
+.tabs-trigger[disabled],
+.tabs-trigger[aria-disabled="true"] {
   color: #ccc;
   cursor: not-allowed;
   pointer-events: none;

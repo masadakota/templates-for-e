@@ -41,9 +41,9 @@ your-project/
   <!-- タブボタン -->
   <div class="tabs-container" id="my-tabs">
     <div role="tablist" class="tabs-list">
-      <button class="tab-button" data-tab="tab1" role="tab">タブ1</button>
-      <button class="tab-button" data-tab="tab2" role="tab">タブ2</button>
-      <button class="tab-button" data-tab="tab3" role="tab">タブ3</button>
+      <button class="tabs-trigger" data-tab="tab1" role="tab">タブ1</button>
+      <button class="tabs-trigger" data-tab="tab2" role="tab">タブ2</button>
+      <button class="tabs-trigger" data-tab="tab3" role="tab">タブ3</button>
     </div>
   </div>
 
@@ -255,12 +255,12 @@ const tabs = new Tabs({
 
 ```css
 /* タブボタンの色を変更 */
-.tab-button {
+.tabs-trigger {
   color: #333;
   font-weight: 600;
 }
 
-.tab-button.active {
+.tabs-trigger.active {
   color: #10b981;
   border-bottom-color: #10b981;
 }
@@ -281,8 +281,8 @@ const tabs = new Tabs({
 <header class="sticky-header">
   <div class="tabs-container" id="nav-tabs">
     <div role="tablist" class="tabs-list">
-      <button class="tab-button" data-tab="home" role="tab">ホーム</button>
-      <button class="tab-button" data-tab="about" role="tab">概要</button>
+      <button class="tabs-trigger" data-tab="home" role="tab">ホーム</button>
+      <button class="tabs-trigger" data-tab="about" role="tab">概要</button>
     </div>
   </div>
 </header>

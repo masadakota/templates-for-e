@@ -281,8 +281,8 @@
         id="main-tabs"
         style="justify-content: center"
       >
-        <button class="tab-button" data-tab="inbound" role="tab">受電</button>
-        <button class="tab-button" data-tab="outbound" role="tab">CB</button>
+        <button class="tabs-trigger" data-tab="inbound" role="tab">受電</button>
+        <button class="tabs-trigger" data-tab="outbound" role="tab">CB</button>
       </div>
     </div>
 
@@ -422,7 +422,7 @@
         <!-- タブパネル -->
         <div class="tab-panels" id="main-panels">
           <!-- 受電タブ -->
-          <div class="tab-panel" data-tab-panel="inbound">
+          <div class="tabs-content" data-tab-panel="inbound">
             <div class="search-item card">
               <div class="card-title">有償警告</div>
               <!-- <label>
@@ -684,7 +684,7 @@
           <!-- /受電タブ -->
 
           <!-- CBタブ -->
-          <div class="tab-panel" data-tab-panel="outbound">
+          <div class="tabs-content" data-tab-panel="outbound">
             <div class="search-item card">
               <div class="card-title">CB (修理依頼OK)</div>
               <div class="card-content">
@@ -1013,7 +1013,6 @@
         // タブを初期化
         const tabs = new Tabs({
           tabsList: "#main-tabs", // TabsListコンテナ
-          tabsContent: "#main-panels", // TabsContentコンテナ
           defaultValue: "inbound", // デフォルトの値
           activeColor: "var(--accent)", // アクティブなトリガーのテキストの色
           activeBorderColor: "var(--accent)", // アクティブなトリガーの下線の色
