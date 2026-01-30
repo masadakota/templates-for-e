@@ -870,17 +870,17 @@
       });
 
       // .delay-notice と .delay-notice-for-taishogai に初期テキストを設定
-      function initDelayNotice() {
-        const delayNoticeText = "お日にちがかかる可能性案内";
-        document
-          .querySelectorAll(".delay-notice, .delay-notice-for-taishogai")
-          .forEach((element) => {
-            element.textContent = delayNoticeText;
-          });
-      }
+      // function initDelayNotice() {
+      //   const delayNoticeText = "お日にちがかかる可能性案内";
+      //   document
+      //     .querySelectorAll(".delay-notice, .delay-notice-for-taishogai")
+      //     .forEach((element) => {
+      //       element.textContent = delayNoticeText;
+      //     });
+      // }
 
       // 初期化実行
-      initDelayNotice();
+      // initDelayNotice();
 
       /**
        * 故障内容のラジオボタンの値からHTMLメッセージを取得
@@ -1010,13 +1010,15 @@
       }
 
       function init() {
-        // Tabsを初期化
+        // タブを初期化
         const tabs = new Tabs({
-          container: "#main-tabs",
-          panelContainer: "#main-panels",
-          defaultTab: "inbound",
-          // onChange: (tabId, previousTab) => {
-          //   console.log(`Tab changed: ${previousTab} → ${tabId}`);
+          tabsList: "#main-tabs", // TabsListコンテナ
+          tabsContent: "#main-panels", // TabsContentコンテナ
+          defaultValue: "inbound", // デフォルトの値
+          activeColor: "var(--accent)", // アクティブなトリガーのテキストの色
+          activeBorderColor: "var(--accent)", // アクティブなトリガーの下線の色
+          // onValueChange: (value, previousValue) => {
+          //   console.log(`Value changed: ${previousValue} → ${value}`);
           // },
         });
 

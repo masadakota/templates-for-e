@@ -104,65 +104,71 @@ const tabs = new Tabs(options);
 
 | オプション | 型 | デフォルト | 説明 |
 |----------|-----|----------|------|
-| `container` | string \| HTMLElement | **必須** | タブボタンのコンテナ |
-| `panelContainer` | string \| HTMLElement | `null` | タブパネルのコンテナ（未指定時はcontainerと同じ） |
-| `defaultTab` | string | `null` | 初期表示するタブのID |
-| `onChange` | function | `null` | タブ変更時のコールバック |
-| `tabSelector` | string | `'[data-tab]'` | タブボタンのセレクタ |
-| `panelSelector` | string | `'[data-tab-panel]'` | タブパネルのセレクタ |
+| `tabsList` | string \| HTMLElement | **必須** | TabsListコンテナのセレクタまたは要素 |
+| `tabsContent` | string \| HTMLElement | `null` | TabsContentコンテナ（未指定時はtabsListと同じ） |
+| `defaultValue` | string | `null` | 初期表示する値 |
+| `onValueChange` | function | `null` | 値変更時のコールバック |
+| `triggerSelector` | string | `'[data-tab]'` | TabsTriggerのセレクタ |
+| `contentSelector` | string | `'[data-tab-panel]'` | TabsContentのセレクタ |
 | `activeClass` | string | `'active'` | アクティブ時のクラス名 |
 | `enableKeyboard` | boolean | `true` | キーボード操作を有効化 |
 | `enableHistory` | boolean | `false` | ブラウザ履歴との連携 |
+| `activeColor` | string | `null` | アクティブなトリガーの文字色 |
+| `activeBgColor` | string | `null` | アクティブなトリガーの背景色 |
+| `activeBorderColor` | string | `null` | アクティブなトリガーのボーダー色 |
 
 #### 使用例
 
 ```javascript
 const tabs = new Tabs({
-  container: '#my-tabs',
-  panelContainer: '#content-area',
-  defaultTab: 'home',
-  onChange: (tabId, previousTab) => {
-    console.log(`タブが変更されました: ${previousTab} → ${tabId}`);
+  tabsList: '#my-tabs',
+  tabsContent: '#content-area',
+  defaultValue: 'home',
+  onValueChange: (value, previousValue) => {
+    console.log(`値が変更されました: ${previousValue} → ${value}`);
   },
   enableKeyboard: true,
-  enableHistory: true
+  enableHistory: true,
+  activeColor: '#10b981',        // アクティブなトリガーの文字色
+  activeBgColor: '#ecfdf5',      // アクティブなトリガーの背景色
+  activeBorderColor: '#10b981'   // アクティブなトリガーのボーダー色
 });
 ```
 
 ### メソッド
 
-#### showTab(tabId, triggerCallback)
+#### setValue(value, triggerCallback)
 
-指定したタブを表示します。
+値を設定してコンテンツを表示します。
 
 ```javascript
-tabs.showTab('tab2');                  // タブ2を表示（コールバック実行）
-tabs.showTab('tab2', false);           // タブ2を表示（コールバック実行しない）
+tabs.setValue('tab2');                  // tab2を表示（コールバック実行）
+tabs.setValue('tab2', false);           // tab2を表示（コールバック実行しない）
 ```
 
-#### getCurrentTab()
+#### getValue()
 
-現在アクティブなタブのIDを取得します。
+現在アクティブな値を取得します。
 
 ```javascript
-const currentTab = tabs.getCurrentTab();
-console.log('現在のタブ:', currentTab);
+const currentValue = tabs.getValue();
+console.log('現在の値:', currentValue);
 ```
 
-#### disableTab(tabId)
+#### disableTrigger(value)
 
-指定したタブを無効化します。
+指定したトリガーを無効化します。
 
 ```javascript
-tabs.disableTab('tab3');  // タブ3を無効化
+tabs.disableTrigger('tab3');  // tab3トリガーを無効化
 ```
 
-#### enableTab(tabId)
+#### enableTrigger(value)
 
-指定したタブを有効化します。
+指定したトリガーを有効化します。
 
 ```javascript
-tabs.enableTab('tab3');   // タブ3を有効化
+tabs.enableTrigger('tab3');   // tab3トリガーを有効化
 ```
 
 #### destroy()
@@ -187,19 +193,19 @@ tabs.destroy();  // タブインスタンスを破棄
 
 ## イベント
 
-### onChange コールバック
+### onValueChange コールバック
 
-タブが変更されたときに呼び出されます。
+値が変更されたときに呼び出されます。
 
 ```javascript
 const tabs = new Tabs({
-  container: '#my-tabs',
-  onChange: (tabId, previousTab) => {
-    console.log('新しいタブ:', tabId);
-    console.log('前のタブ:', previousTab);
+  tabsList: '#my-tabs',
+  onValueChange: (value, previousValue) => {
+    console.log('新しい値:', value);
+    console.log('前の値:', previousValue);
 
     // カスタム処理
-    if (tabId === 'profile') {
+    if (value === 'profile') {
       loadUserProfile();
     }
   }
@@ -208,21 +214,40 @@ const tabs = new Tabs({
 
 ## ブラウザ履歴との連携
 
-`enableHistory: true` を設定すると、タブの状態がブラウザ履歴に保存されます。
+`enableHistory: true` を設定すると、値の状態がブラウザ履歴に保存されます。
 
 ```javascript
 const tabs = new Tabs({
-  container: '#my-tabs',
+  tabsList: '#my-tabs',
   enableHistory: true  // ブラウザ履歴に保存
 });
 ```
 
 **動作:**
-- タブを切り替えると URL のハッシュが変更されます（例: `#tab1`）
-- ブラウザの戻る/進むボタンでタブの履歴を移動できます
-- ページをリロードしても最後に表示していたタブが復元されます
+- 値を切り替えると URL のハッシュが変更されます（例: `#tab1`）
+- ブラウザの戻る/進むボタンで値の履歴を移動できます
+- ページをリロードしても最後に表示していた値が復元されます
 
 ## カスタムスタイル
+
+### カラーカスタマイズ（オプション）
+
+初期化時にアクティブなタブの色をカスタマイズできます。
+
+```javascript
+const tabs = new Tabs({
+  tabsList: '#my-tabs',
+  defaultValue: 'home',
+  activeColor: '#10b981',        // 文字色（緑）
+  activeBgColor: '#ecfdf5',      // 背景色（淡い緑）
+  activeBorderColor: '#10b981'   // ボーダー色（緑）
+});
+```
+
+**利用可能なオプション:**
+- `activeColor` - アクティブなタブの文字色
+- `activeBgColor` - アクティブなタブの背景色
+- `activeBorderColor` - アクティブなタブのボーダー色（下線）
 
 ### CSSカスタマイズ
 

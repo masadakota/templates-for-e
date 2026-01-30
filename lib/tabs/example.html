@@ -140,11 +140,11 @@
       </div>
 
     <div class="controls">
-      <button onclick="basicTabs.showTab('home')">ホームに切り替え</button>
-      <button onclick="basicTabs.showTab('profile')">プロフィールに切り替え</button>
-      <button onclick="basicTabs.disableTab('messages')">メッセージを無効化</button>
-      <button onclick="basicTabs.enableTab('messages')">メッセージを有効化</button>
-      <button onclick="alert('Current tab: ' + basicTabs.getCurrentTab())">現在のタブを確認</button>
+      <button onclick="basicTabs.setValue('home')">ホームに切り替え</button>
+      <button onclick="basicTabs.setValue('profile')">プロフィールに切り替え</button>
+      <button onclick="basicTabs.disableTrigger('messages')">メッセージを無効化</button>
+      <button onclick="basicTabs.enableTrigger('messages')">メッセージを有効化</button>
+      <button onclick="alert('Current value: ' + basicTabs.getValue())">現在の値を確認</button>
     </div>
 
     <div class="log" id="basic-log"></div>
@@ -152,8 +152,8 @@
 
   <!-- Example 2: Separate Hierarchy -->
   <section class="example-section">
-    <h2>2. 別階層配置のタブ</h2>
-    <p>タブボタンとタブパネルを別の場所に配置した例です。</p>
+    <h2>2. 別階層配置のタブ（カスタムカラー）</h2>
+    <p>タブボタンとタブパネルを別の場所に配置した例です。アクティブなタブの色をカスタマイズしています。</p>
 
     <!-- タブボタン -->
     <div role="tablist" class="tabs-list" id="separate-tabs">
@@ -238,26 +238,29 @@
     }
 
     const basicTabs = new Tabs({
-      container: '#basic-tabs',
-      panelContainer: '#basic-panels',
-      defaultTab: 'home',
-      onChange: (tabId, previousTab) => {
-        logBasic(`Tab changed: ${previousTab || 'none'} → ${tabId}`);
+      tabsList: '#basic-tabs',
+      tabsContent: '#basic-panels',
+      defaultValue: 'home',
+      onValueChange: (value, previousValue) => {
+        logBasic(`Value changed: ${previousValue || 'none'} → ${value}`);
       }
     });
 
-    // Example 2: Separate Hierarchy
+    // Example 2: Separate Hierarchy (with custom colors)
     const separateTabs = new Tabs({
-      container: '#separate-tabs',
-      panelContainer: '#separate-panels',
-      defaultTab: 'overview'
+      tabsList: '#separate-tabs',
+      tabsContent: '#separate-panels',
+      defaultValue: 'overview',
+      activeColor: '#10b981',        // カスタム文字色（緑）
+      activeBgColor: '#ecfdf5',      // カスタム背景色（淡い緑）
+      activeBorderColor: '#10b981'   // カスタムボーダー色（緑）
     });
 
     // Example 3: With History
     const historyTabs = new Tabs({
-      container: '#history-tabs',
-      panelContainer: '#history-panels',
-      defaultTab: 'section1',
+      tabsList: '#history-tabs',
+      tabsContent: '#history-panels',
+      defaultValue: 'section1',
       enableHistory: true
     });
 
