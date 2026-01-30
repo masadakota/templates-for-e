@@ -1,19 +1,19 @@
-/* アニメーション用 */
+/* 背景色のアニメーション */
 .copy-flash-transition {
   transition: background-color 0.75s ease;
 }
 
-/* コピー可能要素 */
+/* コピーアイコンが表示される時に .copyable の要素に付与するclass */
+/* .copyable-with-icon {
+  padding-right: 30px !important;
+} */
+
+/* コピーアイコン用 */
 .copyable {
   position: relative;
 }
 
-/* コピーアイコンが表示される場合のパディング */
-.copyable-with-icon {
-  padding-right: 30px !important;
-}
-
-/* コピーアイコン表示 */
+/* コピーアイコン */
 .copyable::after {
   content: "";
   position: absolute;

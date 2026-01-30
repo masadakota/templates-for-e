@@ -16,7 +16,7 @@
   --secondary-foreground: rgb(52, 52, 52);
   --muted: rgb(247, 247, 247);
   --muted-foreground: rgb(142, 142, 142);
-  --accent: rgb(0, 120, 212); /* #0078d4; */
+  --accent: rgb(69 181 217); /* #0078d4; */ /* rgb(0, 120, 212) */
   /* --accent: rgb(247, 247, 247); */
   --accent-foreground: rgb(255, 255, 255);
   /* --accent-foreground: rgb(52, 52, 52); */
@@ -42,16 +42,16 @@
   --foreground: rgb(38, 38, 38);
 
   /* Custom: Intermediate colors (midground) */
-  --midground: rgb(146, 146, 146);     /* Alias for midground-50 */
-  --midground-10: rgb(234, 234, 234);  /* 10% foreground, 90% background */
-  --midground-20: rgb(212, 212, 212);  /* 20% foreground, 80% background */
-  --midground-30: rgb(190, 190, 190);  /* 30% foreground, 70% background */
-  --midground-40: rgb(168, 168, 168);  /* 40% foreground, 60% background */
-  --midground-50: rgb(146, 146, 146);  /* 50% foreground, 50% background */
-  --midground-60: rgb(125, 125, 125);  /* 60% foreground, 40% background */
-  --midground-70: rgb(103, 103, 103);  /* 70% foreground, 30% background */
-  --midground-80: rgb(81, 81, 81);     /* 80% foreground, 20% background */
-  --midground-90: rgb(59, 59, 59);     /* 90% foreground, 10% background */
+  --midground: rgb(146, 146, 146); /* Alias for midground-50 */
+  --midground-10: rgb(234, 234, 234); /* 10% foreground, 90% background */
+  --midground-20: rgb(212, 212, 212); /* 20% foreground, 80% background */
+  --midground-30: rgb(190, 190, 190); /* 30% foreground, 70% background */
+  --midground-40: rgb(168, 168, 168); /* 40% foreground, 60% background */
+  --midground-50: rgb(146, 146, 146); /* 50% foreground, 50% background */
+  --midground-60: rgb(125, 125, 125); /* 60% foreground, 40% background */
+  --midground-70: rgb(103, 103, 103); /* 70% foreground, 30% background */
+  --midground-80: rgb(81, 81, 81); /* 80% foreground, 20% background */
+  --midground-90: rgb(59, 59, 59); /* 90% foreground, 10% background */
 }
 
 /* :root {

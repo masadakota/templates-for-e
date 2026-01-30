@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabs Library - Examples</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background-color: #f9fafb;
+    }
+
+    h1 {
+      color: #1f2937;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      color: #374151;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .example-section {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      margin-bottom: 32px;
+    }
+
+    .controls {
+      margin-top: 16px;
+      padding: 16px;
+      background-color: #f3f4f6;
+      border-radius: 6px;
+    }
+
+    .controls button {
+      margin-right: 8px;
+      margin-bottom: 8px;
+      padding: 8px 16px;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .controls button:hover {
+      background-color: #2563eb;
+    }
+
+    .log {
+      margin-top: 16px;
+      padding: 12px;
+      background-color: #1f2937;
+      color: #10b981;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      border-radius: 4px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .log-entry {
+      margin-bottom: 4px;
+    }
+
+    code {
+      background-color: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tabs Library - 使用例</h1>
+
+  <!-- Example 1: Basic Tabs -->
+  <section class="example-section">
+    <h2>1. 基本的なタブ</h2>
+    <p>デフォルトスタイルのタブです。</p>
+
+    <div class="tabs-container" id="basic-tabs">
+      <div role="tablist" class="tabs-list">
+        <button class="tab-button" data-tab="home" role="tab">ホーム</button>
+        <button class="tab-button" data-tab="profile" role="tab">プロフィール</button>
+        <button class="tab-button" data-tab="messages" role="tab">メッセージ</button>
+        <button class="tab-button" data-tab="settings" role="tab">設定</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel" data-tab-panel="home">
+          <h3>ホーム</h3>
+          <p>ホームページのコンテンツです。ここには最新の情報やダッシュボードが表示されます。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="profile">
+          <h3>プロフィール</h3>
+          <p>ユーザープロフィールの情報が表示されます。</p>
+          <ul>
+            <li>名前: 山田太郎</li>
+            <li>メール: yamada@example.com</li>
+            <li>登録日: 2025-01-01</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-tab-panel="messages">
+          <h3>メッセージ</h3>
+          <p>未読メッセージ: <strong>3件</strong></p>
+          <p>メッセージの一覧が表示されます。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="settings">
+          <h3>設定</h3>
+          <p>アプリケーションの設定を変更できます。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button onclick="basicTabs.showTab('home')">ホームに切り替え</button>
+      <button onclick="basicTabs.showTab('profile')">プロフィールに切り替え</button>
+      <button onclick="basicTabs.disableTab('messages')">メッセージを無効化</button>
+      <button onclick="basicTabs.enableTab('messages')">メッセージを有効化</button>
+      <button onclick="alert('Current tab: ' + basicTabs.getCurrentTab())">現在のタブを確認</button>
+    </div>
+
+    <div class="log" id="basic-log"></div>
+  </section>
+
+  <!-- Example 2: Pills Style -->
+  <section class="example-section">
+    <h2>2. ピルスタイルのタブ</h2>
+    <p>丸みを帯びたピルスタイルのタブです。</p>
+
+    <div class="tabs-container pills" id="pills-tabs">
+      <div role="tablist" class="tabs-list">
+        <button class="tab-button" data-tab="overview" role="tab">概要</button>
+        <button class="tab-button" data-tab="features" role="tab">機能</button>
+        <button class="tab-button" data-tab="pricing" role="tab">料金</button>
+        <button class="tab-button" data-tab="support" role="tab">サポート</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel" data-tab-panel="overview">
+          <h3>プロダクト概要</h3>
+          <p>このプロダクトは、タブUIを簡単に実装できるライブラリです。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="features">
+          <h3>主な機能</h3>
+          <ul>
+            <li>シンプルなAPI</li>
+            <li>カスタマイズ可能なスタイル</li>
+            <li>アクセシビリティ対応</li>
+            <li>キーボード操作サポート</li>
+          </ul>
+        </div>
+        <div class="tab-panel" data-tab-panel="pricing">
+          <h3>料金プラン</h3>
+          <p><strong>無料</strong> - オープンソースライブラリです</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="support">
+          <h3>サポート</h3>
+          <p>GitHubのIssuesでサポートを受け付けています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example 3: Boxed Style -->
+  <section class="example-section">
+    <h2>3. ボックススタイルのタブ</h2>
+    <p>ボックス型のタブです。</p>
+
+    <div class="tabs-container boxed" id="boxed-tabs">
+      <div role="tablist" class="tabs-list">
+        <button class="tab-button" data-tab="html" role="tab">HTML</button>
+        <button class="tab-button" data-tab="css" role="tab">CSS</button>
+        <button class="tab-button" data-tab="javascript" role="tab">JavaScript</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel" data-tab-panel="html">
+          <h3>HTML</h3>
+          <p>マークアップ言語です。Webページの構造を定義します。</p>
+          <code>&lt;div class="tabs-container"&gt;...&lt;/div&gt;</code>
+        </div>
+        <div class="tab-panel" data-tab-panel="css">
+          <h3>CSS</h3>
+          <p>スタイルシート言語です。Webページの見た目を定義します。</p>
+          <code>.tab-button { padding: 12px 24px; }</code>
+        </div>
+        <div class="tab-panel" data-tab-panel="javascript">
+          <h3>JavaScript</h3>
+          <p>プログラミング言語です。Webページに動的な機能を追加します。</p>
+          <code>const tabs = new Tabs({ container: '.tabs-container' });</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example 4: Animated Tabs -->
+  <section class="example-section">
+    <h2>4. アニメーション付きタブ</h2>
+    <p>タブ切り替え時にフェードインアニメーションが適用されます。</p>
+
+    <div class="tabs-container animated" id="animated-tabs">
+      <div role="tablist" class="tabs-list">
+        <button class="tab-button" data-tab="spring" role="tab">春</button>
+        <button class="tab-button" data-tab="summer" role="tab">夏</button>
+        <button class="tab-button" data-tab="autumn" role="tab">秋</button>
+        <button class="tab-button" data-tab="winter" role="tab">冬</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel" data-tab-panel="spring">
+          <h3>🌸 春</h3>
+          <p>桜が咲き、新しい生命が芽吹く季節です。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="summer">
+          <h3>☀️ 夏</h3>
+          <p>暑い日差しと青い空が広がる季節です。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="autumn">
+          <h3>🍂 秋</h3>
+          <p>紅葉が美しく、収穫の季節です。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="winter">
+          <h3>⛄ 冬</h3>
+          <p>雪が降り、静かで寒い季節です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example 5: Vertical Tabs -->
+  <section class="example-section">
+    <h2>5. 縦タブ</h2>
+    <p>サイドバー風の縦タブレイアウトです。</p>
+
+    <div class="tabs-container vertical" id="vertical-tabs">
+      <div role="tablist" class="tabs-list">
+        <button class="tab-button" data-tab="general" role="tab">一般設定</button>
+        <button class="tab-button" data-tab="security" role="tab">セキュリティ</button>
+        <button class="tab-button" data-tab="notifications" role="tab">通知</button>
+        <button class="tab-button" data-tab="privacy" role="tab">プライバシー</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel" data-tab-panel="general">
+          <h3>一般設定</h3>
+          <p>アプリケーションの基本設定を変更します。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="security">
+          <h3>セキュリティ設定</h3>
+          <p>パスワードや2段階認証などのセキュリティ設定を管理します。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="notifications">
+          <h3>通知設定</h3>
+          <p>メール通知やプッシュ通知の設定を変更します。</p>
+        </div>
+        <div class="tab-panel" data-tab-panel="privacy">
+          <h3>プライバシー設定</h3>
+          <p>データの共有や公開範囲を設定します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script src="index.js"></script>
+  <script>
+    // Example 1: Basic Tabs with logging
+    const basicLog = document.getElementById('basic-log');
+    function logBasic(message) {
+      const entry = document.createElement('div');
+      entry.className = 'log-entry';
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      basicLog.insertBefore(entry, basicLog.firstChild);
+    }
+
+    const basicTabs = new Tabs({
+      container: '#basic-tabs',
+      defaultTab: 'home',
+      onChange: (tabId, previousTab) => {
+        logBasic(`Tab changed: ${previousTab || 'none'} → ${tabId}`);
+      }
+    });
+
+    // Example 2: Pills Style
+    const pillsTabs = new Tabs({
+      container: '#pills-tabs',
+      defaultTab: 'overview'
+    });
+
+    // Example 3: Boxed Style
+    const boxedTabs = new Tabs({
+      container: '#boxed-tabs',
+      defaultTab: 'html'
+    });
+
+    // Example 4: Animated Tabs
+    const animatedTabs = new Tabs({
+      container: '#animated-tabs',
+      defaultTab: 'spring'
+    });
+
+    // Example 5: Vertical Tabs
+    const verticalTabs = new Tabs({
+      container: '#vertical-tabs',
+      defaultTab: 'general'
+    });
+
+    // 初期化完了メッセージ
+    logBasic('Tabs library initialized');
+  </script>
+</body>
+</html>

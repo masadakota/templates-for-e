@@ -1,5 +1,8 @@
 const CONFIG = {
-  ohinichiText: "年始繁忙期トーク案内",
-  // ohinichiText: "お日にちがかかる可能性案内",
-  operatorName: "正田"
+  ohinichiText: "メーカー繁忙期案内",
+  defaultOhinichiText: "お日にちがかかる可能性案内",
+  // datetimeFormat: "M/D HH:mm",
+  datetimeFormat: "M/D HH:■",
+  // datetimeFormat: "YYYY/MM/DD HH:mm"
+  // operatorName: "",
 };

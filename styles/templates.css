@@ -24,29 +24,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* ラベルのテキスト選択を無効化 */
-label {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  white-space: nowrap;
-}
-
-/* 縦の区切り線 */
-.separator-vertical {
-  width: 1px;
-  background-color: #ccc;
-  align-self: stretch;
-}
-
-/* 横の区切り線 */
-.separator-horizontal {
-  height: 1px;
-  background-color: #ccc;
-  width: 100%;
-}
-
 /* ステータス表示 */
 .status-display {
   padding-left: 3px;
@@ -88,13 +65,3 @@ label {
   }
 }
 
-.box-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
-  font-weight: bold;
-  background-color: #888;
-  padding: 4px 8px;
-  border-bottom-right-radius: 8px;
-}
