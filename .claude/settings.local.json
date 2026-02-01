@@ -9,7 +9,8 @@
       "Bash(dir:*)",
       "Bash(move lib\\form-sync lib\\form-updater)",
       "Bash(move settings-toggle slide-toggle)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(move search-filter.js index.js)"
     ]
   }
 }

@@ -248,6 +248,41 @@ console.log('現在のフィルター:', filters);
 // 例: { category: 'inbound', status: 'active' }
 ```
 
+#### `getItemsData()`
+すべてのアイテムデータをオブジェクト配列として取得します。
+
+```javascript
+const itemsData = filter.getItemsData();
+console.log(itemsData);
+// 例: [
+//   {
+//     element: <div>,
+//     index: 0,
+//     title: "受電対応の記録",
+//     category: "inbound",
+//     content: "受電対応の記録 お客様からの問い合わせに対応しました。",
+//     createdAt: Date(2026-01-01)
+//   },
+//   ...
+// ]
+```
+
+#### `getVisibleItemsData()`
+現在表示中のアイテムデータをオブジェクト配列として取得します。
+
+```javascript
+const visibleData = filter.getVisibleItemsData();
+console.log(`表示中: ${visibleData.length}件`);
+```
+
+#### `getHiddenItemsData()`
+現在非表示のアイテムデータをオブジェクト配列として取得します。
+
+```javascript
+const hiddenData = filter.getHiddenItemsData();
+console.log(`非表示: ${hiddenData.length}件`);
+```
+
 #### `destroy()`
 イベントリスナーを削除し、リソースを解放します。
 
