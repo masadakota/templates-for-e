@@ -81,7 +81,7 @@
       font-size: 13px;
     }
 
-    .tab-panel-content {
+    .tabs-content-inner {
       padding: 24px;
       background-color: #fff;
       border: 1px solid #e0e0e0;
@@ -98,46 +98,44 @@
     <p>デフォルトスタイルのタブです。</p>
 
     <!-- タブボタン -->
-    <div role="tablist" class="tabs-list" id="basic-tabs">
-      <button class="tabs-trigger" data-tab="home" role="tab">ホーム</button>
-      <button class="tabs-trigger" data-tab="profile" role="tab">プロフィール</button>
-      <button class="tabs-trigger" data-tab="messages" role="tab">メッセージ</button>
-      <button class="tabs-trigger" data-tab="settings" role="tab">設定</button>
+    <div class="tabs-list" id="basic-tabs">
+      <button class="tabs-trigger" data-tabs-value="home">ホーム</button>
+      <button class="tabs-trigger" data-tabs-value="profile">プロフィール</button>
+      <button class="tabs-trigger" data-tabs-value="messages">メッセージ</button>
+      <button class="tabs-trigger" data-tabs-value="settings">設定</button>
     </div>
 
-    <!-- タブパネル -->
-    <div class="tab-panels" id="basic-panels">
-        <div class="tab-panel" data-tab-panel="home">
-          <div class="tab-panel-content">
-            <h3>ホーム</h3>
-            <p>ホームページのコンテンツです。ここには最新の情報やダッシュボードが表示されます。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-tab-panel="profile">
-          <div class="tab-panel-content">
-            <h3>プロフィール</h3>
-            <p>ユーザープロフィールの情報が表示されます。</p>
-            <ul>
-              <li>名前: 山田太郎</li>
-              <li>メール: yamada@example.com</li>
-              <li>登録日: 2025-01-01</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tab-panel" data-tab-panel="messages">
-          <div class="tab-panel-content">
-            <h3>メッセージ</h3>
-            <p>未読メッセージ: <strong>3件</strong></p>
-            <p>メッセージの一覧が表示されます。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-tab-panel="settings">
-          <div class="tab-panel-content">
-            <h3>設定</h3>
-            <p>アプリケーションの設定を変更できます。</p>
-          </div>
-        </div>
+    <!-- タブコンテンツ -->
+    <div class="tabs-content" data-tabs-value="home" data-tabs-id="basic-tabs">
+      <div class="tabs-content-inner">
+        <h3>ホーム</h3>
+        <p>ホームページのコンテンツです。ここには最新の情報やダッシュボードが表示されます。</p>
       </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="profile" data-tabs-id="basic-tabs">
+      <div class="tabs-content-inner">
+        <h3>プロフィール</h3>
+        <p>ユーザープロフィールの情報が表示されます。</p>
+        <ul>
+          <li>名前: 山田太郎</li>
+          <li>メール: yamada@example.com</li>
+          <li>登録日: 2025-01-01</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="messages" data-tabs-id="basic-tabs">
+      <div class="tabs-content-inner">
+        <h3>メッセージ</h3>
+        <p>未読メッセージ: <strong>3件</strong></p>
+        <p>メッセージの一覧が表示されます。</p>
+      </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="settings" data-tabs-id="basic-tabs">
+      <div class="tabs-content-inner">
+        <h3>設定</h3>
+        <p>アプリケーションの設定を変更できます。</p>
+      </div>
+    </div>
 
     <div class="controls">
       <button onclick="basicTabs.setValue('home')">ホームに切り替え</button>
@@ -150,79 +148,114 @@
     <div class="log" id="basic-log"></div>
   </section>
 
-  <!-- Example 2: Separate Hierarchy -->
+  <!-- Example 2: Pills Variant -->
   <section class="example-section">
-    <h2>2. 別階層配置のタブ（カスタムカラー）</h2>
+    <h2>2. Pillsバリアント</h2>
+    <p>Bootstrap Pills風のスタイルです。アクティブなタブは塗りつぶされた背景で表示されます。</p>
+
+    <!-- タブボタン -->
+    <div class="tabs-list" id="pills-tabs">
+      <button class="tabs-trigger" data-tabs-value="overview">概要</button>
+      <button class="tabs-trigger" data-tabs-value="features">機能</button>
+      <button class="tabs-trigger" data-tabs-value="pricing">料金</button>
+    </div>
+
+    <!-- タブコンテンツ -->
+    <div class="tabs-content" data-tabs-value="overview" data-tabs-id="pills-tabs">
+      <div class="tabs-content-inner">
+        <h3>プロダクト概要</h3>
+        <p>このプロダクトは、タブUIを簡単に実装できるライブラリです。</p>
+      </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="features" data-tabs-id="pills-tabs">
+      <div class="tabs-content-inner">
+        <h3>主な機能</h3>
+        <ul>
+          <li>シンプルなAPI</li>
+          <li>カスタマイズ可能なスタイル</li>
+          <li>アクセシビリティ対応</li>
+          <li>キーボード操作サポート</li>
+          <li>別階層配置可能</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="pricing" data-tabs-id="pills-tabs">
+      <div class="tabs-content-inner">
+        <h3>料金プラン</h3>
+        <p><strong>無料</strong> - オープンソースライブラリです</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example 3: Separate Hierarchy with Custom Colors -->
+  <section class="example-section">
+    <h2>3. 別階層配置のタブ（カスタムカラー）</h2>
     <p>タブボタンとタブパネルを別の場所に配置した例です。アクティブなタブの色をカスタマイズしています。</p>
 
     <!-- タブボタン -->
-    <div role="tablist" class="tabs-list" id="separate-tabs">
-      <button class="tabs-trigger" data-tab="overview" role="tab">概要</button>
-      <button class="tabs-trigger" data-tab="features" role="tab">機能</button>
-      <button class="tabs-trigger" data-tab="pricing" role="tab">料金</button>
+    <div class="tabs-list" id="separate-tabs">
+      <button class="tabs-trigger" data-tabs-value="overview">概要</button>
+      <button class="tabs-trigger" data-tabs-value="features">機能</button>
+      <button class="tabs-trigger" data-tabs-value="pricing">料金</button>
     </div>
 
-    <!-- タブパネル（別の場所） -->
-    <div class="tab-panels" id="separate-panels">
-        <div class="tab-panel" data-tab-panel="overview">
-          <div class="tab-panel-content">
-            <h3>プロダクト概要</h3>
-            <p>このプロダクトは、タブUIを簡単に実装できるライブラリです。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-tab-panel="features">
-          <div class="tab-panel-content">
-            <h3>主な機能</h3>
-            <ul>
-              <li>シンプルなAPI</li>
-              <li>カスタマイズ可能なスタイル</li>
-              <li>アクセシビリティ対応</li>
-              <li>キーボード操作サポート</li>
-              <li>別階層配置可能</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tab-panel" data-tab-panel="pricing">
-          <div class="tab-panel-content">
-            <h3>料金プラン</h3>
-            <p><strong>無料</strong> - オープンソースライブラリです</p>
-          </div>
-        </div>
+    <!-- タブコンテンツ（別の場所） -->
+    <div class="tabs-content" data-tabs-value="overview" data-tabs-id="separate-tabs">
+      <div class="tabs-content-inner">
+        <h3>プロダクト概要</h3>
+        <p>このプロダクトは、タブUIを簡単に実装できるライブラリです。</p>
       </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="features" data-tabs-id="separate-tabs">
+      <div class="tabs-content-inner">
+        <h3>主な機能</h3>
+        <ul>
+          <li>シンプルなAPI</li>
+          <li>カスタマイズ可能なスタイル</li>
+          <li>アクセシビリティ対応</li>
+          <li>キーボード操作サポート</li>
+          <li>別階層配置可能</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="pricing" data-tabs-id="separate-tabs">
+      <div class="tabs-content-inner">
+        <h3>料金プラン</h3>
+        <p><strong>無料</strong> - オープンソースライブラリです</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Example 3: With History -->
+  <!-- Example 4: With History -->
   <section class="example-section">
-    <h2>3. ブラウザ履歴連携</h2>
+    <h2>4. ブラウザ履歴連携</h2>
     <p>URLのハッシュとブラウザの戻る/進むボタンでタブを切り替えられます。</p>
 
-    <div role="tablist" class="tabs-list" id="history-tabs">
-      <button class="tabs-trigger" data-tab="section1" role="tab">セクション1</button>
-      <button class="tabs-trigger" data-tab="section2" role="tab">セクション2</button>
-      <button class="tabs-trigger" data-tab="section3" role="tab">セクション3</button>
+    <div class="tabs-list" id="history-tabs">
+      <button class="tabs-trigger" data-tabs-value="section1">セクション1</button>
+      <button class="tabs-trigger" data-tabs-value="section2">セクション2</button>
+      <button class="tabs-trigger" data-tabs-value="section3">セクション3</button>
     </div>
 
-    <div class="tab-panels" id="history-panels">
-        <div class="tab-panel" data-tab-panel="section1">
-          <div class="tab-panel-content">
-            <h3>セクション1</h3>
-            <p>URLに <code>#section1</code> が追加されます。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-tab-panel="section2">
-          <div class="tab-panel-content">
-            <h3>セクション2</h3>
-            <p>URLに <code>#section2</code> が追加されます。</p>
-          </div>
-        </div>
-        <div class="tab-panel" data-tab-panel="section3">
-          <div class="tab-panel-content">
-            <h3>セクション3</h3>
-            <p>URLに <code>#section3</code> が追加されます。</p>
-            <p>ブラウザの戻るボタンで前のタブに戻れます。</p>
-          </div>
-        </div>
+    <div class="tabs-content" data-tabs-value="section1" data-tabs-id="history-tabs">
+      <div class="tabs-content-inner">
+        <h3>セクション1</h3>
+        <p>URLに <code>#section1</code> が追加されます。</p>
       </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="section2" data-tabs-id="history-tabs">
+      <div class="tabs-content-inner">
+        <h3>セクション2</h3>
+        <p>URLに <code>#section2</code> が追加されます。</p>
+      </div>
+    </div>
+    <div class="tabs-content" data-tabs-value="section3" data-tabs-id="history-tabs">
+      <div class="tabs-content-inner">
+        <h3>セクション3</h3>
+        <p>URLに <code>#section3</code> が追加されます。</p>
+        <p>ブラウザの戻るボタンで前のタブに戻れます。</p>
+      </div>
+    </div>
   </section>
 
   <!-- JavaScript -->
@@ -239,17 +272,22 @@
 
     const basicTabs = new Tabs({
       tabsList: '#basic-tabs',
-      tabsContent: '#basic-panels',
       defaultValue: 'home',
       onValueChange: (value, previousValue) => {
         logBasic(`Value changed: ${previousValue || 'none'} → ${value}`);
       }
     });
 
-    // Example 2: Separate Hierarchy (with custom colors)
+    // Example 2: Pills Variant
+    const pillsTabs = new Tabs({
+      tabsList: '#pills-tabs',
+      defaultValue: 'overview',
+      variant: 'pills'  // Pillsバリアントを指定
+    });
+
+    // Example 3: Separate Hierarchy (with custom colors)
     const separateTabs = new Tabs({
       tabsList: '#separate-tabs',
-      tabsContent: '#separate-panels',
       defaultValue: 'overview',
       activeColor: '#10b981',        // カスタム文字色（緑）
       activeBgColor: '#ecfdf5',      // カスタム背景色（淡い緑）
@@ -259,7 +297,6 @@
     // Example 3: With History
     const historyTabs = new Tabs({
       tabsList: '#history-tabs',
-      tabsContent: '#history-panels',
       defaultValue: 'section1',
       enableHistory: true
     });

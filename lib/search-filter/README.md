@@ -8,6 +8,8 @@
 - ✅ **デフォルト設定** - 設定不要で即使える
 - ✅ **リアルタイム検索** - 入力と同時にフィルタリング
 - ✅ **AND検索対応** - 半角スペース区切りで複数キーワード検索
+- ✅ **カテゴリフィルター** - data-*属性でカテゴリ別フィルタリング
+- ✅ **柔軟な検索対象** - data-*属性とtextContentを組み合わせ可能
 - ✅ **大文字小文字の区別** - 設定で切り替え可能
 - ✅ **デバウンス対応** - 大量データでもパフォーマンス最適化
 - ✅ **クリアボタン** - 検索のリセット機能
@@ -217,6 +219,35 @@ const hidden = filter.getHiddenItems();
 console.log('非表示のアイテム数:', hidden.length);
 ```
 
+#### `setFilter(key, value)`
+カテゴリフィルターを設定します（data-*属性を使用）。
+
+```javascript
+// カテゴリフィルターを設定
+filter.setFilter('category', 'inbound');
+
+// フィルターをクリア
+filter.setFilter('category', null);
+// または
+filter.setFilter('category', '');
+```
+
+#### `clearFilters()`
+すべてのカテゴリフィルターをクリアします。
+
+```javascript
+filter.clearFilters();
+```
+
+#### `getFilters()`
+現在のフィルター設定を取得します。
+
+```javascript
+const filters = filter.getFilters();
+console.log('現在のフィルター:', filters);
+// 例: { category: 'inbound', status: 'active' }
+```
+
 #### `destroy()`
 イベントリスナーを削除し、リソースを解放します。
 
@@ -314,7 +345,66 @@ filter.filter('有償 警告');  // 両方のキーワードを含むアイテ�
 - 検索: `"有償 警告 案内"` → 3つすべてのキーワードを含むアイテム
 - 検索: `"メーカー保証"` → "メーカー保証"を含むアイテム
 
-### 例8: メソッドチェーン
+### 例8: カテゴリフィルター（data-*属性）
+
+```html
+<!-- HTMLマークアップ -->
+<select id="category-filter">
+  <option value="">すべて</option>
+  <option value="inbound">受電</option>
+  <option value="outbound">架電</option>
+</select>
+
+<div id="items-container">
+  <div class="search-item"
+       data-title="受電対応の記録"
+       data-category="inbound"
+       data-created-at="2026-01-01">
+    <h3>受電対応の記録</h3>
+    <p>お客様からの問い合わせに対応しました。</p>
+  </div>
+
+  <div class="search-item"
+       data-title="架電結果"
+       data-category="outbound"
+       data-created-at="2026-01-02">
+    <h3>架電結果</h3>
+    <p>フォローアップの電話を実施しました。</p>
+  </div>
+</div>
+```
+
+```javascript
+// 検索対象フィールドを指定
+const filter = new SearchFilter({
+  searchFields: ['title'],      // data-title属性を検索対象に
+  searchTextContent: true        // 子要素のテキストも検索対象に
+}).init();
+
+// カテゴリフィルターの設定
+document.querySelector('#category-filter').addEventListener('change', (e) => {
+  filter.setFilter('category', e.target.value || null);
+});
+```
+
+**検索の仕組み:**
+- テキスト検索: `data-title`属性 + 子要素のtextContent
+- カテゴリフィルター: `data-category`属性でフィルタリング
+- 両方の条件を満たすアイテムのみ表示
+
+### 例9: 複数のdata-*属性を検索対象に
+
+```javascript
+const filter = new SearchFilter({
+  searchFields: ['title', 'createdAt'],  // 複数のdata-*属性
+  searchTextContent: true                 // textContentも含める
+}).init();
+
+// 検索例: "2026-01-01" → data-created-at="2026-01-01"のアイテムが表示
+// 検索例: "受電" → data-title="受電..."またはtextContentに"受電"を含むアイテムが表示
+```
+
+### 例10: メソッドチェーン
 
 ```javascript
 const filter = new SearchFilter()

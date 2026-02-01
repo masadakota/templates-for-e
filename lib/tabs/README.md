@@ -39,29 +39,25 @@ your-project/
 </head>
 <body>
   <!-- タブボタン -->
-  <div class="tabs-container" id="my-tabs">
-    <div role="tablist" class="tabs-list">
-      <button class="tabs-trigger" data-tab="tab1" role="tab">タブ1</button>
-      <button class="tabs-trigger" data-tab="tab2" role="tab">タブ2</button>
-      <button class="tabs-trigger" data-tab="tab3" role="tab">タブ3</button>
-    </div>
+  <div class="tabs-list" id="my-tabs">
+    <button class="tabs-trigger" data-tabs-value="tab1">タブ1</button>
+    <button class="tabs-trigger" data-tabs-value="tab2">タブ2</button>
+    <button class="tabs-trigger" data-tabs-value="tab3">タブ3</button>
   </div>
 
-  <!-- タブパネル（別の場所に配置可能） -->
+  <!-- タブコンテンツ（別の場所に配置可能） -->
   <div id="content-area">
-    <div class="tab-panels">
-      <div class="tab-panel" data-tab-panel="tab1">
-        <h2>タブ1のコンテンツ</h2>
-        <p>ここにタブ1の内容が表示されます。</p>
-      </div>
-      <div class="tab-panel" data-tab-panel="tab2">
-        <h2>タブ2のコンテンツ</h2>
-        <p>ここにタブ2の内容が表示されます。</p>
-      </div>
-      <div class="tab-panel" data-tab-panel="tab3">
-        <h2>タブ3のコンテンツ</h2>
-        <p>ここにタブ3の内容が表示されます。</p>
-      </div>
+    <div class="tabs-content" data-tabs-value="tab1" data-tabs-id="my-tabs">
+      <h2>タブ1のコンテンツ</h2>
+      <p>ここにタブ1の内容が表示されます。</p>
+    </div>
+    <div class="tabs-content" data-tabs-value="tab2" data-tabs-id="my-tabs">
+      <h2>タブ2のコンテンツ</h2>
+      <p>ここにタブ2の内容が表示されます。</p>
+    </div>
+    <div class="tabs-content" data-tabs-value="tab3" data-tabs-id="my-tabs">
+      <h2>タブ3のコンテンツ</h2>
+      <p>ここにタブ3の内容が表示されます。</p>
     </div>
   </div>
 
@@ -70,9 +66,8 @@ your-project/
   <script>
     // タブを初期化
     const tabs = new Tabs({
-      container: '#my-tabs',
-      panelContainer: '#content-area',
-      defaultTab: 'tab1'
+      tabsList: '#my-tabs',
+      defaultValue: 'tab1'
     });
   </script>
 </body>
@@ -82,15 +77,15 @@ your-project/
 ### 2. 重要な属性
 
 **タブボタン:**
-- `data-tab="タブID"` - タブの識別子（必須）
-- `role="tab"` - アクセシビリティ用（推奨）
+- `data-tabs-value="値"` - タブの識別子（必須）
 
-**タブパネル:**
-- `data-tab-panel="タブID"` - タブボタンと同じID（必須）
-- `role="tabpanel"` - アクセシビリティ用（推奨）
+**タブコンテンツ:**
+- `data-tabs-value="値"` - タブボタンと同じ値（必須）
+- `data-tabs-id="グループID"` - タブグループのID（必須）
+  - `tabsList` の `id` 属性と同じ値を指定します
+  - 複数のタブグループを同じページで使用する場合に必要です
 
-**タブリスト:**
-- `role="tablist"` - タブボタンの親要素に設定（推奨）
+> **Note:** `role` 属性は自動的に設定されるため、HTMLで手動設定する必要はありません。
 
 ## APIリファレンス
 
@@ -104,13 +99,13 @@ const tabs = new Tabs(options);
 
 | オプション | 型 | デフォルト | 説明 |
 |----------|-----|----------|------|
-| `tabsList` | string \| HTMLElement | **必須** | TabsListコンテナのセレクタまたは要素 |
-| `tabsContent` | string \| HTMLElement | `null` | TabsContentコンテナ（未指定時はtabsListと同じ） |
-| `defaultValue` | string | `null` | 初期表示する値 |
+| `tabsList` | string \| HTMLElement | **必須** | タブボタンの親コンテナのセレクタまたは要素 |
+| `defaultValue` | string | `null` | 初期表示するタブのvalue |
 | `onValueChange` | function | `null` | 値変更時のコールバック |
-| `triggerSelector` | string | `'[data-tab]'` | TabsTriggerのセレクタ |
-| `contentSelector` | string | `'[data-tab-panel]'` | TabsContentのセレクタ |
+| `triggerSelector` | string | `'.tabs-trigger'` | TabsTriggerのセレクタ |
+| `contentSelector` | string | `'.tabs-content'` | TabsContentのセレクタ |
 | `activeClass` | string | `'active'` | アクティブ時のクラス名 |
+| `variant` | string | `'default'` | スタイルバリアント (`'default'`, `'pills'`, `'underline'`) |
 | `enableKeyboard` | boolean | `true` | キーボード操作を有効化 |
 | `enableHistory` | boolean | `false` | ブラウザ履歴との連携 |
 | `activeColor` | string | `null` | アクティブなトリガーの文字色 |
@@ -122,16 +117,15 @@ const tabs = new Tabs(options);
 ```javascript
 const tabs = new Tabs({
   tabsList: '#my-tabs',
-  tabsContent: '#content-area',
   defaultValue: 'home',
   onValueChange: (value, previousValue) => {
     console.log(`値が変更されました: ${previousValue} → ${value}`);
   },
   enableKeyboard: true,
   enableHistory: true,
-  activeColor: '#10b981',        // アクティブなトリガーの文字色
-  activeBgColor: '#ecfdf5',      // アクティブなトリガーの背景色
-  activeBorderColor: '#10b981'   // アクティブなトリガーのボーダー色
+  activeColor: '#10b981',        // アクティブなタブの文字色
+  activeBgColor: '#ecfdf5',      // アクティブなタブの背景色
+  activeBorderColor: '#10b981'   // アクティブなタブのボーダー色
 });
 ```
 
@@ -228,6 +222,43 @@ const tabs = new Tabs({
 - ブラウザの戻る/進むボタンで値の履歴を移動できます
 - ページをリロードしても最後に表示していた値が復元されます
 
+## スタイルバリアント
+
+タブのスタイルを3種類から選択できます。
+
+### デフォルトバリアント
+
+```javascript
+const tabs = new Tabs({
+  tabsList: '#my-tabs',
+  variant: 'default'  // または省略可能
+});
+```
+
+デフォルトスタイルです。アクティブなタブは下線で表示されます。
+
+### Pillsバリアント（Bootstrap Pills風）
+
+```javascript
+const tabs = new Tabs({
+  tabsList: '#my-tabs',
+  variant: 'pills'
+});
+```
+
+Bootstrap Pills風のスタイルです。アクティブなタブは塗りつぶされた背景で表示されます。
+
+### Underlineバリアント
+
+```javascript
+const tabs = new Tabs({
+  tabsList: '#my-tabs',
+  variant: 'underline'
+});
+```
+
+明示的な下線スタイルです。タブリストに下線が引かれ、アクティブなタブは強調された下線で表示されます。
+
 ## カスタムスタイル
 
 ### カラーカスタマイズ（オプション）
@@ -265,8 +296,8 @@ const tabs = new Tabs({
   border-bottom-color: #10b981;
 }
 
-/* タブパネルのスタイル */
-.tab-panel {
+/* タブコンテンツのスタイル */
+.tabs-content {
   padding: 24px;
   background-color: #fff;
 }
@@ -279,31 +310,26 @@ const tabs = new Tabs({
 ```html
 <!-- ヘッダーにタブボタン -->
 <header class="sticky-header">
-  <div class="tabs-container" id="nav-tabs">
-    <div role="tablist" class="tabs-list">
-      <button class="tabs-trigger" data-tab="home" role="tab">ホーム</button>
-      <button class="tabs-trigger" data-tab="about" role="tab">概要</button>
-    </div>
+  <div class="tabs-list" id="nav-tabs">
+    <button class="tabs-trigger" data-tabs-value="home">ホーム</button>
+    <button class="tabs-trigger" data-tabs-value="about">概要</button>
   </div>
 </header>
 
-<!-- メインコンテンツにタブパネル -->
+<!-- メインコンテンツにタブコンテンツ -->
 <main id="main-content">
-  <div class="tab-panels">
-    <div class="tab-panel" data-tab-panel="home">
-      <h1>ホームページ</h1>
-    </div>
-    <div class="tab-panel" data-tab-panel="about">
-      <h1>概要ページ</h1>
-    </div>
+  <div class="tabs-content" data-tabs-value="home" data-tabs-id="nav-tabs">
+    <h1>ホームページ</h1>
+  </div>
+  <div class="tabs-content" data-tabs-value="about" data-tabs-id="nav-tabs">
+    <h1>概要ページ</h1>
   </div>
 </main>
 
 <script>
   const tabs = new Tabs({
-    container: '#nav-tabs',
-    panelContainer: '#main-content',
-    defaultTab: 'home'
+    tabsList: '#nav-tabs',
+    defaultValue: 'home'
   });
 </script>
 ```
@@ -312,16 +338,32 @@ const tabs = new Tabs({
 
 ### タブが表示されない
 
-**原因:** `data-tab` と `data-tab-panel` の値が一致していない可能性があります。
+**原因1:** タブボタンとタブコンテンツの `data-tabs-value` の値が一致していない可能性があります。
 
 ```html
 <!-- ❌ 間違い -->
-<button data-tab="tab1">タブ1</button>
-<div data-tab-panel="tab-1">コンテンツ</div>
+<button class="tabs-trigger" data-tabs-value="tab1">タブ1</button>
+<div class="tabs-content" data-tabs-value="tab-1" data-tabs-id="my-tabs">コンテンツ</div>
 
 <!-- ✅ 正しい -->
-<button data-tab="tab1">タブ1</button>
-<div data-tab-panel="tab1">コンテンツ</div>
+<button class="tabs-trigger" data-tabs-value="tab1">タブ1</button>
+<div class="tabs-content" data-tabs-value="tab1" data-tabs-id="my-tabs">コンテンツ</div>
+```
+
+**原因2:** タブコンテンツに `data-tabs-id` が指定されていない、または間違ったIDが指定されている可能性があります。
+
+```html
+<!-- ❌ 間違い -->
+<div class="tabs-list" id="my-tabs">
+  <button class="tabs-trigger" data-tabs-value="tab1">タブ1</button>
+</div>
+<div class="tabs-content" data-tabs-value="tab1" data-tabs-id="other-tabs">コンテンツ</div>
+
+<!-- ✅ 正しい -->
+<div class="tabs-list" id="my-tabs">
+  <button class="tabs-trigger" data-tabs-value="tab1">タブ1</button>
+</div>
+<div class="tabs-content" data-tabs-value="tab1" data-tabs-id="my-tabs">コンテンツ</div>
 ```
 
 ### キーボード操作が動かない
@@ -331,7 +373,7 @@ const tabs = new Tabs({
 ```javascript
 // キーボード操作を有効化
 const tabs = new Tabs({
-  container: '#my-tabs',
+  tabsList: '#my-tabs',
   enableKeyboard: true  // これを true に設定
 });
 ```
@@ -358,6 +400,14 @@ const tabs = new Tabs({
 MIT License
 
 ## 更新履歴
+
+### v1.2.0 (2026-02-01)
+- スタイルバリアント機能を追加（`variant` オプション）
+  - `default`: デフォルトの下線スタイル
+  - `pills`: Bootstrap Pills風スタイル
+  - `underline`: 明示的な下線スタイル
+- 属性名を shadcn/ui に近づける（`data-tabs-value` を統一）
+- グループID機能を追加（`data-tabs-id` で複数タブグループを分離）
 
 ### v1.1.0 (2026-01-31)
 - 別階層配置機能を追加（`panelContainer` オプション）

@@ -2,6 +2,10 @@
    Common Styles
 ========================= */
 
+html {
+  overflow-y: scroll;
+}
+
 /* Box Component */
 .box {
   border: 1px solid var(--border, #e5e7eb);

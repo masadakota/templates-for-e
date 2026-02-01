@@ -475,6 +475,29 @@
 .max-h-screen { max-height: 100vh; }
 
 /* =========================
+   Position Utilities
+========================= */
+.static {
+  position: static;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.sticky {
+  position: sticky;
+}
+
+/* =========================
    Responsive Utilities
 ========================= */
 /* Small devices (sm: 640px and up) */

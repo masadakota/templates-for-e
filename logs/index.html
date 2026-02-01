@@ -36,7 +36,6 @@
         width: 500px;
         max-width: 100%;
         margin: 0 auto;
-        min-height: 100vh;
         padding: 12px;
       }
 
@@ -55,11 +54,6 @@
         /* padding-bottom: 12px; */
         z-index: 10;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      .search-wrapper {
-        position: relative;
-        /* max-width: 500px; */
       }
 
       .search-input {
@@ -256,11 +250,6 @@
         filter: brightness(0) invert(1); /* SVGを白色に変換 */
       }
 
-      /* 設定セクション */
-      #settings {
-        margin-top: 0;
-      }
-
       /* Mobile responsiveness */
       @media (max-width: 768px) {
         h1 {
@@ -273,45 +262,35 @@
       }
     </style>
   </head>
-  <body class="bg-foreground/20 bg-muted">
+  <body>
     <div class="sticky-header">
-      <div
-        role="tablist"
-        class="tabs-list"
-        id="main-tabs"
-        style="justify-content: center"
-      >
-        <button class="tabs-trigger" data-tab="inbound" role="tab">受電</button>
-        <button class="tabs-trigger" data-tab="outbound" role="tab">CB</button>
-      </div>
-    </div>
-
-    <div
-      class="sticky-header"
-      style="
-        padding: 12px;
-        top: 58px;
-        border: 2px solid var(--muted-foreground);
-        border-radius: 8px;
-        margin: 8px auto 12px;
-        width: 500px;
-        max-width: calc(100% - 12px * 2);
-      "
-    >
-      <div class="flex justify-between items-center">
-        <div style="width: fit-content">
-          <label for="operator-name-input" class="text-sm"
-            >オペレーター名:</label
+      <div style="width: 500px; max-width: 100%; margin: 0 auto; padding: 12px">
+        <div class="flex justify-between items-center">
+          <div style="width: fit-content">
+            <label for="operator-name-input" class="text-sm"
+              >オペレーター名:</label
+            >
+            <input
+              type="text"
+              style="width: 100px"
+              data-target-class="operator-name"
+              id="operator-name-input"
+            />
+          </div>
+          <!-- 設定アイコン -->
+          <button
+            class="btn"
+            style="border: none; font-weight: normal"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
           >
-          <input
-            type="text"
-            style="width: 100px"
-            data-target-class="operator-name"
-            id="operator-name-input"
-          />
-        </div>
-        <!-- 設定アイコン -->
-        <button
+            設定
+          </button>
+
+          <!-- <button
           id="settings-toggle"
           class="settings-icon-btn"
           aria-label="設定を開く"
@@ -323,82 +302,83 @@
             width="16"
             height="16"
           />
-        </button>
-      </div>
-      <div
-        id="settings"
-        class="box border-2"
-        style="
-          border-top-right-radius: 0;
-          border-color: var(--muted-foreground);
-          display: none;
-        "
-      >
-        <div
-          style="
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            margin-bottom: 0.5rem;
-          "
-        >
-          <h2 style="font-size: 1.2rem; margin: 0">設定</h2>
+        </button> -->
+          <a href="./help.html" class="text-sm">使い方</a>
         </div>
-        <p style="color: var(--muted-foreground)">
-          以下の設定の変更するには、config.js を編集してください。
-        </p>
-        <div>
-          <label for="hinichi-input">"お日にちがかかる..." を上書き:</label>
+        <!-- 設定パネル -->
+        <div class="collapse" id="collapseExample">
+          <div
+            style="
+              border-radius: 8px;
+              border: 2px solid #aaa;
+              padding: 12px;
+              font-size: 0.9rem;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                margin-bottom: 0.5rem;
+              "
+            >
+              <h2 style="font-size: 1rem; margin: 0">設定</h2>
+            </div>
+            <p style="color: var(--muted-foreground)">
+              以下の設定の変更するには、config.js を編集してください。
+            </p>
+            <div>
+              <label for="hinichi-input">"お日にちがかかる..." を上書き:</label>
+              <input
+                type="text"
+                style="width: 200px"
+                data-target-classes="delay-notice delay-notice-for-taishogai"
+                id="delay-notice-input"
+                data-priority="1"
+                placeholder="お日にちがかかる可能性案内"
+                disabled
+              />
+            </div>
+            <div>
+              <label for="hinichi-input">日時のフォーマット:</label>
+              <input type="text" style="width: 200px" id="" disabled />
+            </div>
+          </div>
+        </div>
+
+        <!-- Search UI -->
+        <div class="relative">
           <input
             type="text"
-            style="width: 200px"
-            data-target-classes="delay-notice delay-notice-for-taishogai"
-            id="delay-notice-input"
-            data-priority="1"
-            placeholder="お日にちがかかる可能性案内"
-            disabled
+            id="search-input"
+            class="search-input"
+            placeholder="検索"
+            autocomplete="off"
+            aria-label="ログ検索"
           />
+          <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
         </div>
 
-        <div>
-          <label for="hinichi-input">日時のフォーマット:</label>
-          <input type="text" style="width: 200px" id="" disabled />
-        </div>
-      </div>
-
-      <div
-        class="flex justify-between items-center gap-4 mx-auto"
-        style="max-width: 100%; margin-top: 4px"
-      >
-        <!-- Search UI -->
-        <div class="flex-1">
-          <div class="search-wrapper">
-            <input
-              type="text"
-              id="search-input"
-              class="search-input"
-              placeholder="検索"
-              autocomplete="off"
-              aria-label="ログ検索"
-            />
-            <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18 6L6 18M6 6L18 18"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
+        <div class="tabs-list" id="main-tabs" style="justify-content: center">
+          <button class="tabs-trigger" data-tabs-value="inbound">受電</button>
+          <button class="tabs-trigger" data-tabs-value="outbound">CB</button>
         </div>
       </div>
     </div>
@@ -419,9 +399,12 @@
         id="items-container"
         style="display: flex; flex-direction: column; gap: 0.75rem"
       >
-        <!-- タブパネル -->
         <!-- 受電タブ -->
-        <div class="tabs-content" data-tab-panel="inbound">
+        <div
+          class="tabs-content"
+          data-tabs-value="inbound"
+          data-tabs-id="main-tabs"
+        >
           <div class="search-item card">
             <div class="card-title">有償警告</div>
             <!-- <label>
@@ -680,7 +663,11 @@
         <!-- /受電タブ -->
 
         <!-- CBタブ -->
-        <div class="tabs-content" data-tab-panel="outbound">
+        <div
+          class="tabs-content"
+          data-tabs-value="outbound"
+          data-tabs-id="main-tabs"
+        >
           <div class="search-item card">
             <div class="card-title">CB (修理依頼OK)</div>
             <div class="card-content">
@@ -834,17 +821,14 @@
       </div>
     </div>
 
+    <!-- Scripts -->
+    <script src="./config.js"></script>
     <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="../lib/tabs/index.js"></script>
     <script src="../lib/search-filter/search-filter.js"></script>
-    <script>
-      // SearchFilterを初期化（デフォルト設定を使用）
-      new SearchFilter().init();
-    </script>
     <script src="../lib/copy-handler/index.js"></script>
     <script src="../lib/form-updater/index.js"></script>
     <script src="../lib/datetime-display/index.js"></script>
-    <script src="./config.js"></script>
     <script>
       // CopyHandlerを初期化
       const copyHandler = new CopyHandler({
@@ -854,29 +838,16 @@
         includeTh: false, // th要素をコピー対象外
       });
       copyHandler.init();
-
-      // FormUpdaterを初期化
-      const formUpdater = new FormUpdater();
-      formUpdater.init();
-
+      // SearchFilterを初期化（デフォルト設定を使用）
+      new SearchFilter().init();
       // 日時表示を初期化
       new DateTimeDisplay({
         format: CONFIG.datetimeFormat,
         // format: "YYYY/MM/DD HH:mm:ss"
       });
-
-      // .delay-notice と .delay-notice-for-taishogai に初期テキストを設定
-      // function initDelayNotice() {
-      //   const delayNoticeText = "お日にちがかかる可能性案内";
-      //   document
-      //     .querySelectorAll(".delay-notice, .delay-notice-for-taishogai")
-      //     .forEach((element) => {
-      //       element.textContent = delayNoticeText;
-      //     });
-      // }
-
-      // 初期化実行
-      // initDelayNotice();
+      // FormUpdaterを初期化
+      const formUpdater = new FormUpdater();
+      formUpdater.init();
 
       /**
        * 故障内容のラジオボタンの値からHTMLメッセージを取得
@@ -982,8 +953,6 @@
         });
 
       function updateDelayNoticeView() {
-        // const delayNoticeInput = document.getElementById("delay-notice-input");
-        // const text = delayNoticeInput.value.trim();
         const text = CONFIG.ohinichiText || config.defaultOhinichiText;
         document
           .querySelectorAll(".delay-notice, .delay-notice-for-taishogai")
@@ -1008,10 +977,12 @@
       function init() {
         // タブを初期化
         const tabs = new Tabs({
-          tabsList: "#main-tabs", // TabsListコンテナ
-          defaultValue: "inbound", // デフォルトの値
-          activeColor: "var(--accent)", // アクティブなトリガーのテキストの色
-          activeBorderColor: "var(--accent)", // アクティブなトリガーの下線の色
+          tabsList: "#main-tabs", // TabsList
+          defaultValue: "inbound", // アクティブなタブのデフォルト値
+          variant: "pills", // タブのスタイル: 'underline' または 'pills'
+          activeBgColor: "var(--accent)", // アクティブなタブの背景色
+          activeBorderColor: "var(--accent)", // アクティブなタブのborderの色
+          // activeColor: "var(--accent)", // アクティブなタブのテキストの色
           // onValueChange: (value, previousValue) => {
           //   console.log(`Value changed: ${previousValue} → ${value}`);
           // },
@@ -1036,22 +1007,6 @@
         document.getElementById("delay-notice-input").value =
           CONFIG.ohinichiText;
         // dispatchEventBySelector('input[id="delay-notice-input"]', "input");
-
-        // 設定トグル機能
-        const settingsToggle = document.getElementById("settings-toggle");
-        const settingsSection = document.getElementById("settings");
-
-        if (settingsToggle && settingsSection) {
-          settingsToggle.addEventListener("click", () => {
-            if (settingsSection.style.display === "none") {
-              settingsSection.style.display = "";
-              settingsToggle.classList.add("active");
-            } else {
-              settingsSection.style.display = "none";
-              settingsToggle.classList.remove("active");
-            }
-          });
-        }
       }
       init();
     </script>

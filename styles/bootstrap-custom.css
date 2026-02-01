@@ -88,7 +88,7 @@
 }
 
 .btn-outline-primary {
-  background-color: var(--midground-10);
+  background-color: var(--middle-10);
   /* background-color: var(--secondary); */
   color: var(--primary);
   border-color: var(--border);
@@ -96,7 +96,7 @@
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
-  background-color: color-mix(in srgb, var(--midground-10), black 5%);
+  background-color: color-mix(in srgb, var(--middle-10), black 5%);
   /* background-color: color-mix(in srgb, var(--secondary), black 5%); */
   color: var(--primary);
   border-color: var(--border);
