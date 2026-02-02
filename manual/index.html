@@ -4,283 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>マニュアル</title>
-    <link rel="stylesheet" href="../styles/globals.css" />
-    <link rel="stylesheet" href="../styles/tailwind-like.css" />
-    <link rel="stylesheet" href="../vendor/bootstrap/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="../vendor/bootstrap-icons/font/bootstrap-icons.min.css"
-    />
-    <link rel="stylesheet" href="../styles/common.css" />
-    <link rel="stylesheet" href="../lib/copy-handler/styles.css" />
-    <link rel="stylesheet" href="../lib/tabs/styles.css" />
-
-    <style>
-      /* Custom styles for log page */
-      body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-        background-color: var(--background);
-        color: var(--foreground);
-        box-sizing: border-box;
-      }
-
-      .container {
-        all: unset;
-        box-sizing: border-box;
-        display: block;
-        /* background-color: var(--muted); */
-        /* background-color: var(--background); */
-        /* padding-top: 0; */
-        width: 500px;
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 12px;
-      }
-
-      h1 {
-        /* margin-bottom: 1.5rem; */
-        font-size: 1.75rem;
-        font-weight: 600;
-      }
-
-      /* Sticky header */
-      .sticky-header {
-        position: sticky;
-        top: 0;
-        background-color: var(--muted);
-        /* padding-top: 12px; */
-        /* padding-bottom: 12px; */
-        z-index: 10;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      .search-input {
-        width: 100%;
-        padding: 6px 12px;
-        /* padding: 0.625rem 2.5rem 0.625rem 1rem; */
-        border: 2px solid var(--foreground);
-        border-radius: var(--radius);
-        font-size: 1rem;
-        transition: border-color 0.2s ease;
-      }
-
-      .search-input:focus {
-        outline: none;
-        /* border-color: var(--ring); */
-        /* box-shadow: 0 0 0 3px rgba(181, 181, 181, 0.8); */
-      }
-
-      .clear-btn {
-        position: absolute;
-        right: 0.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        color: var(--muted-foreground);
-        cursor: pointer;
-        padding: 0.25rem;
-        border-radius: var(--radius-button);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition:
-          opacity 0.2s ease,
-          background-color 0.2s ease;
-        pointer-events: none;
-      }
-
-      .clear-btn.visible {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .clear-btn svg {
-        width: 24px;
-        height: 24px;
-      }
-
-      .clear-btn:hover {
-        background-color: var(--muted);
-        color: var(--foreground);
-      }
-
-      /* Individual search item */
-      .search-item {
-        /* padding: 1rem;
-        background-color: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius); */
-        transition:
-          opacity 0.2s ease,
-          transform 0.2s ease;
-      }
-
-      .search-item.hidden {
-        display: none;
-      }
-
-      .search-item:hover {
-        /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); */
-      }
-
-      /* Empty states */
-      .empty-state {
-        text-align: center;
-        padding: 3rem 1rem;
-        color: var(--muted-foreground);
-      }
-
-      .empty-state-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-      }
-
-      .empty-state-message {
-        font-size: 0.875rem;
-      }
-
-      .copyable {
-        position: relative;
-        border-radius: var(--radius);
-        /* transition: background-color 0.2s ease; */
-        border: 2px solid var(--accent);
-        /* border: 1px solid var(--border); */
-        width: fit-content;
-        padding: 8px;
-        padding-right: 30px;
-      }
-      .card-title {
-        font-weight: bold;
-        font-size: 1rem;
-        color: var(--foreground);
-        background-color: #ddd;
-        margin-top: -12px;
-        margin-left: -12px;
-        margin-right: -12px;
-        padding: 6px 12px;
-      }
-      .card-content {
-        margin-top: 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-      .card h3 {
-        font-size: 1rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        /* color: var(--muted-foreground); */
-        border-left: 4px solid var(--muted-foreground);
-        padding-left: 0.5rem;
-      }
-      .card h4 {
-        font-size: 1rem;
-        font-weight: bold;
-        margin-bottom: 4px;
-      }
-
-      .card hr {
-        margin-top: 4px;
-        margin-bottom: 4px;
-      }
-
-      .talk {
-        background-color: lightyellow;
-        padding: 8px;
-        border-radius: var(--radius);
-        margin-bottom: 8px;
-
-        *:last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      .card .copyable {
-        margin-bottom: 8px;
-      }
-
-      /* 設定アイコンボタン */
-      .settings-icon-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-        color: var(--muted-foreground);
-        border-radius: var(--radius);
-        cursor: pointer;
-        vertical-align: bottom;
-      }
-
-      /* 設定が開いている時のスタイル */
-      .settings-icon-btn.active {
-        color: var(--background);
-        border-radius: 8px 8px 0 0;
-        background-color: var(--muted-foreground);
-      }
-
-      /* .settings-icon-btn:hover:not(.active) {
-        background-color: var(--muted);
-        color: var(--foreground);
-      } */
-
-      /* .settings-icon-btn:active {
-        transform: scale(0.95);
-      } */
-
-      .settings-icon-btn img {
-        width: 24px;
-        height: 24px;
-        padding: 6px;
-        /* background-color: #6c757d; */
-        border-radius: 6px;
-        transition: transform 0.3s ease;
-      }
-
-      /* アクティブ時はSVGの背景を白に */
-      .settings-icon-btn.active img {
-        background-color: transparent;
-        filter: brightness(0) invert(1); /* SVGを白色に変換 */
-      }
-
-      /* Mobile responsiveness */
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 1.5rem;
-        }
-
-        .search-item {
-          padding: 0.75rem;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="../styles/bundle.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
+
   <body>
     <div class="sticky-header">
-      <div style="width: 500px; max-width: 100%; margin: 0 auto; padding: 12px">
+      <div
+        class="flex flex-col gap-1"
+        style="width: 500px; max-width: 100%; margin: 0 auto; padding: 8px 12px"
+      >
         <div class="flex justify-between items-center">
-          <div style="width: fit-content">
-            <label for="operator-name-input" class="text-sm"
+          <!-- オペレーター名 -->
+          <div class="flex flex-col">
+            <!-- <label for="operator-name-input" class="text-sm"
               >オペレーター名:</label
-            >
+            > -->
             <input
               type="text"
-              style="width: 100px"
-              data-target-class="operator-name"
+              style="width: 120px"
               id="operator-name-input"
+              class="small-placeholder"
+              placeholder="オペレーター名"
             />
           </div>
+
+          <a id="help-link" href="./help.html" class="text-sm" target="_blank"
+            >使い方（管理者用）</a
+          >
+
           <!-- 設定 -->
           <button
             class="btn"
-            style="border: none; font-weight: normal"
+            style="
+              border: none;
+              font-weight: normal;
+              color: var(--muted-foreground);
+            "
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#collapseExample"
@@ -291,19 +51,18 @@
           </button>
 
           <!-- <button
-          id="settings-toggle"
-          class="settings-icon-btn"
-          aria-label="設定を開く"
-          title="設定"
-        >
-          <img
-            src="../components/ui/gear-fill.svg"
-            alt="設定"
-            width="16"
-            height="16"
-          />
-        </button> -->
-          <a href="./help.html" class="text-sm">使い方</a>
+            id="settings-toggle"
+            class="settings-icon-btn"
+            aria-label="設定を開く"
+            title="設定"
+          >
+            <img
+              src="../components/ui/gear-fill.svg"
+              alt="設定"
+              width="16"
+              height="16"
+            />
+          </button> -->
         </div>
         <!-- 設定パネル -->
         <div class="collapse" id="collapseExample">
@@ -342,7 +101,12 @@
             </div>
             <div>
               <label for="hinichi-input">日時のフォーマット:</label>
-              <input type="text" style="width: 200px" id="" disabled />
+              <input
+                type="text"
+                style="width: 200px"
+                id="datetime-format-input"
+                disabled
+              />
             </div>
           </div>
         </div>
@@ -352,7 +116,6 @@
           <input
             type="text"
             id="search-input"
-            class="search-input"
             placeholder="検索"
             autocomplete="off"
             aria-label="ログ検索"
@@ -375,40 +138,50 @@
             </svg>
           </button>
         </div>
+        <!-- キーワード -->
+        <!-- <div>
+          <span class="text-sm" style="margin-right: 8px">頻出キーワード:</span>
+          <button class="keyword-btn" data-keyword="浴室暖房乾燥機">
+            浴室暖房乾燥機
+          </button>
+          <button
+            class="keyword-btn"
+            data-keyword="お客様がメーカーに直接修理依頼"
+          >
+            お客様がメーカーに直接修理依頼
+          </button>
+          <button class="keyword-btn" data-keyword="ユナイト非対応の照明">
+            ユナイト非対応の照明
+          </button>
+        </div> -->
 
         <!-- Category Buttons -->
-        <div class="flex gap-2 mt-2 justify-center items-center">
-          <span class="text-sm">カテゴリー</span>
+        <div class="flex gap-1 justify-center items-center">
+          <span class="text-sm">カテゴリー:</span>
           <button class="tab-pill" data-target-category="inbound">受電</button>
           <button class="tab-pill" data-target-category="cb">CB</button>
           <button class="tab-pill" data-target-category="all">全て</button>
         </div>
         <!-- <div class="tabs-list" id="main-tabs" style="justify-content: center">
-          <button class="tabs-trigger" data-tabs-value="inbound">受電</button>
-          <button class="tabs-trigger" data-tabs-value="outbound">CB</button>
-        </div> -->
+            <button class="tabs-trigger" data-tabs-value="inbound">受電</button>
+            <button class="tabs-trigger" data-tabs-value="outbound">CB</button>
+          </div> -->
       </div>
     </div>
 
     <div class="container bg-muted">
       <div
         id="result-count"
-        style="
-          /* margin-top: 0.5rem; */
-          color: var(--muted-foreground);
-          font-size: 0.875rem;
-        "
+        style="color: var(--muted-foreground); font-size: 0.875rem"
         role="status"
         aria-live="polite"
       ></div>
 
-      <div
-        id="items-container"
-        style="display: flex; flex-direction: column; gap: 0.75rem"
-      >
+      <div id="items-container" class="flex flex-col gap-3 mt-2">
         <div
           class="search-item card"
           data-title="有償警告"
+          data-aliases="ゆうしょうけいこく"
           data-category="inbound"
           data-created-at="2026-02-01"
         >
@@ -467,6 +240,7 @@
         <div
           class="search-item card"
           data-title="保証対象外部位"
+          data-aliases="ほしょうたいしょうがいぶい"
           data-category="inbound"
           data-created-at="2026-02-01"
         >
@@ -518,6 +292,19 @@
 
         <div
           class="search-item card"
+          data-title="留守番電話への吹き込み希望"
+          data-aliases="留守電, るすでん, るすばんでんわ, ふきこみ"
+          data-category="inbound"
+          data-created-at="2026-02-01"
+        >
+          <h3>伝達事項/申し送り事項</h3>
+          <div class="copyable">
+            不出の場合は、留守番電話に吹き込んでほしいとのご希望がございました。
+          </div>
+        </div>
+
+        <div
+          class="search-item card"
           data-title="浴室暖房乾燥機"
           data-category="inbound"
           data-created-at="2026-02-01"
@@ -546,6 +333,7 @@
         <div
           class="search-item card"
           data-title="お客様が直接メーカーに修理依頼をした"
+          data-aliases="めーかー, ちょくせつ, しゅうりいらい"
           data-category="inbound"
           data-created-at="2026-02-01"
         >
@@ -570,16 +358,15 @@
         <div
           class="search-item card"
           data-title="エアコンの修理依頼"
+          data-aliases="えあこん"
           data-category="inbound"
           data-created-at="2026-02-01"
         >
-          <!-- <div class="card-title">エアコンの修理依頼</div> -->
           <div class="talk">
             こちらの窓口はリフォーム製品の10年保証の窓口のため、ご購入店舗へお問い合わせください。
           </div>
           <h4>備考:</h4>
           <div class="copyable">購入店舗へ問い合わせていただくよう案内。</div>
-          <div class="hidden">えあこん</div>
         </div>
 
         <div
@@ -595,14 +382,13 @@
         <div
           class="search-item card"
           data-title="連絡希望時間/訪問希望日"
+          data-aliases="れんらく, ほうもん"
           data-category="inbound"
           data-created-at="2026-02-01"
         >
-          <!-- <div class="card-title">連絡希望時間/訪問希望日</div> -->
           <h3>申し送り事項</h3>
           <div class="copyable">連絡は■～■時、■時以降ご希望です。</div>
           <div class="copyable">訪問は■/■ご希望です。</div>
-          <div class="hidden">れんらく, ほうもん</div>
         </div>
 
         <div
@@ -611,7 +397,6 @@
           data-category="inbound"
           data-created-at="2026-02-01"
         >
-          <!-- <div class="card-title">販売店連携</div> -->
           <h3>トーク (→お客様)</h3>
           <div class="talk">
             <p>
@@ -635,8 +420,7 @@
             <h3>備考</h3>
             <div class="copyable">
               <div>
-                <span class="datetime-display"></span> CC<span
-                  class="operator-name"
+                <span class="clock"></span> CC<span class="operator-name"
                   >■</span
                 >
               </div>
@@ -658,7 +442,6 @@
           data-category="inbound"
           data-created-at="2026-02-01"
         >
-          <!-- <div class="card-title">販売店連携（メーカー修理不可）</div> -->
           <div>給湯器（エコキュートなど）の外部配管/...</div>
           <h3>トーク (→お客様)</h3>
           <div class="talk">
@@ -671,6 +454,36 @@
           </div>
           <div></div>
           <div class="hidden">はんばいてんれんけい</div>
+        </div>
+
+        <div
+          class="search-item card"
+          data-title="ユナイト非対応の製品（照明など）"
+          data-aliases="スワン, すわん, しょうめい, 照明, ゆないと"
+          data-category="inbound"
+          data-created-at="2026-02-01"
+        >
+          <div>スワン、ｘｘ、ｘｘ、はユナイト非対応。家電119へ依頼。</div>
+          <h3>トーク (→お客様)</h3>
+          <div class="talk">
+            担当部署（家電の119番）から折り返しご連絡いたします。
+          </div>
+
+          <h3>トーク (→家電119)</h3>
+          <div class="talk">
+            先程、お客様から■の修理依頼のお電話が入りまして、こちらの製品の場合、エディオン本部からの指示により、家電の119番様でのご対応をお願いしております。
+          </div>
+          <div class="copyable">
+            <div>
+              <span class="clock"></span> 架電 CC<span class="operator-name"
+                >■</span
+              >
+            </div>
+            <div>対応者: 家電119/■様/■</div>
+            <div>
+              ユナイト非対応の製品のため、家電119へ連携。ご対応をお願いし、了承をいただく。
+            </div>
+          </div>
         </div>
 
         <div
@@ -709,7 +522,6 @@
           data-category="cb"
           data-created-at="2026-02-01"
         >
-          <!-- <div class="card-title">CB: 修理依頼OK</div> -->
           <div class="card-content">
             <div style="display: flex; gap: 4px; align-items: center">
               <span>案内: </span>
@@ -768,12 +580,11 @@
             </div>
             <div class="copyable">
               <div>
-                <span class="datetime-display"></span> CC<span
-                  class="operator-name"
+                <span class="clock"></span> 架電 CC<span class="operator-name"
                   >■</span
                 >
               </div>
-              <div>対応者:</div>
+              <div>対応者: ■</div>
               <div>・<span id="outbound-annai"></span></div>
               <div>・<span class="delay-notice"></span>済</div>
               <div id="outbound-koshonaiyo"></div>
@@ -789,14 +600,6 @@
         >
           <!-- <div class="card-title">CB: 不出</div> -->
           <div class="card-content">
-            <div style="display: flex; gap: 4px; align-items: center">
-              <select id="fude-kaisu-select">
-                <option value="fude-kaisu-1">1回目</option>
-                <option value="fude-kaisu-2">2回目</option>
-                <option value="fude-kaisu-3">3回目</option>
-              </select>
-            </div>
-
             <div
               style="
                 display: flex;
@@ -805,12 +608,20 @@
                 margin-bottom: 8px;
               "
             >
-              <span>種類: </span>
+              <select id="fude-kaisu-select">
+                <option value="fude-kaisu-1">1回目</option>
+                <option value="fude-kaisu-2">2回目</option>
+                <option value="fude-kaisu-3">3回目</option>
+              </select>
+              <!-- <span>種類: </span> -->
               <select id="fude-type-select">
                 <option value="rusuden-fukikomi">留守電吹き込み済み</option>
                 <option value="rusuden">留守電</option>
                 <option value="call">コール音</option>
                 <option value="wachu">話中</option>
+                <option value="chikakuni">
+                  「近くにおりません」アナウンス
+                </option>
               </select>
               <input
                 type="text"
@@ -822,8 +633,7 @@
             <div class="copyable">
               <div>
                 <span class="fude-kaisu"></span>
-                <span class="datetime-display"></span> 架電 CC<span
-                  class="operator-name"
+                <span class="clock"></span> 架電 CC<span class="operator-name"
                   >■</span
                 >
               </div>
@@ -831,7 +641,32 @@
             </div>
           </div>
         </div>
+
+        <div
+          class="search-item card"
+          data-title="CB: 販売店戻し"
+          data-aliases="はんばいてんもどし"
+          data-category="cb"
+          data-created-at="2026-02-01"
+        >
+          <div class="card-content">
+            <div class="copyable">
+              <div>
+                <span class="clock"></span> 架電 CC<span class="operator-name"
+                  >■</span
+                >
+              </div>
+              <div>対応者: ■</div>
+              <div>
+                お客様が当CCからの電話にお出にならず、修理の手配を進められない旨をお伝え。
+                フリーダイヤルの電話に出ていただくか、お客様から当CCへ折り返しご連絡いただくようお伝えいただき、その結果を折り返していただくようお願いし、了承を得る。
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- この階層にデータを追加。 -->
 
       <!-- No results message (hidden by default) -->
       <div id="no-results" class="empty-state" style="display: none">
@@ -850,11 +685,12 @@
     <script src="./config.js"></script>
     <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="../lib/copy-handler/index.js"></script>
-    <script src="../lib/datetime-display/index.js"></script>
+    <script src="../lib/clock/index.js"></script>
     <script src="../lib/search-filter/index.js"></script>
     <script src="../lib/form-updater/index.js"></script>
     <!-- <script src="../lib/tabs/index.js"></script> -->
     <script>
+      let isAdmin = false;
       /**
        * data-title属性を持つ要素にcard-titleを自動生成
        */
@@ -878,6 +714,36 @@
        */
       function initUI() {
         initTitles();
+        // 管理者用の表示
+        const params = new URLSearchParams(location.search);
+        isAdmin = params.has("admin");
+        if (!isAdmin) {
+          const elem = document.getElementById("help-link");
+          elem.style.display = "none";
+        }
+
+        // オペレーター名
+        const initialOperatorName = "■";
+        document
+          .getElementById("operator-name-input")
+          .addEventListener("input", (event) => {
+            let newValue = event.target.value.trim();
+            if (newValue === "") {
+              // #operator-name-inputが空の時は、#operator-name-inputのbackground-colorを赤にする
+              // input.style.backgroundColor = "#ffcccc";
+              newValue = initialOperatorName;
+            } else {
+              // input.style.backgroundColor = "";
+            }
+            document.querySelectorAll(".operator-name").forEach((el) => {
+              el.textContent = newValue;
+            });
+          });
+        dispatchEventBySelector("#operator-name-input", "input"); // 初期化
+
+        // 日時フォーマット
+        document.getElementById("datetime-format-input").value =
+          CONFIG.datetimeFormat;
       }
       // UI初期化
       initUI();
@@ -932,8 +798,24 @@
 
       initCategoryFilters();
 
+      // キーワードボタンのイベントリスナーを設定
+      function initKeywordButtons() {
+        document.querySelectorAll(".keyword-btn").forEach((button) => {
+          button.addEventListener("click", (e) => {
+            const keyword = e.target.dataset.keyword;
+            const searchInput = document.getElementById("search-input");
+            searchInput.value = keyword;
+            searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+            searchInput.focus();
+          });
+        });
+      }
+
+      initKeywordButtons();
+
+      // Libs
       // 日時表示を初期化
-      new DateTimeDisplay({
+      new Clock({
         format: CONFIG.datetimeFormat,
         // format: "YYYY/MM/DD HH:mm:ss"
       });

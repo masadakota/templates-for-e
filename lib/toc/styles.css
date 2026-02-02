@@ -1,0 +1,220 @@
+/**
+ * TOC (Table of Contents) Styles
+ * 目次のスタイル定義
+ */
+
+/* 目次コンテナ */
+#toc {
+  background-color: var(--muted, #f5f5f5);
+  border-radius: var(--radius, 8px);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border, #e0e0e0);
+}
+
+/* 目次リスト */
+#toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#toc li {
+  margin: 0;
+}
+
+/* 目次リンク */
+#toc a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  text-decoration: none;
+  color: var(--foreground, #333);
+  border-radius: 4px;
+  /* transition: all 0.2s ease; */
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* 番号部分 */
+#toc .toc-number {
+  flex-shrink: 0;
+  color: var(--accent, #007bff);
+  /* min-width: 2.5rem; */
+}
+
+/* h2レベルの番号のみ太字 */
+#toc li[data-level="2"] .toc-number {
+  font-weight: bold;
+}
+
+/* テキスト部分 */
+#toc .toc-text {
+  flex: 1;
+}
+
+/* リンクホバー */
+#toc a:hover {
+  opacity: 0.7;
+  /* color: var(--accent, #007bff); */
+  /* background-color: var(--accent-muted, rgba(0, 123, 255, 0.1)); */
+  /* padding-left: 1rem; */
+}
+
+/* リンクアクティブ */
+#toc a:active {
+  transform: scale(0.98);
+}
+
+/* h2レベル */
+#toc li[data-level="2"] a {
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* h3レベル（インデント） */
+#toc li[data-level="3"] a {
+  font-size: 0.875rem;
+  padding-left: 1.5rem;
+  color: var(--muted-foreground, #666);
+}
+
+/* h4レベル（さらにインデント） */
+#toc li[data-level="4"] a {
+  font-size: 0.8125rem;
+  padding-left: 2.5rem;
+  color: var(--muted-foreground, #666);
+}
+
+/* 目次タイトル（オプション） */
+#toc::before {
+  content: "目次";
+  display: block;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--foreground, #333);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border, #e0e0e0);
+}
+
+/* 目次タイトルを非表示にする場合 */
+#toc.no-title::before {
+  display: none;
+}
+
+/* コンパクトバージョン */
+#toc.compact {
+  padding: 1rem;
+}
+
+#toc.compact a {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+#toc.compact::before {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+/* スティッキーTOC（サイドバー用） */
+#toc.sticky {
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+/* スクロールバーのスタイル（Webkit） */
+#toc.sticky::-webkit-scrollbar {
+  width: 6px;
+}
+
+#toc.sticky::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#toc.sticky::-webkit-scrollbar-thumb {
+  background: var(--border, #e0e0e0);
+  border-radius: 3px;
+}
+
+#toc.sticky::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground, #666);
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  #toc {
+    background-color: var(--muted, #2a2a2a);
+    border-color: var(--border, #404040);
+  }
+
+  #toc a {
+    color: var(--foreground, #e0e0e0);
+  }
+
+  #toc a:hover {
+    color: var(--accent, #4a9eff);
+    background-color: var(--accent-muted, rgba(74, 158, 255, 0.15));
+  }
+
+  #toc::before {
+    color: var(--foreground, #e0e0e0);
+    border-bottom-color: var(--border, #404040);
+  }
+
+  #toc li[data-level="3"] a,
+  #toc li[data-level="4"] a {
+    color: var(--muted-foreground, #a0a0a0);
+  }
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  #toc {
+    padding: 1rem;
+  }
+
+  #toc a {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.5rem;
+  }
+
+  #toc li[data-level="3"] a {
+    padding-left: 1.25rem;
+  }
+
+  #toc li[data-level="3"] a:hover {
+    padding-left: 1.5rem;
+  }
+
+  #toc li[data-level="4"] a {
+    padding-left: 2rem;
+  }
+
+  #toc li[data-level="4"] a:hover {
+    padding-left: 2.25rem;
+  }
+
+  #toc.sticky {
+    position: static;
+    max-height: none;
+  }
+}
+
+/* プリントスタイル */
+@media print {
+  #toc {
+    border: 1px solid #000;
+    background-color: #fff;
+    page-break-inside: avoid;
+  }
+
+  #toc a {
+    color: #000;
+  }
+}

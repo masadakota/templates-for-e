@@ -1,0 +1,202 @@
+.container {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  /* background-color: var(--muted); */
+  /* background-color: var(--background); */
+  /* padding-top: 0; */
+  width: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+h1 {
+  /* margin-bottom: 1.5rem; */
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius-button);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease;
+  pointer-events: none;
+}
+
+.clear-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.clear-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.clear-btn:hover {
+  background-color: var(--muted);
+  color: var(--foreground);
+}
+
+.search-item.hidden {
+  display: none;
+}
+
+/* Empty states */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted-foreground);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state-message {
+  font-size: 0.875rem;
+}
+
+.copyable {
+  position: relative;
+  border-radius: var(--radius);
+  /* transition: background-color 0.2s ease; */
+  border: 2px solid var(--accent);
+  /* border: 1px solid var(--border); */
+  width: fit-content;
+  padding: 8px;
+  padding-right: 30px;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--foreground);
+  background-color: #ddd;
+  margin-top: -12px;
+  margin-left: -12px;
+  margin-right: -12px;
+  padding: 6px 12px;
+}
+
+.card-content {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  /* color: var(--muted-foreground); */
+  border-left: 4px solid var(--muted-foreground);
+  padding-left: 0.5rem;
+}
+
+.card h4 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.card hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.talk {
+  background-color: lightyellow;
+  padding: 8px;
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.card .copyable {
+  margin-bottom: 8px;
+}
+
+/* 設定アイコンボタン */
+.settings-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--muted-foreground);
+  border-radius: var(--radius);
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+/* 設定が開いている時のスタイル */
+.settings-icon-btn.active {
+  color: var(--background);
+  border-radius: 8px 8px 0 0;
+  background-color: var(--muted-foreground);
+}
+
+/* .settings-icon-btn:hover:not(.active) {
+        background-color: var(--muted);
+        color: var(--foreground);
+      } */
+
+.settings-icon-btn img {
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+  /* background-color: #6c757d; */
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+
+/* アクティブ時はSVGの背景を白に */
+.settings-icon-btn.active img {
+  background-color: transparent;
+  filter: brightness(0) invert(1);
+  /* SVGを白色に変換 */
+}
+
+.keyword-btn {
+  display: inline-block;
+  /* padding: 4px 8px; */
+  padding: 0;
+  margin: 0 4px 4px 0;
+  font-size: 0.875rem;
+  border: none;
+  background-color: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* 設定ボタンが開いている時のスタイル */
+.btn[data-bs-toggle="collapse"][aria-expanded="true"] {
+  background-color: var(--muted-foreground);
+  color: var(--background) !important;
+  font-weight: bold !important;
+}

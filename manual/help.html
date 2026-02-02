@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>マニュアル - 使い方</title>
+    <link rel="stylesheet" href="../styles/bundle.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../lib/toc/styles.css" />
+
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--background);
+        color: var(--foreground);
+      }
+
+      .container {
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      .feature-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background-color: var(--muted);
+        border-radius: var(--radius);
+      }
+
+      .feature-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .feature-icon {
+        width: 24px;
+        height: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--accent);
+        color: white;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 0.875rem;
+      }
+
+      .feature-description {
+        color: var(--muted-foreground);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .example-box {
+        background-color: var(--card);
+        border: 2px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .example-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--accent);
+      }
+
+      .example-content {
+        background-color: var(--background);
+        padding: 0.75rem;
+        border-radius: 4px;
+        font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+        font-size: 0.875rem;
+        color: var(--foreground);
+        overflow-x: auto;
+      }
+
+      .copy-method {
+        margin: 0.75rem 0;
+        padding: 0.75rem;
+        background-color: var(--background);
+        border-left: 3px solid var(--accent);
+        /* border-radius: 4px; */
+      }
+
+      .copy-method strong {
+        color: var(--accent);
+      }
+
+      ul {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+
+      .highlight {
+        background-color: rgba(var(--accent-rgb), 0.1);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 500;
+      }
+
+      .nav-button {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--accent);
+        color: white;
+        text-decoration: none;
+        border-radius: var(--radius);
+        transition: background-color 0.2s ease;
+      }
+
+      .nav-button:hover {
+        background-color: var(--accent);
+        opacity: 0.8;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <article>
+        <h1>管理者向けドキュメント</h1>
+        <nav id="toc"></nav>
+        <div id="content">
+          <section>
+            <h2>はじめに</h2>
+            <p>このWebアプリは、HTML/CSS/JavaScriptで構成されています。</p>
+
+            <table class="mb-4">
+              <tr>
+                <th>HTML</th>
+                <td>Webページの <strong>構造</strong> を定義する。</td>
+              </tr>
+              <tr>
+                <th>CSS</th>
+                <td>Webページの <strong>デザイン</strong> を定義する。</td>
+              </tr>
+              <tr>
+                <th>JavaScript</th>
+                <td>Webページの <strong>動作</strong> を定義する。</td>
+              </tr>
+            </table>
+
+            <p>
+              ローカル環境で動作します。index.htmlファイルをWebブラウザ(Chrome,
+              Edgeなど)で開くと、起動します。
+            </p>
+          </section>
+
+          <section>
+            <h2>コードを編集する</h2>
+            <h3>エディタ</h3>
+            <p>
+              コードを編集するには、メモ帳、Web版VS Code、VS
+              Codeなどのエディタを使用します。
+            </p>
+            <table>
+              <tr>
+                <th></th>
+                <th>メモ帳</th>
+                <th>Web版VS Code</th>
+                <th>VS Code</th>
+              </tr>
+              <tr>
+                <th>編集のしやすさ</th>
+                <td>✕</td>
+                <td>◯</td>
+                <td>◎</td>
+              </tr>
+              <tr>
+                <th>AIによるコード生成</th>
+                <td>✕</td>
+                <td>✕</td>
+                <td>◎</td>
+              </tr>
+              <tr>
+                <th>インストール</th>
+                <td>不要</td>
+                <td>不要</td>
+                <td>必要</td>
+              </tr>
+            </table>
+            <div id="editor-tabs" class="tabs-list">
+              <button class="tabs-trigger" data-tabs-value="memocho">
+                メモ帳
+              </button>
+              <button class="tabs-trigger" data-tabs-value="vs-code-web">
+                Web版VS Code
+              </button>
+              <button class="tabs-trigger" data-tabs-value="vs-code">
+                VS Code
+              </button>
+            </div>
+            <div class="box">
+              <div
+                class="tabs-content"
+                data-tabs-value="memocho"
+                data-tabs-id="editor-tabs"
+              >
+                <p>1. index.htmlのファイルを右クリックし、メモ帳で開きます。</p>
+                <p>2. 編集後、保存します。</p>
+              </div>
+              <div
+                class="tabs-content"
+                data-tabs-value="vs-code-web"
+                data-tabs-id="editor-tabs"
+              >
+                <p>
+                  Web版VS
+                  Codeは、Microsoft製のWebアプリケーションです。Webブラウザ上で、ローカルのファイルを編集できます。
+                </p>
+                <p>
+                  <span class="step-number">1</span>
+                  <a href="https://vscode.dev" target="_blank">vscode.dev</a>
+                  にアクセスします。
+                </p>
+                <p>
+                  <span class="step-number">2</span>[フォルダーを開く]
+                  をクリックし、このツールのフォルダを指定します。
+                </p>
+                <p>
+                  <span class="step-number">3</span>
+                  "このサイトにファイルの表示とコピーを許可しますか？"
+                  のダイアログで "許可する" をクリックします。
+                </p>
+                <p>
+                  <span class="step-number">4</span>
+                  "このフォルダ内のファイルの作成者を信頼しますか？"
+                  のダイアログで "はい" を選択します。
+                </p>
+                <p>
+                  <span class="step-number">5</span>
+                  左のエクスプローラーでファイルを選択し、編集します。
+                </p>
+                <div class="tips-box">
+                  <div class="box-content">
+                    💡 Alt + Shift + F でコードを自動整列できます。
+                  </div>
+                </div>
+                <p>
+                  <span class="step-number">6</span>
+                  index.htmlファイルをWebブラウザ(Chrome,
+                  Edge)で開き、必要であれば、ページを再読み込みして、表示を確認します。
+                </p>
+                <div class="warning-box">
+                  <div class="box-content">
+                    ⚠️ 内容を変更すると、即座に上書き保存されます。
+                  </div>
+                </div>
+              </div>
+              <div
+                class="tabs-content"
+                data-tabs-value="vs-code"
+                data-tabs-id="editor-tabs"
+              >
+                <p>VS Code</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>データを追加する</h2>
+            <p>データを追加するには、下記のようなコードを記述します。</p>
+
+            <h3>コード</h3>
+            <script type="text/plain" class="language-markup line-numbers">
+              <div
+                data-title="浴室暖房乾燥機の修理依頼"
+                data-aliases="よくしつだんぼうかんそうき, しゅうり"
+                data-category="inbound"
+                data-created-at="2026-02-01"
+              >
+                <div>テキストテキスト</div>
+                <h3>見出し</h3>
+                <div class="copyable">
+                  コピーしたいテキスト<br />
+                  改行するには、改行したい位置にbrタグを記述します。
+                </div>
+                <div>テキストテキスト</div>
+              </div>
+            </script>
+
+            <table class="mt-4">
+              <tr>
+                <th>属性名</th>
+                <th>説明</th>
+              </tr>
+              <tr>
+                <td>data-title</td>
+                <td>データのタイトル。</td>
+              </tr>
+              <tr>
+                <td>data-aliases</td>
+                <td>
+                  検索用の別名のキーワード。複数指定する場合は、カンマ区切り。
+                </td>
+              </tr>
+              <tr>
+                <td>data-category</td>
+                <td>データのカテゴリ。 受電は "inbound", CBは "cb"。</td>
+              </tr>
+              <tr>
+                <td>data-created-at</td>
+                <td>データの作成日 (YYYY-MM-DD形式)。例: "2026-02-01"。</td>
+              </tr>
+            </table>
+
+            <h3>結果</h3>
+            <div
+              class="search-item card mt-4"
+              data-title="浴室暖房乾燥機の修理依頼"
+              data-aliases="よくしつだんぼうかんそうき, しゅうり"
+              data-category="inbound"
+              data-created-at="2026-02-01"
+            >
+              <div>テキストテキスト</div>
+              <div class="h3">見出し</div>
+              <div class="copyable">
+                コピーしたいテキスト<br />
+                改行するには、改行したい位置にbrタグを記述します。
+              </div>
+              <div>テキストテキスト</div>
+            </div>
+
+            <h3>追加場所</h3>
+            <p>
+              index.htmlの下記のコードと同じ階層に、上記のコードを追加してください。
+            </p>
+
+            <script type="text/plain" class="language-markup line-numbers">
+              <!-- この階層にデータを追加。 -->
+            </script>
+
+            <h4>例</h4>
+            <script type="text/plain" class="language-markup line-numbers">
+              <div
+                data-title="浴室暖房乾燥機の修理依頼"
+                data-aliases="よくしつだんぼうかんそうき, しゅうり"
+                data-category="inbound"
+                data-created-at="2026-02-01"
+              >
+                <!-- 省略 -->
+              </div>
+              <!-- この階層にデータを追加。 -->
+            </script>
+          </section>
+
+          <section>
+            <h2>ワンクリックでテキストをコピー</h2>
+            <p>
+              classに <code>copyable</code>
+              を付与すると、その要素のテキストをワンクリック（右クリック）でクリップボードにコピーできるようになります。
+              コピーが成功すると、背景が一時的にフラッシュします。
+            </p>
+
+            <h3>サンプル</h3>
+            <h4>コード</h4>
+            <script
+              type="text/plain"
+              class="language-markup line-numbers"
+              data-line="1"
+            >
+              <div class="copyable">
+                ワンクリック（右クリック）でコピーできるテキスト。<br>
+                改行するには、改行したい位置にbrタグを記述します。
+              </div>
+            </script>
+            <h4>結果</h4>
+            <div class="copyable">
+              ワンクリック（右クリック）でコピーできるテキスト。<br />
+              改行するには、改行したい位置にbrタグを記述します。
+            </div>
+
+            <h3>サンプル2</h3>
+            <p>
+              tableのclassに
+              <code>copyable-table</code>
+              を付与すると、そのtableのtdタグのテキストをワンクリックでコピーできるようになります。
+            </p>
+            <h4>コード</h4>
+            <script
+              type="text/plain"
+              class="language-markup line-numbers"
+              data-line="1"
+            >
+              <table class="copyable-table">
+                <tr>
+                  <td>テキスト1</td><td>テキスト2</td>
+                </tr>
+                <tr>
+                  <td>テキスト3</td><td>テキスト4</td>
+                </tr>
+              </table>
+            </script>
+
+            <h4>結果</h4>
+            <table class="copyable-table">
+              <tr>
+                <td>テキスト1</td>
+                <td>テキスト2</td>
+              </tr>
+              <tr>
+                <td>テキスト3</td>
+                <td>テキスト4</td>
+              </tr>
+            </table>
+          </section>
+
+          <section>
+            <h2>「お日にちがかかる…」の上書き</h2>
+            <p>
+              config.js の
+              <code>ohinichiText</code>
+              の値を編集してください。
+            </p>
+            <script
+              type="text/plain"
+              class="language-javascript line-numbers"
+              data-line="2"
+            >
+              const CONFIG = {
+                ohinichiText: "メーカー繁忙期案内", // 上書き用のテキスト
+                defaultOhinichiText: "お日にちがかかる可能性案内", // デフォルトのテキスト
+                // ...
+              };
+            </script>
+
+            <h2>現在の日時の表示</h2>
+
+            <div>現在の日時を表示したい位置に、以下のコードを記述します。</div>
+            <script type="text/plain" class="language-markup line-numbers">
+              <span class="clock"></span>
+            </script>
+
+            <h3>サンプル</h3>
+            <h4>コード</h4>
+            <script
+              type="text/plain"
+              class="language-markup line-numbers"
+              data-line="2"
+            >
+              <div class="copyable">
+                <span class="clock"></span> 架電 CC<span class="operator-name"></span><br>
+                テキストテキスト
+              </div>
+            </script>
+            <h4>結果</h4>
+            <div class="copyable">
+              <span class="clock"></span> 架電 CC池袋太郎<br />
+              テキストテキスト
+            </div>
+          </section>
+
+          <section>
+            <h3>日時の形式</h3>
+            <p>config.js の datetimeFormatの値を編集してください。</p>
+            <table>
+              <tr>
+                <th>日時の形式</th>
+                <th>例</th>
+              </tr>
+              <tr>
+                <td>M/D H:mm</td>
+                <td>1/1 1:01</td>
+              </tr>
+              <tr>
+                <td>M/D H:■</td>
+                <td>1/1 1:■</td>
+              </tr>
+              <tr>
+                <td>MM/DD HH:mm</td>
+                <td>01/01 01:01</td>
+              </tr>
+            </table>
+          </section>
+
+          <!-- <a href="index.html" class="nav-button">← マニュアルに戻る</a> -->
+        </div>
+      </article>
+    </div>
+    <script src="../lib/tabs/index.js"></script>
+    <script src="../lib/clock/index.js"></script>
+    <script src="../lib/copy-handler/config.js"></script>
+    <script src="../lib/copy-handler/index.js"></script>
+    <script src="../lib/toc/index.js"></script>
+    <script>
+      // TOCを初期化
+      const toc = new TOC({
+        tocSelector: "#toc",
+        contentSelector: "#content",
+        headingSelector: "h2, h3",
+        linkColor: "var(--foreground)",
+        linkHoverColor: "var(--accent)",
+        orderedList: true, // 番号付きリストを有効化
+      });
+      toc.init();
+
+      // タブを初期化
+      new Tabs({
+        tabsList: "#editor-tabs", // tabs-listのid
+        defaultValue: "memocho", // アクティブなタブのデフォルト値
+        // variant: "underline", // タブのスタイル: 'underline' または 'pills'
+        // activeBgColor: "var(--accent)", // アクティブなタブの背景色
+        activeBorderColor: "var(--accent)", // アクティブなタブのborderの色
+        activeColor: "var(--accent)", // アクティブなタブのテキストの色
+        // onValueChange: (value, previousValue) => {
+        //   console.log(`Value changed: ${previousValue} → ${value}`);
+        // },
+      });
+
+      // new Tabs({
+      //   tabsList: "#tab-add-data", // tabs-listのid
+      //   defaultValue: "code", // アクティブなタブのデフォルト値
+      //   // variant: "underline", // タブのスタイル: 'underline' または 'pills'
+      //   // activeBgColor: "var(--accent)", // アクティブなタブの背景色
+      //   activeBorderColor: "var(--accent)", // アクティブなタブのborderの色
+      //   activeColor: "var(--accent)", // アクティブなタブのテキストの色
+      //   // onValueChange: (value, previousValue) => {
+      //   //   console.log(`Value changed: ${previousValue} → ${value}`);
+      //   // },
+      // });
+
+      new Clock({
+        format: "M/D H:mm",
+      });
+
+      // CopyHandlerを初期化
+      const copyHandler = new CopyHandler({
+        copyIconColor: "var(--accent)", // コピーアイコンの色
+        flashColor: "color-mix(in srgb, var(--accent) 30%, transparent)", // コピー成功時のハイライト色
+      });
+      copyHandler.init();
+    </script>
+    <!-- HTMLエスケープユーティリティ（Prism.jsの前に読み込む） -->
+    <!-- <script src="../utils/html-escape.js"></script> -->
+    <script src="../vendor/prism-js/prism.js"></script>
+  </body>
+</html>

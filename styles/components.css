@@ -1,0 +1,245 @@
+/**
+ * components.css - UIコンポーネントスタイル集
+ *
+ * このファイルには、プロジェクト全体で再利用可能なUIコンポーネントのスタイルが含まれます。
+ */
+
+/* =============================================================================
+   Box / Card Components - ボックス・カードコンポーネント
+   ============================================================================= */
+
+.box {
+  border: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  background-color: var(--background);
+  color: var(--foreground);
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.box-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  font-weight: bold;
+  background-color: #888;
+  padding: 4px 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.card {
+  all: unset; /* Bootstrapの影響をリセット */
+  display: block;
+  padding: 12px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.card > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* =============================================================================
+   Separator Components - 区切り線コンポーネント
+   ============================================================================= */
+
+/* 縦の区切り線 */
+.separator-vertical {
+  width: 1px;
+  background-color: #ccc;
+  align-self: stretch;
+}
+
+/* 横の区切り線 */
+.separator-horizontal {
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+}
+
+/* =============================================================================
+   Form Components - フォームコンポーネント
+   ============================================================================= */
+
+/* ラジオボタンのカスタムスタイル - radio-pills */
+.radio-pills label:has(input[type="radio"]) {
+  display: inline-block;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.radio-pills label:has(input[type="radio"]) input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-pills label:has(input[type="radio"]:checked) {
+  background-color: var(--accent);
+  color: var(--background);
+  border-color: var(--accent);
+}
+
+.radio-pills label:has(input[type="radio"]):hover {
+  border-color: var(--accent);
+}
+
+/* =============================================================================
+   Tab Components - タブコンポーネント
+   ============================================================================= */
+
+/* カテゴリフィルターボタン（Tab Pills） */
+.tab-pill {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  color: var(--foreground);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tab-pill.active {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  border-color: var(--accent);
+}
+
+/* =============================================================================
+   Step Number Component - ステップ番号コンポーネント
+   ============================================================================= */
+
+.step-number {
+  display: inline-block;
+  padding: 0 4px;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  border-radius: 4px;
+  background-color: var(--muted-foreground);
+  color: var(--background);
+  margin-right: 0.5rem;
+}
+
+/* =============================================================================
+   Message Boxes - 情報ボックスのバリエーション
+   ============================================================================= */
+
+/* 共通スタイル */
+.info-box,
+.success-box,
+.warning-box,
+.tips-box,
+.danger-box,
+.note-box {
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+  border-left: 4px solid;
+}
+
+/* 情報（青） */
+.info-box {
+  background-color: #cfe2ff;
+  border-left-color: #0d6efd;
+}
+
+.info-box .box-title {
+  font-weight: 700;
+  color: #084298;
+  margin-bottom: 0.5rem;
+}
+
+.info-box .box-content {
+  color: #084298;
+  line-height: 1.6;
+}
+
+/* 成功（緑） */
+.success-box {
+  background-color: #d1e7dd;
+  border-left-color: #198754;
+}
+
+.success-box .box-title {
+  font-weight: 700;
+  color: #0f5132;
+  margin-bottom: 0.5rem;
+}
+
+.success-box .box-content {
+  color: #0f5132;
+  line-height: 1.6;
+}
+
+/* 警告（オレンジ） - 既存の.tips-boxと統合 */
+.warning-box,
+.tips-box {
+  background-color: #fff3cd;
+  border-left-color: #ffc107;
+}
+
+.warning-box .box-title,
+.tips-box .box-title {
+  font-weight: 700;
+  color: #856404;
+  margin-bottom: 0.5rem;
+}
+
+.warning-box .box-content,
+.tips-box .box-content {
+  color: #856404;
+  line-height: 1.6;
+}
+
+/* 危険・エラー（赤） */
+.danger-box {
+  background-color: #f8d7da;
+  border-left-color: #dc3545;
+}
+
+.danger-box .box-title {
+  font-weight: 700;
+  color: #842029;
+  margin-bottom: 0.5rem;
+}
+
+.danger-box .box-content {
+  color: #842029;
+  line-height: 1.6;
+}
+
+/* メモ（グレー） */
+.note-box {
+  background-color: #e2e3e5;
+  border-left-color: #6c757d;
+}
+
+.note-box .box-title {
+  font-weight: 700;
+  color: #383d41;
+  margin-bottom: 0.5rem;
+}
+
+.note-box .box-content {
+  color: #383d41;
+  line-height: 1.6;
+}

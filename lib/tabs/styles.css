@@ -6,22 +6,21 @@
 /* ===== タブリスト ===== */
 .tabs-list {
   display: flex;
-  gap: 0;
+  gap: 4px;
   padding: 0;
   margin: 0;
   list-style: none;
-  background-color: #f5f5f5;
 }
 
-/* ===== タブボタン（共通スタイル） ===== */
+/* ===== タブボタン（共通） ===== */
 .tabs-trigger {
   flex: 0 0 auto;
   /* padding: 12px 24px; */
   padding: 8px 16px;
   font-size: 14px;
-  font-weight: normal;
-  /* font-weight: 500; */
-  color: #666;
+  font-weight: bold;
+  /* font-weight: normal; */
+  color: #aaa;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -45,15 +44,15 @@
   opacity: 0.5;
 }
 
-/* ===== デフォルトバリアント（Underlineスタイル） ===== */
+/* ===== デフォルトバリアント（Underline） ===== */
 .tabs-variant-default .tabs-trigger {
-  border-bottom: 3px solid transparent;
+  border-bottom: 3px solid #ccc;
 }
 
-.tabs-variant-default .tabs-trigger:hover {
+/* .tabs-variant-default .tabs-trigger:hover {
   color: #333;
   background-color: #ececec;
-}
+} */
 
 .tabs-variant-default .tabs-trigger.active {
   color: #2563eb;
@@ -61,7 +60,7 @@
   border-bottom-color: #2563eb;
 }
 
-/* ===== Pillsバリアント（Bootstrap Pills風） ===== */
+/* ===== Pillsバリアント ===== */
 .tabs-variant-pills {
   gap: 8px;
   background-color: transparent;
@@ -111,6 +110,9 @@
 /* ===== タブコンテンツ ===== */
 .tabs-content {
   display: none;
+  & > *:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .tabs-content.active {

@@ -10,7 +10,11 @@
       "Bash(move lib\\form-sync lib\\form-updater)",
       "Bash(move settings-toggle slide-toggle)",
       "Bash(mkdir:*)",
-      "Bash(move search-filter.js index.js)"
+      "Bash(move search-filter.js index.js)",
+      "Bash(move libdatetime-display libclock)",
+      "Bash(cmd /c \"move /Y lib\\\\datetime-display lib\\\\clock\")",
+      "Bash(cmd /c \"if exist lib\\\\clock echo SUCCESS || echo FAILED\")",
+      "Bash(cmd /c \"dir /b lib\")"
     ]
   }
 }

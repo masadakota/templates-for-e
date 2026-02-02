@@ -1,6 +1,5 @@
 /**
  * Global CSS Variables
- * shadcn/ui inspired design tokens
  */
 
 :root {
@@ -41,17 +40,18 @@
   --background: rgb(255, 255, 255);
   --foreground: rgb(38, 38, 38);
 
-  /* Custom: Intermediate colors (midground) */
-  --middle: rgb(146, 146, 146); /* Alias for midground-50 */
-  --middle-10: rgb(234, 234, 234); /* 10% foreground, 90% background */
-  --middle-20: rgb(212, 212, 212); /* 20% foreground, 80% background */
-  --middle-30: rgb(190, 190, 190); /* 30% foreground, 70% background */
-  --middle-40: rgb(168, 168, 168); /* 40% foreground, 60% background */
-  --middle-50: rgb(146, 146, 146); /* 50% foreground, 50% background */
-  --middle-60: rgb(125, 125, 125); /* 60% foreground, 40% background */
-  --middle-70: rgb(103, 103, 103); /* 70% foreground, 30% background */
-  --middle-80: rgb(81, 81, 81); /* 80% foreground, 20% background */
-  --middle-90: rgb(59, 59, 59); /* 90% foreground, 10% background */
+  /* Neutral Colors (shadcn/ui) */
+  --neutral-50: hsl(0 0% 98%);
+  --neutral-100: hsl(0 0% 96.1%);
+  --neutral-200: hsl(0 0% 89.8%);
+  --neutral-300: hsl(0 0% 83.1%);
+  --neutral-400: hsl(0 0% 63.9%);
+  --neutral-500: hsl(0 0% 45.1%);
+  --neutral-600: hsl(0 0% 32.2%);
+  --neutral-700: hsl(0 0% 25.1%);
+  --neutral-800: hsl(0 0% 14.9%);
+  --neutral-900: hsl(0 0% 9%);
+  --neutral-950: hsl(0 0% 5%);
 }
 
 /* :root {

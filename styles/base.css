@@ -1,0 +1,104 @@
+/* =========================
+   Base Styles - 基本HTML要素のスタイル
+========================= */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  box-sizing: border-box;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: var(--background);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  &:focus {
+    outline: none;
+    border-color: var(--muted-foreground);
+    /* box-shadow: 0 0 0 2px var(--accent); */
+  }
+}
+
+.small-placeholder::placeholder {
+  font-size: 0.9rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--border, #e5e7eb);
+  td,
+  th {
+    border: 1px solid var(--border, #e5e7eb);
+    padding: 0.5rem 1rem;
+    text-align: left;
+  }
+  th {
+    background-color: #ddd;
+  }
+}
+
+/* ラベルのテキスト選択を無効化 */
+label {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  white-space: nowrap;
+}
+
+a {
+  color: var(--muted-foreground);
+  /* color: var(--accent); */
+  /* text-decoration: none; */
+  /* &:hover {
+    text-decoration: underline;
+  } */
+}
+
+article {
+  h1 {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--foreground);
+  }
+
+  h2 {
+    background-color: var(--neutral-200);
+    border-radius: var(--radius);
+    color: var(--foreground) !important;
+    padding: 0.75rem;
+    font-size: 1.3rem !important;
+    font-weight: 600 !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+    /* border-left: 8px solid var(--accent); */
+  }
+
+  h3 {
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    border-left: 4px solid var(--muted-foreground);
+    padding-left: 0.75rem;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  h4 {
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}

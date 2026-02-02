@@ -1,0 +1,24 @@
+/**
+ * bundle.css - CSSバンドルファイル
+ *
+ * このファイルは、プロジェクト全体で使用するすべてのCSSを@importでまとめています。
+ *
+ * 使い方:
+ * <link rel="stylesheet" href="../styles/bundle.css" />
+ *
+ */
+
+/* 基本スタイル */
+@import url("globals.css");
+@import url("tailwind-like.css");
+@import url("base.css");
+@import url("components.css");
+
+/* 外部ライブラリ */
+@import url("../vendor/bootstrap/bootstrap.min.css");
+@import url("../vendor/bootstrap-icons/font/bootstrap-icons.min.css");
+@import url("../vendor/prism-js/prism.css");
+
+/* カスタムライブラリ（lib/） */
+@import url("../lib/tabs/styles.css");
+@import url("../lib/copy-handler/styles.css");
