@@ -116,15 +116,29 @@
    * セレクターで要素を取得してイベントをディスパッチ
    * @param {string} selector - CSSセレクター
    * @param {string} eventType - イベントタイプ
+   * @param {Object} options - イベントオプション
+   * @param {boolean} [options.bubbles=true] - イベントをバブリングさせるか
+   * @param {boolean} [options.cancelable=true] - イベントをキャンセル可能にするか
    * @returns {boolean} 要素が見つかってイベントをディスパッチできたらtrue
    */
-  function dispatchEventBySelector(selector, eventType) {
+  function dispatchEventBySelector(selector, eventType, options = {}) {
     const element = document.querySelector(selector);
     if (!element) {
       console.warn(`要素が見つかりません: ${selector}`);
       return false;
     }
-    element.dispatchEvent(new Event(eventType));
+
+    const {
+      bubbles = true,
+      cancelable = true,
+      ...rest
+    } = options;
+
+    element.dispatchEvent(new Event(eventType, {
+      bubbles,
+      cancelable,
+      ...rest
+    }));
     return true;
   }
 

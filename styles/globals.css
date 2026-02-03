@@ -15,7 +15,7 @@
   --secondary-foreground: rgb(52, 52, 52);
   --muted: rgb(247, 247, 247);
   --muted-foreground: rgb(142, 142, 142);
-  --accent: rgb(69 181 217); /* #0078d4; */ /* rgb(0, 120, 212) */
+  --accent: rgb(34, 150, 190); /* #0078d4; */ /* rgb(0, 120, 212) */ /* 69, 181, 217 */
   /* --accent: rgb(247, 247, 247); */
   --accent-foreground: rgb(255, 255, 255);
   /* --accent-foreground: rgb(52, 52, 52); */

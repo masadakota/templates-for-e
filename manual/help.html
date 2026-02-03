@@ -102,7 +102,7 @@
 
       li {
         margin-bottom: 0.5rem;
-        line-height: 1.6;
+        /* line-height: 1.6; */
       }
 
       .highlight {
@@ -274,7 +274,7 @@
           </section>
 
           <section>
-            <h2>データを追加する</h2>
+            <h2 id="how-to-add-data">データを追加する</h2>
             <p>データを追加するには、下記のようなコードを記述します。</p>
 
             <h3>コード</h3>
@@ -282,7 +282,7 @@
               <div
                 data-title="浴室暖房乾燥機の修理依頼"
                 data-aliases="よくしつだんぼうかんそうき, しゅうり"
-                data-category="inbound"
+                data-category="受電"
               >
                 <div>テキストテキスト</div>
                 <div class="copyable">
@@ -322,7 +322,7 @@
               class="search-item card mt-4"
               data-title="浴室暖房乾燥機の修理依頼"
               data-aliases="よくしつだんぼうかんそうき, しゅうり"
-              data-category="inbound"
+              data-category="受電"
             >
               <div>テキストテキスト</div>
               <div class="copyable">
@@ -349,7 +349,7 @@
               <div
                 data-title="浴室暖房乾燥機の修理依頼"
                 data-aliases="よくしつだんぼうかんそうき, しゅうり"
-                data-category="inbound"
+                data-category="受電"
                 data-created-at="2026-02-01"
               >
                 <!-- 省略 -->
@@ -544,13 +544,8 @@
       // new Tabs({
       //   tabsList: "#tab-add-data", // tabs-listのid
       //   defaultValue: "code", // アクティブなタブのデフォルト値
-      //   // variant: "underline", // タブのスタイル: 'underline' または 'pills'
-      //   // activeBgColor: "var(--accent)", // アクティブなタブの背景色
       //   activeBorderColor: "var(--accent)", // アクティブなタブのborderの色
       //   activeColor: "var(--accent)", // アクティブなタブのテキストの色
-      //   // onValueChange: (value, previousValue) => {
-      //   //   console.log(`Value changed: ${previousValue} → ${value}`);
-      //   // },
       // });
 
       new Clock({

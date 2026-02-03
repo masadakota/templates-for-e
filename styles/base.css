@@ -12,7 +12,7 @@ body {
   box-sizing: border-box;
 }
 
-input {
+input[type="text"] {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -27,6 +27,14 @@ input {
     border-color: var(--muted-foreground);
     /* box-shadow: 0 0 0 2px var(--accent); */
   }
+}
+
+input[type="checkbox"] {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-right: 0.25rem;
+  accent-color: var(--accent);
+  /* color: var(--accent-foreground); */
 }
 
 .small-placeholder::placeholder {
@@ -64,6 +72,17 @@ a {
   /* &:hover {
     text-decoration: underline;
   } */
+}
+
+/* 押下効果 - マウスダウン時に少し下げる */
+.pushable {
+  transition: translate 0.1s ease !important;
+  /* transition: transform 0.1s ease !important; */
+  cursor: pointer;
+  &:active {
+    translate: 0 1px;
+    /* transform: translateY(1px); */
+  }
 }
 
 article {

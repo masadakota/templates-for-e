@@ -126,9 +126,9 @@
               <input
                 type="text"
                 style="width: 200px"
-                data-fb-target=".delay-notice, .delay-notice-for-taishogai"
-                id="delay-notice-input"
-                data-priority="1"
+                data-fb-target=".ohinichi, .ohinichi-for-taishogai"
+                id="ohinichi-input"
+                data-fb-priority="1"
                 placeholder="お日にちがかかる可能性案内"
                 disabled
               />
@@ -164,14 +164,12 @@
 
         <!-- Category Buttons -->
         <div class="flex gap-1 items-center">
-          <span class="text-sm">カテゴリー:</span>
-          <button class="tab-pill" data-target-category="inbound">受電</button>
-          <button class="tab-pill" data-target-category="cb">CB</button>
-          <button class="tab-pill" data-target-category="all">全て</button>
+          <span class="text-sm text-muted-foreground font-bold">カテゴリー</span>
+          <div id="category-buttons" class="flex items-center gap-1"></div>
         </div>
         <!-- <div class="tabs-list" id="main-tabs" style="justify-content: center">
-            <button class="tabs-trigger" data-tabs-value="inbound">受電</button>
-            <button class="tabs-trigger" data-tabs-value="outbound">CB</button>
+            <button class="tabs-trigger" data-tabs-value="受電">受電</button>
+            <button class="tabs-trigger" data-tabs-value="CB">CB</button>
           </div> -->
       </div>
     </div>
@@ -189,16 +187,16 @@
           class="search-item card"
           data-title="有償警告"
           data-aliases="ゆうしょうけいこく"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <label id="is-mitsubishi-label">
             <input
               type="checkbox"
               id="is-mitsubishi-checkbox"
-              data-fb-target=".delay-notice"
+              data-fb-target=".ohinichi"
               data-true-value="通常よりお日にちがかかる可能性案内"
-              data-priority="2"
+              data-fb-priority="2"
             />
             三菱
           </label>
@@ -206,12 +204,12 @@
           <div style="display: flex; gap: 8px">
             <div class="copyable">
               ・有償警告案内<span class="yusho-keikoku">未</span><br />
-              ・<span class="delay-notice">お日にちがかかる可能性案内</span
+              ・<span class="ohinichi">お日にちがかかる可能性案内</span
               ><span class="yusho-keikoku">未</span>
             </div>
             <div class="copyable">
               ・有償警告案内済<br />
-              ・<span class="delay-notice">お日にちがかかる可能性案内</span
+              ・<span class="ohinichi">お日にちがかかる可能性案内</span
               ><span>済</span>
             </div>
           </div>
@@ -221,13 +219,13 @@
               ・メーカー保証期間内の有償警告案内<span class="yusho-keikoku"
                 >未</span
               ><br />
-              ・<span class="delay-notice">お日にちがかかる可能性案内</span
+              ・<span class="ohinichi">お日にちがかかる可能性案内</span
               ><span class="yusho-keikoku">未</span>
             </div>
 
             <div class="copyable">
               ・メーカー保証期間内の有償警告案内済<br />
-              ・<span class="delay-notice">お日にちがかかる可能性案内</span
+              ・<span class="ohinichi">お日にちがかかる可能性案内</span
               ><span>済</span>
             </div>
           </div>
@@ -237,7 +235,7 @@
           class="search-item card"
           data-title="保証対象外部位"
           data-aliases="ほしょうたいしょうがいぶい"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <!-- <div class="card-title">保証対象外部位</div> -->
@@ -263,14 +261,14 @@
               <div class="copyable">
                 ・保証対象外部位案内<span class="taishogai-status">未</span
                 ><br />
-                ・<span class="delay-notice-for-taishogai"></span
+                ・<span class="ohinichi-for-taishogai"></span
                 ><span class="taishogai-status">未</span>
               </div>
 
               <div class="copyable">
                 ・保証対象外部位案内<span class="taishogai-status">済</span
                 ><br />
-                ・<span class="delay-notice-for-taishogai"></span
+                ・<span class="ohinichi-for-taishogai"></span
                 ><span class="taishogai-status">済</span>
               </div>
             </div>
@@ -290,7 +288,7 @@
           class="search-item card"
           data-title="留守番電話への吹き込み希望"
           data-aliases="留守電, るすでん, るすばんでんわ, ふきこみ"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <h3>伝達事項/申し送り事項</h3>
@@ -302,7 +300,7 @@
         <div
           class="search-item card"
           data-title="浴室暖房乾燥機"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <!-- <div class="card-title">浴室暖房乾燥機</div> -->
@@ -330,7 +328,7 @@
           class="search-item card"
           data-title="お客様が直接メーカーに修理依頼をした"
           data-aliases="めーかー, ちょくせつ, しゅうりいらい"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <h3>訪問前/訪問中</h3>
@@ -354,7 +352,7 @@
           class="search-item card"
           data-title="エアコンの修理依頼"
           data-aliases="えあこん"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <div class="talk">
@@ -367,7 +365,7 @@
         <div
           class="search-item card"
           data-title="IHクッキングヒーター 天板にひび（割れ）"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <!-- <div class="card-title">IHクッキングヒーター 天板にひび（割れ）</div> -->
@@ -378,7 +376,7 @@
           class="search-item card"
           data-title="連絡希望時間/訪問希望日"
           data-aliases="れんらく, ほうもん"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <h3>申し送り事項</h3>
@@ -389,7 +387,7 @@
         <div
           class="search-item card"
           data-title="販売店連携"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <h3>トーク (→お客様)</h3>
@@ -434,7 +432,7 @@
         <div
           class="search-item card"
           data-title="販売店連携（メーカー修理不可）"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <div>給湯器（エコキュートなど）の外部配管/...</div>
@@ -455,7 +453,7 @@
           class="search-item card"
           data-title="ユナイト非対応の製品（照明など）"
           data-aliases="スワン, すわん, しょうめい, 照明, ゆないと"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <div>スワン、ｘｘ、ｘｘ、はユナイト非対応。家電119へ依頼。</div>
@@ -486,7 +484,7 @@
         <div
           class="search-item card"
           data-title="案内ステータス"
-          data-category="inbound"
+          data-category="受電"
           data-created-at="2026-02-01"
         >
           <table class="copyable-table">
@@ -516,7 +514,7 @@
         <div
           class="search-item card"
           data-title="CB: 修理依頼OK"
-          data-category="cb"
+          data-category="CB"
           data-created-at="2026-02-01"
         >
           <div class="card-content">
@@ -567,29 +565,42 @@
                   <input
                     type="radio"
                     name="outbound-koshonaiyo"
-                    value="故障内容変更:<br />■<br />↓<br />■"
                     data-fb-target="#outbound-koshonaiyo"
-                  />追加
+                    value="故障内容追記:<br>■"
+                  />追記
                 </label>
                 <label>
                   <input
                     type="radio"
                     name="outbound-koshonaiyo"
-                    value="故障内容追記:"
                     data-fb-target="#outbound-koshonaiyo"
+                    value="故障内容変更:<br>■<br>↓<br>■"
                   />変更
                 </label>
               </div>
             </div>
+
+            <div>
+              <label class="flex items-center w-fit">
+                <input
+                  type="checkbox"
+                  data-fb-target="#cb-ok-taiosha"
+                  data-fb-true-value="対応者: ■"
+                  data-fb-false-value="[hidden]"
+                />
+                対応者が契約者ではない
+              </label>
+            </div>
+
             <div class="copyable">
               <div>
                 <span class="clock"></span> 架電 CC<span class="operator-name"
                   >■</span
                 >
               </div>
-              <div>対応者: ■</div>
+              <div id="cb-ok-taiosha">対応者: ■</div>
               <div>・<span id="outbound-annai"></span></div>
-              <div>・<span class="delay-notice"></span>済</div>
+              <div>・<span class="ohinichi"></span>済</div>
               <div id="outbound-koshonaiyo"></div>
             </div>
           </div>
@@ -598,11 +609,41 @@
         <div
           class="search-item card"
           data-title="CB: 不出"
-          data-category="cb"
+          data-category="CB"
           data-created-at="2026-02-01"
         >
           <!-- <div class="card-title">CB: 不出</div> -->
           <div class="card-content">
+            <div class="radio-pills">
+              <label
+                ><input
+                  type="radio"
+                  name="fude-kaisu"
+                  value="1回目"
+                  data-fb-target="#fude-kaisu"
+                  checked
+                />
+                1回目</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="fude-kaisu"
+                  value="2回目"
+                  data-fb-target="#fude-kaisu"
+                />
+                2回目</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="fude-kaisu"
+                  value="3回目"
+                  data-fb-target="#fude-kaisu"
+                />
+                3回目</label
+              >
+            </div>
             <div
               style="
                 display: flex;
@@ -611,12 +652,11 @@
                 margin-bottom: 8px;
               "
             >
-              <select id="fude-kaisu-select" data-fb-target="#fude-kaisu">
-                <option value="1回目">1回目</option>
-                <option value="2回目">2回目</option>
-                <option value="3回目">3回目</option>
-              </select>
-              <select id="fude-type-select" data-fb-target="#fude-type">
+              <select
+                id="fude-type-select"
+                data-fb-target="#fude-type"
+                data-fb-priority="2"
+              >
                 <option value="留守電吹き込み済み">留守電吹き込み済み</option>
                 <option value="留守電">留守電</option>
                 <option value="コール音">コール音</option>
@@ -627,8 +667,12 @@
               </select>
               <input
                 type="text"
-                id="fude-type-override"
+                id="fude-type-override-input"
+                data-fb-target="#fude-type"
+                data-fb-priority="1"
+                data-fb-ignore-empty="true"
                 placeholder="自由に入力"
+                data-clearable
               />
             </div>
 
@@ -648,7 +692,7 @@
           class="search-item card"
           data-title="CB: 販売店戻し"
           data-aliases="はんばいてんもどし"
-          data-category="cb"
+          data-category="CB"
           data-created-at="2026-02-01"
         >
           <div class="card-content">
@@ -658,7 +702,7 @@
                   >■</span
                 >
               </div>
-              <div>対応者: ■</div>
+              <div>対応者: ■店/■様/■</div>
               <div>
                 お客様が当CCからの電話にお出にならず、修理の手配を進められない旨をお伝え。
                 フリーダイヤルの電話に出ていただくか、お客様から当CCへ折り返しご連絡いただくようお伝えいただき、その結果を折り返していただくようお願いし、了承を得る。
@@ -666,9 +710,9 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- この階層にデータを追加 -->
+        <!-- この階層にデータを追加 -->
+      </div>
 
       <!-- 該当するデータがない -->
       <div id="no-results" class="empty-state" style="display: none">
@@ -677,8 +721,10 @@
 
       <!-- データがない -->
       <div id="empty-state" class="empty-state" style="display: none">
-        <div>データがありません</div>
-        <div class="empty-state-message">まだデータが追加されていません。</div>
+        <div>データを追加してください。</div>
+        <a href="./help.html#how-to-add-data" target="_blank"
+          >データを追加する方法</a
+        >
       </div>
     </div>
 
@@ -699,6 +745,8 @@
     <script src="../lib/search-filter/index.js"></script>
     <!-- フォームのイベント発生時にUIを自動更新 -->
     <script src="../lib/form-binder/index.js"></script>
+    <!-- テキストボックスにクリアボタンを追加 -->
+    <script src="../lib/input-clear/index.js"></script>
     <!-- タブ -->
     <!-- <script src="../lib/tabs/index.js"></script> -->
 
@@ -723,10 +771,43 @@
       }
 
       /**
+       * CONFIG.categoriesを使って、カテゴリーボタンを生成
+       */
+      function generateCategoryButtons() {
+        const container = document.getElementById("category-buttons");
+        if (!container) return;
+
+        // 新しいフラグメントを作成
+        const fragment = document.createDocumentFragment();
+
+        // CONFIG.categoriesの各カテゴリーに対してボタンを生成
+        CONFIG.categories.forEach((category) => {
+          const button = document.createElement("button");
+          button.className = "tab-pill pushable";
+
+          // "全て:all" のような形式の場合、ラベルとvalueを分割
+          if (category.includes(":")) {
+            const [label, value] = category.split(":");
+            button.textContent = label;
+            button.dataset.targetCategory = value;
+          } else {
+            button.textContent = category;
+            button.dataset.targetCategory = category;
+          }
+
+          fragment.appendChild(button);
+        });
+
+        // 要素全体を置き換え
+        container.replaceChildren(fragment);
+      }
+
+      /**
        * UI要素を初期化
        */
       function initUI() {
         initItemUI();
+        generateCategoryButtons();
         // 管理者用の表示
         const params = new URLSearchParams(location.search);
         isAdmin = params.has("admin");
@@ -765,15 +846,16 @@
       // UI初期化
       initUI();
 
-      // Library初期化
+      // ライブラリを初期化
+      // InputClearを初期化
+      new InputClear();
       // CopyHandlerを初期化
-      const copyHandler = new CopyHandler({
+      new CopyHandler({
         copyIconColor: "var(--accent)", // コピーアイコンの色
         flashColor: "color-mix(in srgb, var(--accent) 30%, transparent)", // コピー成功時のハイライト色
         // showCopyIcon: false,  // コピーアイコンを非表示
         includeTh: false, // th要素をコピー対象外
       });
-
       // SearchFilterを初期化
       const searchFilter = new SearchFilter();
 
@@ -802,13 +884,23 @@
             });
           });
 
-        // 初期状態で「受電」フィルターを適用
-        const inboundButton = document.querySelector(
-          '[data-target-category="inbound"]',
+        // 初期状態でデフォルトカテゴリーのフィルターを適用
+        const defaultCategory = CONFIG.defaultCategory;
+        if (!defaultCategory) {
+          console.warn("CONFIG.defaultCategory が設定されていません");
+          return;
+        }
+
+        const defaultButton = document.querySelector(
+          `[data-target-category="${defaultCategory}"]`,
         );
-        if (inboundButton) {
-          inboundButton.classList.add("active");
-          searchFilter.setFilter("category", "inbound");
+        if (defaultButton) {
+          defaultButton.classList.add("active");
+          searchFilter.setFilter("category", defaultCategory);
+        } else {
+          console.error(
+            `デフォルトカテゴリー "${defaultCategory}" に対応するボタンが見つかりません。CONFIG.categories に "${defaultCategory}" が含まれているか確認してください。`,
+          );
         }
       }
 
@@ -836,31 +928,26 @@
       });
 
       // FormBinderを初期化
-      const formBinder = new FormBinder();
+      new FormBinder();
 
+      // 不出の種類のセレクトボックスのvalueが変わった時、不出の種類の上書きテキストボックスのvalueをクリア
       document
-        .getElementById("fude-type-override")
-        .addEventListener("input", (e) => {
-          const input = e.target;
-          const value = input.value.trim();
-          if (value) {
-            document.querySelectorAll(".fude-type").forEach((el) => {
-              el.textContent = value;
-            });
-          } else {
-            // セレクトの値に戻す
-            const select = document.getElementById("fude-type-select");
-            const selectedOption = select.options[select.selectedIndex];
-            document.querySelectorAll(".fude-type").forEach((el) => {
-              el.textContent = selectedOption.textContent;
-            });
+        .getElementById("fude-type-select")
+        .addEventListener("change", (e) => {
+          const overrideInput = document.getElementById(
+            "fude-type-override-input",
+          );
+          if (overrideInput.value !== "") {
+            overrideInput.value = "";
+            const event = new Event("input", { bubbles: true });
+            overrideInput.dispatchEvent(event);
           }
         });
 
-      function updateDelayNoticeUI() {
+      function updateOhinichiUI() {
         const text = CONFIG.ohinichiText || config.defaultOhinichiText;
         document
-          .querySelectorAll(".delay-notice, .delay-notice-for-taishogai")
+          .querySelectorAll(".ohinichi, .ohinichi-for-taishogai")
           .forEach((element) => {
             element.textContent = text;
           });
@@ -883,7 +970,7 @@
         // タブを初期化
         // const tabs = new Tabs({
         //   tabsList: "#main-tabs", // TabsList
-        //   defaultValue: "inbound", // アクティブなタブのデフォルト値
+        //   defaultValue: "受電", // アクティブなタブのデフォルト値
         //   variant: "pills", // タブのスタイル: 'underline' または 'pills'
         //   activeBgColor: "var(--accent)", // アクティブなタブの背景色
         //   activeBorderColor: "var(--accent)", // アクティブなタブのborderの色
@@ -894,12 +981,11 @@
         // });
 
         //
-        updateDelayNoticeUI();
+        updateOhinichiUI();
         updateIsMitsubishiUI();
 
-        document.getElementById("delay-notice-input").value =
-          CONFIG.ohinichiText;
-        // dispatchEventBySelector('input[id="delay-notice-input"]', "input");
+        document.getElementById("ohinichi-input").value = CONFIG.ohinichiText;
+        // dispatchEventBySelector('input[id="ohinichi-input"]', "input");
       }
       init();
     </script>

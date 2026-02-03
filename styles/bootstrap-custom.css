@@ -183,3 +183,7 @@
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
+
+.collapse > :last-child {
+  margin-bottom: 0;
+}

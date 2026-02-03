@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InputClear - デモ</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+      border-bottom: 3px solid #007bff;
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      color: #555;
+      margin-top: 2rem;
+      border-left: 4px solid #007bff;
+      padding-left: 0.75rem;
+    }
+
+    .demo-section {
+      background: white;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .demo-item {
+      margin: 1.5rem 0;
+    }
+
+    .demo-item label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .demo-item input {
+      font-size: 16px;
+      padding: 0.75rem;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      transition: border-color 0.2s;
+    }
+
+    .demo-item input:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    .code-block {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block code {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: #d63384;
+    }
+
+    .info-box {
+      background: #e7f3ff;
+      border-left: 4px solid #007bff;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .event-log {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      padding: 1rem;
+      margin: 1rem 0;
+      max-height: 200px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .event-log div {
+      padding: 0.25rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0.25rem;
+      font-size: 14px;
+    }
+
+    button:hover {
+      /* background: #0056b3; */
+    }
+
+    button.secondary {
+      background: #6c757d;
+    }
+
+    button.secondary:hover {
+      background: #545b62;
+    }
+  </style>
+</head>
+<body>
+  <h1>InputClear Library - デモページ</h1>
+
+  <div class="info-box">
+    <strong>InputClear</strong> は、テキストボックスに自動的にクリアボタンを追加するライブラリです。<br>
+    指定したclass名またはdata属性を持つinput要素に対して、値をクリアするボタンを表示します。
+  </div>
+
+  <!-- 基本的な使用例 -->
+  <div class="demo-section">
+    <h2>1. 基本的な使用例 (data-clearable)</h2>
+
+    <div class="demo-item">
+      <label for="input1">テキスト入力（デフォルト）</label>
+      <input type="text" id="input1" data-clearable placeholder="何か入力してください">
+    </div>
+
+    <div class="code-block">
+      <code>
+&lt;input type="text" data-clearable placeholder="何か入力してください"&gt;<br>
+&lt;script src="index.js"&gt;&lt;/script&gt;<br>
+&lt;script&gt;<br>
+&nbsp;&nbsp;new InputClear();<br>
+&lt;/script&gt;
+      </code>
+    </div>
+  </div>
+
+  <!-- カスタムセレクター -->
+  <div class="demo-section">
+    <h2>2. カスタムセレクター (.clearable)</h2>
+
+    <div class="demo-item">
+      <label for="input2">カスタムクラス使用</label>
+      <input type="text" id="input2" class="clearable" placeholder="clearableクラスで指定">
+    </div>
+
+    <div class="code-block">
+      <code>
+&lt;input type="text" class="clearable"&gt;<br>
+&lt;script&gt;<br>
+&nbsp;&nbsp;new InputClear({ selector: '.clearable' });<br>
+&lt;/script&gt;
+      </code>
+    </div>
+  </div>
+
+  <!-- カスタムボタンHTML -->
+  <div class="demo-section">
+    <h2>3. カスタムボタンHTML</h2>
+
+    <div class="demo-item">
+      <label for="input3">カスタムアイコン (🗑️)</label>
+      <input type="text" id="input3" class="custom-icon" placeholder="カスタムアイコン">
+    </div>
+
+    <div class="demo-item">
+      <label for="input4">HTMLボタン</label>
+      <input type="text" id="input4" class="custom-html" placeholder="HTMLボタン">
+    </div>
+
+    <div class="code-block">
+      <code>
+new InputClear({<br>
+&nbsp;&nbsp;selector: '.custom-icon',<br>
+&nbsp;&nbsp;buttonHTML: '🗑️'<br>
+});<br><br>
+new InputClear({<br>
+&nbsp;&nbsp;selector: '.custom-html',<br>
+&nbsp;&nbsp;buttonHTML: '&lt;span style="color:red"&gt;✕&lt;/span&gt;'<br>
+});
+      </code>
+    </div>
+  </div>
+
+  <!-- フォーカス時のみ表示 -->
+  <div class="demo-section">
+    <h2>4. フォーカス時のみ表示</h2>
+
+    <div class="demo-item">
+      <label for="input5">フォーカス中のみボタン表示</label>
+      <input type="text" id="input5" class="focus-only" placeholder="フォーカスしてください">
+    </div>
+
+    <div class="code-block">
+      <code>
+new InputClear({<br>
+&nbsp;&nbsp;selector: '.focus-only',<br>
+&nbsp;&nbsp;showOnFocus: true<br>
+});
+      </code>
+    </div>
+  </div>
+
+  <!-- ボタン位置（左側） -->
+  <div class="demo-section">
+    <h2>5. ボタン位置を左側に配置</h2>
+
+    <div class="demo-item">
+      <label for="input6">左側にボタン配置</label>
+      <input type="text" id="input6" class="left-position" placeholder="左側にボタン">
+    </div>
+
+    <div class="code-block">
+      <code>
+new InputClear({<br>
+&nbsp;&nbsp;selector: '.left-position',<br>
+&nbsp;&nbsp;position: 'left'<br>
+});
+      </code>
+    </div>
+  </div>
+
+  <!-- コールバック -->
+  <div class="demo-section">
+    <h2>6. イベントとコールバック</h2>
+
+    <div class="demo-item">
+      <label for="input7">イベントログ付き</label>
+      <input type="text" id="input7" class="with-callback" placeholder="入力してクリアしてください">
+    </div>
+
+    <div class="event-log" id="eventLog">
+      <div><em>イベントログ（最新10件）</em></div>
+    </div>
+
+    <button onclick="document.getElementById('eventLog').innerHTML = '<div><em>イベントログ（最新10件）</em></div>'">
+      ログをクリア
+    </button>
+
+    <div class="code-block">
+      <code>
+new InputClear({<br>
+&nbsp;&nbsp;selector: '.with-callback',<br>
+&nbsp;&nbsp;onClear: (input, oldValue) => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log('Cleared:', oldValue);<br>
+&nbsp;&nbsp;}<br>
+});<br><br>
+// カスタムイベントをリッスン<br>
+input.addEventListener('inputclear', (e) => {<br>
+&nbsp;&nbsp;console.log('Custom event:', e.detail.oldValue);<br>
+});
+      </code>
+    </div>
+  </div>
+
+  <!-- 複数のinputタイプ -->
+  <div class="demo-section">
+    <h2>7. 様々なinputタイプ</h2>
+
+    <div class="demo-item">
+      <label for="input-text">type="text"</label>
+      <input type="text" id="input-text" class="multi-type" placeholder="テキスト">
+    </div>
+
+    <div class="demo-item">
+      <label for="input-search">type="search"</label>
+      <input type="search" id="input-search" class="multi-type" placeholder="検索">
+    </div>
+
+    <div class="demo-item">
+      <label for="input-email">type="email"</label>
+      <input type="email" id="input-email" class="multi-type" placeholder="メールアドレス">
+    </div>
+
+    <div class="demo-item">
+      <label for="input-tel">type="tel"</label>
+      <input type="tel" id="input-tel" class="multi-type" placeholder="電話番号">
+    </div>
+
+    <div class="demo-item">
+      <label for="input-url">type="url"</label>
+      <input type="url" id="input-url" class="multi-type" placeholder="URL">
+    </div>
+
+    <div class="demo-item">
+      <label for="input-password">type="password"</label>
+      <input type="password" id="input-password" class="multi-type" placeholder="パスワード">
+    </div>
+  </div>
+
+  <!-- 動的追加 -->
+  <div class="demo-section">
+    <h2>8. 動的に追加されたinput要素</h2>
+
+    <div id="dynamicContainer"></div>
+
+    <button onclick="addDynamicInput()">input要素を追加</button>
+    <button class="secondary" onclick="removeDynamicInputs()">すべて削除</button>
+
+    <div class="code-block">
+      <code>
+const clearInstance = new InputClear({ selector: '.dynamic' });<br><br>
+// 後から追加されたinputにも適用<br>
+const newInput = document.createElement('input');<br>
+newInput.className = 'dynamic';<br>
+document.body.appendChild(newInput);<br>
+clearInstance.add(newInput);
+      </code>
+    </div>
+  </div>
+
+  <!-- アニメーションなし -->
+  <div class="demo-section">
+    <h2>9. アニメーションなし</h2>
+
+    <div class="demo-item">
+      <label for="input8">即座に表示/非表示</label>
+      <input type="text" id="input8" class="no-animation" placeholder="アニメーションなし">
+    </div>
+
+    <div class="code-block">
+      <code>
+new InputClear({<br>
+&nbsp;&nbsp;selector: '.no-animation',<br>
+&nbsp;&nbsp;animation: false<br>
+});
+      </code>
+    </div>
+  </div>
+
+  <!-- ライブラリの読み込み -->
+  <script src="index.js"></script>
+
+  <script>
+    // 1. デフォルト設定
+    new InputClear();
+
+    // 2. カスタムセレクター
+    new InputClear({ selector: '.clearable' });
+
+    // 3. カスタムボタンHTML
+    new InputClear({
+      selector: '.custom-icon',
+      buttonHTML: '🗑️'
+    });
+
+    new InputClear({
+      selector: '.custom-html',
+      buttonHTML: '<span style="color:red; font-weight:bold;">✕</span>'
+    });
+
+    // 4. フォーカス時のみ表示
+    new InputClear({
+      selector: '.focus-only',
+      showOnFocus: true
+    });
+
+    // 5. 左側配置
+    new InputClear({
+      selector: '.left-position',
+      position: 'left'
+    });
+
+    // 6. コールバック
+    new InputClear({
+      selector: '.with-callback',
+      onClear: (input, oldValue) => {
+        logEvent(`onClear: "${oldValue}" → ""`);
+      }
+    });
+
+    // カスタムイベントのリスナー
+    document.getElementById('input7').addEventListener('inputclear', (e) => {
+      logEvent(`Custom event: oldValue="${e.detail.oldValue}"`);
+    });
+
+    // 7. 複数のinputタイプ
+    new InputClear({ selector: '.multi-type' });
+
+    // 8. 動的追加用のインスタンス
+    const dynamicClearInstance = new InputClear({ selector: '.dynamic' });
+
+    // 9. アニメーションなし
+    new InputClear({
+      selector: '.no-animation',
+      animation: false
+    });
+
+    // イベントログ関数
+    let eventCount = 0;
+    function logEvent(message) {
+      eventCount++;
+      const logDiv = document.getElementById('eventLog');
+      const entry = document.createElement('div');
+      entry.textContent = `[${eventCount}] ${new Date().toLocaleTimeString()} - ${message}`;
+      logDiv.insertBefore(entry, logDiv.children[1]);
+
+      // 最新10件のみ保持
+      while (logDiv.children.length > 11) {
+        logDiv.removeChild(logDiv.lastChild);
+      }
+    }
+
+    // 動的input追加関数
+    let dynamicCount = 0;
+    function addDynamicInput() {
+      dynamicCount++;
+      const container = document.getElementById('dynamicContainer');
+
+      const item = document.createElement('div');
+      item.className = 'demo-item';
+      item.innerHTML = `
+        <label>動的に追加された input ${dynamicCount}</label>
+        <input type="text" class="dynamic" placeholder="Input ${dynamicCount}">
+      `;
+
+      container.appendChild(item);
+
+      // 新しく追加されたinputにクリアボタンを適用
+      const newInput = item.querySelector('input');
+      dynamicClearInstance.add(newInput);
+    }
+
+    // 動的input削除関数
+    function removeDynamicInputs() {
+      const container = document.getElementById('dynamicContainer');
+      container.innerHTML = '';
+      dynamicCount = 0;
+    }
+  </script>
+</body>
+</html>
