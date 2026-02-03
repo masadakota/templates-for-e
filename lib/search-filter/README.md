@@ -4,7 +4,7 @@
 
 ## 特徴
 
-- ✅ **超シンプル** - たった1行で動作（`new SearchFilter().init()`）
+- ✅ **超シンプル** - たった1行で動作（`new SearchFilter()`）
 - ✅ **デフォルト設定** - 設定不要で即使える
 - ✅ **リアルタイム検索** - 入力と同時にフィルタリング
 - ✅ **AND検索対応** - 半角スペース区切りで複数キーワード検索
@@ -28,7 +28,7 @@
 
 ```javascript
 import SearchFilter from './lib/search-filter/SearchFilter.js';
-new SearchFilter().init();  // これだけ！
+new SearchFilter();  // これだけ！
 ```
 
 ## インストール
@@ -81,7 +81,7 @@ lib/search-filter/
 
   <script type="module">
     import SearchFilter from './lib/search-filter/SearchFilter.js';
-    new SearchFilter().init();  // たった1行！
+    new SearchFilter();  // たった1行！
   </script>
 </body>
 </html>
@@ -147,18 +147,9 @@ const filter = new SearchFilter({
     console.log('検索クリア');
   }
 });
-
-filter.init();
 ```
 
 ### メソッド
-
-#### `init()`
-初期化処理を実行します。
-
-```javascript
-filter.init();
-```
 
 #### `filter(keyword)`
 指定したキーワードでフィルタリングを実行します。
@@ -298,7 +289,7 @@ filter.destroy();
 import SearchFilter from '../lib/search-filter/SearchFilter.js';
 
 // たった1行！
-new SearchFilter().init();
+new SearchFilter();
 ```
 
 ### 例2: 一部だけカスタマイズ
@@ -307,7 +298,7 @@ new SearchFilter().init();
 // デフォルト設定を使いつつ、アイテムクラスだけ変更
 new SearchFilter({
   itemSelector: '.log-entry'  // デフォルトは '.search-item'
-}).init();
+});
 ```
 
 ### 例3: デバウンス付き（大量データ）
@@ -315,7 +306,7 @@ new SearchFilter({
 ```javascript
 new SearchFilter({
   debounceMs: 300  // 300ms後に検索実行
-}).init();
+});
 ```
 
 ### 例4: コールバック付き
@@ -335,7 +326,7 @@ new SearchFilter({
   onClear: () => {
     console.log('検索がクリアされました');
   }
-}).init();
+});
 ```
 
 ### 例5: 大文字小文字を区別
@@ -343,13 +334,13 @@ new SearchFilter({
 ```javascript
 new SearchFilter({
   caseSensitive: true  // 大文字小文字を区別
-}).init();
+});
 ```
 
 ### 例6: 動的アイテムの追加
 
 ```javascript
-const filter = new SearchFilter().init();
+const filter = new SearchFilter();
 
 // WebSocketで新しいメッセージを受信
 socket.on('new_message', (message) => {
@@ -368,10 +359,10 @@ socket.on('new_message', (message) => {
 ```javascript
 // 半角スペースで区切ると AND検索になる
 // 例: "有償 警告" → 「有償」AND「警告」を含むアイテムのみ表示
-new SearchFilter().init();
+new SearchFilter();
 
 // プログラムから実行する場合
-const filter = new SearchFilter().init();
+const filter = new SearchFilter();
 filter.filter('有償 警告');  // 両方のキーワードを含むアイテムのみ
 ```
 
@@ -414,7 +405,7 @@ filter.filter('有償 警告');  // 両方のキーワードを含むアイテ�
 const filter = new SearchFilter({
   searchFields: ['title'],      // data-title属性を検索対象に
   searchTextContent: true        // 子要素のテキストも検索対象に
-}).init();
+});
 
 // カテゴリフィルターの設定
 document.querySelector('#category-filter').addEventListener('change', (e) => {
@@ -433,7 +424,7 @@ document.querySelector('#category-filter').addEventListener('change', (e) => {
 const filter = new SearchFilter({
   searchFields: ['title', 'createdAt'],  // 複数のdata-*属性
   searchTextContent: true                 // textContentも含める
-}).init();
+});
 
 // 検索例: "2026-01-01" → data-created-at="2026-01-01"のアイテムが表示
 // 検索例: "受電" → data-title="受電..."またはtextContentに"受電"を含むアイテムが表示
@@ -443,7 +434,7 @@ const filter = new SearchFilter({
 
 ```javascript
 const filter = new SearchFilter()
-  .init()
+  
   .showAll();
 
 // 後でクリア

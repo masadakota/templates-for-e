@@ -101,7 +101,7 @@ const options = {
     new SearchFilter({
       searchInputId: 'search-input',  // HTML ID は kebab-case
       itemSelector: '.search-item'    // HTML クラスは kebab-case
-    }).init();
+    });
   </script>
 </body>
 </html>

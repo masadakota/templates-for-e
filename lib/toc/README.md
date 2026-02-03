@@ -47,12 +47,14 @@ lib/toc/
   <!-- JavaScriptを読み込み -->
   <script src="path/to/toc/index.js"></script>
   <script>
+    // インスタンス作成と同時に自動初期化される
     const toc = new TOC();
-    toc.init();
   </script>
 </body>
 </html>
 ```
+
+> **注意:** `init()`は自動的に呼び出されるため、手動で呼び出す必要はありません。
 
 ### オプション
 
@@ -70,8 +72,6 @@ const toc = new TOC({
     console.log('Clicked:', heading.textContent);
   }
 });
-
-toc.init();
 ```
 
 ## メソッド
@@ -79,7 +79,10 @@ toc.init();
 ### `init()`
 目次を初期化して生成します。
 
+**注意:** このメソッドはコンストラクタで自動的に呼び出されるため、通常は手動で呼び出す必要はありません。
+
 ```javascript
+// 通常は不要（自動的に呼び出される）
 toc.init();
 ```
 
@@ -140,7 +143,6 @@ toc.refresh();
 const toc = new TOC({
   orderedList: true, // 番号付きリストを有効化
 });
-toc.init();
 ```
 
 **出力例:**
@@ -159,7 +161,6 @@ toc.init();
 const toc = new TOC({
   orderedList: false, // 番号なし
 });
-toc.init();
 ```
 
 ### CSS変数を使った色のカスタマイズ
@@ -169,7 +170,6 @@ const toc = new TOC({
   linkColor: 'var(--foreground)',
   linkHoverColor: 'var(--accent)',
 });
-toc.init();
 ```
 
 ### スタイルなしで使用（カスタムCSS）
@@ -181,7 +181,6 @@ CSSを読み込まず、独自のスタイルを適用することも可能：
 <script src="path/to/toc/index.js"></script>
 <script>
   const toc = new TOC();
-  toc.init();
 </script>
 ```
 
@@ -197,7 +196,6 @@ const toc = new TOC({
     heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 });
-toc.init();
 ```
 
 ### h4まで含める
@@ -206,7 +204,6 @@ toc.init();
 const toc = new TOC({
   headingSelector: 'h2, h3, h4',
 });
-toc.init();
 ```
 
 ## ブラウザサポート

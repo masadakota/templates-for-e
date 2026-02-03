@@ -46,7 +46,7 @@
 ```javascript
 // app.js
 import SearchFilter from './lib/search-filter/SearchFilter.js';
-new SearchFilter().init();
+new SearchFilter();
 ```
 
 ### Step 3: 完成！
@@ -87,7 +87,7 @@ new SearchFilter().init();
 ```javascript
 new SearchFilter({
   itemSelector: '.custom-item'  // これだけカスタマイズ
-}).init();
+});
 ```
 
 ### 大量データの場合
@@ -95,7 +95,7 @@ new SearchFilter({
 ```javascript
 new SearchFilter({
   debounceMs: 300  // 300ms後に検索実行
-}).init();
+});
 ```
 
 ### イベントを取得する
@@ -106,7 +106,7 @@ new SearchFilter({
     console.log(`検索: "${result.keyword}"`);
     console.log(`表示: ${result.visibleCount} / ${result.totalCount}`);
   }
-}).init();
+});
 ```
 
 ---
@@ -118,7 +118,7 @@ new SearchFilter({
 ```javascript
 new SearchFilter({
   itemSelector: '.my-item'  // カスタムクラス
-}).init();
+});
 ```
 
 ### Q: 大文字小文字を区別したい
@@ -126,13 +126,13 @@ new SearchFilter({
 ```javascript
 new SearchFilter({
   caseSensitive: true
-}).init();
+});
 ```
 
 ### Q: 動的にアイテムを追加した
 
 ```javascript
-const filter = new SearchFilter().init();
+const filter = new SearchFilter();
 
 // 新しいアイテムを追加
 container.innerHTML += '<div class="search-item">New Item</div>';
@@ -154,7 +154,7 @@ filter.refresh();
 
 ```javascript
 // 自動検出される（autoDetect: trueがデフォルト）
-new SearchFilter().init();
+new SearchFilter();
 ```
 
 ---
@@ -173,7 +173,7 @@ new SearchFilter().init();
 
 ```javascript
 // logs/index.html
-new SearchFilter().init();  // デフォルト設定でOK
+new SearchFilter();  // デフォルト設定でOK
 ```
 
 HTML:
@@ -188,7 +188,7 @@ HTML:
 ```javascript
 new SearchFilter({
   itemSelector: '.product'  // 商品カードのクラス
-}).init();
+});
 ```
 
 ### ユーザー検索の例
@@ -203,7 +203,7 @@ new SearchFilter({
       results: result.visibleCount
     });
   }
-}).init();
+});
 ```
 
 ---
@@ -217,7 +217,7 @@ new SearchFilter({
 **最小構成:**
 ```javascript
 import SearchFilter from './lib/search-filter/SearchFilter.js';
-new SearchFilter().init();
+new SearchFilter();
 ```
 
 これで完璧に動きます！

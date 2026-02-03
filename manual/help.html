@@ -283,15 +283,12 @@
                 data-title="浴室暖房乾燥機の修理依頼"
                 data-aliases="よくしつだんぼうかんそうき, しゅうり"
                 data-category="inbound"
-                data-created-at="2026-02-01"
               >
                 <div>テキストテキスト</div>
-                <h3>見出し</h3>
                 <div class="copyable">
-                  コピーしたいテキスト<br />
+                  コピーしたいテキスト<br>
                   改行するには、改行したい位置にbrタグを記述します。
                 </div>
-                <div>テキストテキスト</div>
               </div>
             </script>
 
@@ -326,15 +323,12 @@
               data-title="浴室暖房乾燥機の修理依頼"
               data-aliases="よくしつだんぼうかんそうき, しゅうり"
               data-category="inbound"
-              data-created-at="2026-02-01"
             >
               <div>テキストテキスト</div>
-              <div class="h3">見出し</div>
               <div class="copyable">
                 コピーしたいテキスト<br />
                 改行するには、改行したい位置にbrタグを記述します。
               </div>
-              <div>テキストテキスト</div>
             </div>
 
             <h3>追加場所</h3>
@@ -347,7 +341,11 @@
             </script>
 
             <h4>例</h4>
-            <script type="text/plain" class="language-markup line-numbers">
+            <script
+              type="text/plain"
+              class="language-markup line-numbers"
+              data-line="1-8"
+            >
               <div
                 data-title="浴室暖房乾燥機の修理依頼"
                 data-aliases="よくしつだんぼうかんそうき, しゅうり"
@@ -464,11 +462,27 @@
               <span class="clock"></span> 架電 CC池袋太郎<br />
               テキストテキスト
             </div>
+            <div>※config.jsで datetimeFormat: "M/D H:mm" としている場合。</div>
           </section>
 
           <section>
             <h3>日時の形式</h3>
-            <p>config.js の datetimeFormatの値を編集してください。</p>
+            <p>
+              config.js の datetimeFormatの値を YYYY-MM-DD形式
+              で編集してください。
+            </p>
+
+            <script
+              type="text/plain"
+              class="language-javascript line-numbers"
+              data-line="3"
+            >
+              const CONFIG = {
+                // ...
+                datetimeFormat: "M/D H:■", // 日時の形式
+                // ...
+              };
+            </script>
             <table>
               <tr>
                 <th>日時の形式</th>
@@ -486,6 +500,10 @@
                 <td>MM/DD HH:mm</td>
                 <td>01/01 01:01</td>
               </tr>
+              <tr>
+                <td>YYYY年MM月DD日 HH:mm</td>
+                <td>2026年01月01日 01:01</td>
+              </tr>
             </table>
           </section>
 
@@ -493,6 +511,7 @@
         </div>
       </article>
     </div>
+    <script src="../vendor/dayjs.min.js"></script>
     <script src="../lib/tabs/index.js"></script>
     <script src="../lib/clock/index.js"></script>
     <script src="../lib/copy-handler/config.js"></script>
@@ -508,7 +527,6 @@
         linkHoverColor: "var(--accent)",
         orderedList: true, // 番号付きリストを有効化
       });
-      toc.init();
 
       // タブを初期化
       new Tabs({
@@ -544,10 +562,7 @@
         copyIconColor: "var(--accent)", // コピーアイコンの色
         flashColor: "color-mix(in srgb, var(--accent) 30%, transparent)", // コピー成功時のハイライト色
       });
-      copyHandler.init();
     </script>
-    <!-- HTMLエスケープユーティリティ（Prism.jsの前に読み込む） -->
-    <!-- <script src="../utils/html-escape.js"></script> -->
     <script src="../vendor/prism-js/prism.js"></script>
   </body>
 </html>

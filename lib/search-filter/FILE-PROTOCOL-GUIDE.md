@@ -20,19 +20,22 @@ has been blocked by CORS policy
 <script src="../lib/search-filter/search-filter.js"></script>
 <script>
   // グローバルスコープでSearchFilterが使える
-  new SearchFilter().init();
+  new SearchFilter();
 </script>
 ```
 
 **ファイル:**
+
 - `lib/search-filter/search-filter.js` - file://プロトコル対応版
 
 **メリット:**
+
 - ✅ file://プロトコルで動作
 - ✅ 設定不要
 - ✅ すべてのブラウザで動作
 
 **デメリット:**
+
 - ❌ グローバルスコープを汚染
 - ❌ モジュールではない
 
@@ -45,8 +48,8 @@ has been blocked by CORS policy
 ```html
 <!-- ES Modules版（Webサーバー必要） -->
 <script type="module">
-  import SearchFilter from './lib/search-filter/SearchFilter.js';
-  new SearchFilter().init();
+  import SearchFilter from "./lib/search-filter/SearchFilter.js";
+  new SearchFilter();
 </script>
 ```
 
@@ -66,11 +69,13 @@ npx http-server
 ブラウザで http://localhost:8000/logs/ を開く
 
 **メリット:**
+
 - ✅ ES Modulesが使える
 - ✅ グローバルスコープを汚染しない
 - ✅ モダンな開発スタイル
 
 **デメリット:**
+
 - ❌ Webサーバーが必要
 - ❌ file://プロトコルでは動作しない
 
@@ -79,11 +84,13 @@ npx http-server
 ### 方法3: ブラウザのセキュリティを無効化（非推奨）
 
 **Chrome:**
+
 ```bash
 chrome.exe --allow-file-access-from-files
 ```
 
 **⚠️ 警告:**
+
 - セキュリティリスクがあります
 - 開発用途のみ
 - 本番環境では絶対に使用しないでください
@@ -92,9 +99,9 @@ chrome.exe --allow-file-access-from-files
 
 ## 使用ファイルの違い
 
-| ファイル | 形式 | file://対応 | 用途 |
-|---------|------|------------|------|
-| `search-filter.js` | UMD | ✅ | file://プロトコル用 |
+| ファイル           | 形式 | file://対応 | 用途                |
+| ------------------ | ---- | ----------- | ------------------- |
+| `search-filter.js` | UMD  | ✅          | file://プロトコル用 |
 
 ---
 
@@ -105,35 +112,37 @@ chrome.exe --allow-file-access-from-files
 ```html
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>履歴</title>
-  <style>
-    .hidden { display: none; }
-    .clear-btn.visible { opacity: 1; }
-  </style>
-</head>
-<body>
-  <input type="text" id="searchInput" placeholder="検索...">
-  <button id="clearBtn">×</button>
-  <div id="resultCount"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>履歴</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+      .clear-btn.visible {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="searchInput" placeholder="検索..." />
+    <button id="clearBtn">×</button>
+    <div id="resultCount"></div>
 
-  <div id="itemsContainer">
-    <div class="search-item">test</div>
-    <div class="search-item">Hello</div>
-    <div class="search-item">Test2</div>
-  </div>
+    <div id="itemsContainer">
+      <div class="search-item">test</div>
+      <div class="search-item">Hello</div>
+      <div class="search-item">Test2</div>
+    </div>
 
-  <div id="noResults" style="display: none;">
-    検索結果なし
-  </div>
+    <div id="noResults" style="display: none;">検索結果なし</div>
 
-  <!-- UMD版を使用（file://で動作） -->
-  <script src="../lib/search-filter/search-filter.js"></script>
-  <script>
-    new SearchFilter().init();
-  </script>
-</body>
+    <!-- UMD版を使用（file://で動作） -->
+    <script src="../lib/search-filter/search-filter.js"></script>
+    <script>
+      new SearchFilter();
+    </script>
+  </body>
 </html>
 ```
 
@@ -148,12 +157,14 @@ chrome.exe --allow-file-access-from-files
 ### Q: UMD版とES Modules版の違いは？
 
 **A:**
+
 - **UMD版**: グローバル変数`SearchFilter`として公開、どこからでもアクセス可能
 - **ES Modules版**: `import`でモジュールとして読み込み、スコープが分離
 
 ### Q: どちらを使うべき？
 
 **A:**
+
 - **file://で開く場合**: UMD版（`search-filter.js`）
 
 ---
@@ -165,6 +176,7 @@ chrome.exe --allow-file-access-from-files
 **原因:** UMD版のスクリプトが読み込まれていない
 
 **解決:**
+
 ```html
 <!-- このスクリプトが読み込まれているか確認 -->
 <script src="../lib/search-filter/search-filter.js"></script>
@@ -175,6 +187,7 @@ chrome.exe --allow-file-access-from-files
 **原因:** ES Modules版をfile://で使おうとしている
 
 **解決:**
+
 - UMD版に切り替える、または
 - Webサーバーを起動する
 
@@ -183,4 +196,4 @@ chrome.exe --allow-file-access-from-files
 ## まとめ
 
 - **file://プロトコル**: `search-filter.js`（UMD版）を使う
-- デフォルト設定で`new SearchFilter().init()`で動作
+- デフォルト設定で`new SearchFilter();`で動作

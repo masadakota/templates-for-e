@@ -126,7 +126,7 @@ window.__checkboxTextToggler.updateTargets('taishogai-status', '完了');
 
 **初期化:**
 ```javascript
-new SearchFilter().init();
+new SearchFilter();
 ```
 
 ### 3. クリップボードコピー機能

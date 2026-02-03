@@ -14,27 +14,56 @@
         class="flex flex-col gap-1"
         style="width: 500px; max-width: 100%; margin: 0 auto; padding: 8px 12px"
       >
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center gap-2">
           <!-- オペレーター名 -->
-          <div class="flex flex-col">
-            <!-- <label for="operator-name-input" class="text-sm"
-              >オペレーター名:</label
-            > -->
+          <input
+            type="text"
+            style="width: 120px"
+            id="operator-name-input"
+            class="small-placeholder"
+            placeholder="オペレーター名"
+          />
+
+          <!-- Search UI -->
+          <div class="relative flex-1">
             <input
               type="text"
-              style="width: 120px"
-              id="operator-name-input"
-              class="small-placeholder"
-              placeholder="オペレーター名"
+              id="search-input"
+              class="search-input"
+              placeholder="検索"
+              autocomplete="off"
+              aria-label="検索"
             />
+            <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
           </div>
 
-          <a id="help-link" href="./help.html" class="text-sm" target="_blank"
-            >使い方（管理者用）</a
+          <a
+            id="help-link"
+            href="./help.html"
+            class="text-sm"
+            style="display: none"
+            target="_blank"
+            >管理者用ドキュメント</a
           >
 
           <!-- 設定 -->
-          <button
+          <!-- <button
             class="btn"
             style="
               border: none;
@@ -48,13 +77,18 @@
             aria-controls="collapseExample"
           >
             設定
-          </button>
+          </button> -->
 
-          <!-- <button
+          <button
             id="settings-toggle"
             class="settings-icon-btn"
-            aria-label="設定を開く"
             title="設定"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+            aria-label="設定を開く"
           >
             <img
               src="../components/ui/gear-fill.svg"
@@ -62,7 +96,7 @@
               width="16"
               height="16"
             />
-          </button> -->
+          </button>
         </div>
         <!-- 設定パネル -->
         <div class="collapse" id="collapseExample">
@@ -92,7 +126,7 @@
               <input
                 type="text"
                 style="width: 200px"
-                data-target-classes="delay-notice delay-notice-for-taishogai"
+                data-fb-target=".delay-notice, .delay-notice-for-taishogai"
                 id="delay-notice-input"
                 data-priority="1"
                 placeholder="お日にちがかかる可能性案内"
@@ -111,33 +145,6 @@
           </div>
         </div>
 
-        <!-- Search UI -->
-        <div class="relative">
-          <input
-            type="text"
-            id="search-input"
-            placeholder="検索"
-            autocomplete="off"
-            aria-label="ログ検索"
-          />
-          <button id="clear-btn" class="clear-btn" aria-label="検索をクリア">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18 6L6 18M6 6L18 18"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
         <!-- キーワード -->
         <!-- <div>
           <span class="text-sm" style="margin-right: 8px">頻出キーワード:</span>
@@ -156,7 +163,7 @@
         </div> -->
 
         <!-- Category Buttons -->
-        <div class="flex gap-1 justify-center items-center">
+        <div class="flex gap-1 items-center">
           <span class="text-sm">カテゴリー:</span>
           <button class="tab-pill" data-target-category="inbound">受電</button>
           <button class="tab-pill" data-target-category="cb">CB</button>
@@ -185,22 +192,11 @@
           data-category="inbound"
           data-created-at="2026-02-01"
         >
-          <!-- <div class="card-title">有償警告</div> -->
-          <!-- <label>
-                <input
-                  type="checkbox"
-                  id="yusho-keikoku-checkbox"
-                  data-target-class="yusho-keikoku"
-                  data-true-value="済"
-                  data-false-value="未"
-                />
-                済
-              </label> -->
           <label id="is-mitsubishi-label">
             <input
               type="checkbox"
               id="is-mitsubishi-checkbox"
-              data-target-class="delay-notice"
+              data-fb-target=".delay-notice"
               data-true-value="通常よりお日にちがかかる可能性案内"
               data-priority="2"
             />
@@ -257,7 +253,7 @@
               <input
                 type="checkbox"
                 id="taishogai-status-checkbox"
-                data-target-class="taishogai-status"
+                data-fb-target=".taishogai-status"
                 data-true-value="済"
                 data-false-value="未"
               />
@@ -337,7 +333,6 @@
           data-category="inbound"
           data-created-at="2026-02-01"
         >
-          <!-- <div class="card-title">お客様が直接メーカーに修理依頼をした</div> -->
           <h3>訪問前/訪問中</h3>
           <div class="talk">
             恐れ入りますが、当窓口を通していない修理は10年保証対象外でございます。
@@ -473,6 +468,8 @@
           <div class="talk">
             先程、お客様から■の修理依頼のお電話が入りまして、こちらの製品の場合、エディオン本部からの指示により、家電の119番様でのご対応をお願いしております。
           </div>
+
+          <h3>備考</h3>
           <div class="copyable">
             <div>
               <span class="clock"></span> 架電 CC<span class="operator-name"
@@ -530,7 +527,8 @@
                   <input
                     type="radio"
                     name="outbound-annai"
-                    value="outbound-annai-yusho"
+                    value="有償警告案内済"
+                    data-fb-target="#outbound-annai"
                     checked
                   />有償警告
                 </label>
@@ -538,14 +536,16 @@
                   <input
                     type="radio"
                     name="outbound-annai"
-                    value="outbound-annai-maker"
+                    value="メーカー保証期間内の有償警告案内済"
+                    data-fb-target="#outbound-annai"
                   />メーカー保証期間内
                 </label>
                 <label>
                   <input
                     type="radio"
                     name="outbound-annai"
-                    value="outbound-annai-taishogai"
+                    value="保証対象外部位案内済"
+                    data-fb-target="#outbound-annai"
                   />保証対象外
                 </label>
               </div>
@@ -558,7 +558,8 @@
                   <input
                     type="radio"
                     name="outbound-koshonaiyo"
-                    value="outbound-koshonaiyo-ok"
+                    value="故障内容一致を確認。"
+                    data-fb-target="#outbound-koshonaiyo"
                     checked
                   />一致
                 </label>
@@ -566,14 +567,16 @@
                   <input
                     type="radio"
                     name="outbound-koshonaiyo"
-                    value="outbound-koshonaiyo-add"
+                    value="故障内容変更:<br />■<br />↓<br />■"
+                    data-fb-target="#outbound-koshonaiyo"
                   />追加
                 </label>
                 <label>
                   <input
                     type="radio"
                     name="outbound-koshonaiyo"
-                    value="outbound-koshonaiyo-change"
+                    value="故障内容追記:"
+                    data-fb-target="#outbound-koshonaiyo"
                   />変更
                 </label>
               </div>
@@ -608,18 +611,17 @@
                 margin-bottom: 8px;
               "
             >
-              <select id="fude-kaisu-select">
-                <option value="fude-kaisu-1">1回目</option>
-                <option value="fude-kaisu-2">2回目</option>
-                <option value="fude-kaisu-3">3回目</option>
+              <select id="fude-kaisu-select" data-fb-target="#fude-kaisu">
+                <option value="1回目">1回目</option>
+                <option value="2回目">2回目</option>
+                <option value="3回目">3回目</option>
               </select>
-              <!-- <span>種類: </span> -->
-              <select id="fude-type-select">
-                <option value="rusuden-fukikomi">留守電吹き込み済み</option>
-                <option value="rusuden">留守電</option>
-                <option value="call">コール音</option>
-                <option value="wachu">話中</option>
-                <option value="chikakuni">
+              <select id="fude-type-select" data-fb-target="#fude-type">
+                <option value="留守電吹き込み済み">留守電吹き込み済み</option>
+                <option value="留守電">留守電</option>
+                <option value="コール音">コール音</option>
+                <option value="話中">話中</option>
+                <option value="「近くにおりません」アナウンス">
                   「近くにおりません」アナウンス
                 </option>
               </select>
@@ -632,12 +634,12 @@
 
             <div class="copyable">
               <div>
-                <span class="fude-kaisu"></span>
+                <span id="fude-kaisu"></span>
                 <span class="clock"></span> 架電 CC<span class="operator-name"
                   >■</span
                 >
               </div>
-              <div class="fude-type"></div>
+              <div id="fude-type"></div>
             </div>
           </div>
         </div>
@@ -666,35 +668,46 @@
         </div>
       </div>
 
-      <!-- この階層にデータを追加。 -->
+      <!-- この階層にデータを追加 -->
 
-      <!-- No results message (hidden by default) -->
+      <!-- 該当するデータがない -->
       <div id="no-results" class="empty-state" style="display: none">
         <div>データがありません</div>
       </div>
 
-      <!-- Empty state (shown when no logs exist) -->
+      <!-- データがない -->
       <div id="empty-state" class="empty-state" style="display: none">
-        <div class="empty-state-icon">📝</div>
-        <div>履歴がありません</div>
-        <div class="empty-state-message">まだログが記録されていません</div>
+        <div>データがありません</div>
+        <div class="empty-state-message">まだデータが追加されていません。</div>
       </div>
     </div>
 
     <!-- Scripts -->
+    <!-- 設定ファイル -->
     <script src="./config.js"></script>
+    <!-- Day.js (日時ライブラリ) -->
+    <script src="../vendor/dayjs.min.js"></script>
+    <!-- Bootstrap (UIフレームワーク) -->
     <script src="../vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- DOM操作ユーティリティ -->
+    <script src="../utils/dom-utils.js"></script>
+    <!-- ワンクリックでコピー -->
     <script src="../lib/copy-handler/index.js"></script>
+    <!-- 日時表示 -->
     <script src="../lib/clock/index.js"></script>
+    <!-- データ検索 -->
     <script src="../lib/search-filter/index.js"></script>
-    <script src="../lib/form-updater/index.js"></script>
+    <!-- フォームのイベント発生時にUIを自動更新 -->
+    <script src="../lib/form-binder/index.js"></script>
+    <!-- タブ -->
     <!-- <script src="../lib/tabs/index.js"></script> -->
+
     <script>
       let isAdmin = false;
       /**
        * data-title属性を持つ要素にcard-titleを自動生成
        */
-      function initTitles() {
+      function initItemUI() {
         document.querySelectorAll("[data-title]").forEach((element) => {
           const title = element.dataset.title;
           if (title) {
@@ -713,13 +726,13 @@
        * UI要素を初期化
        */
       function initUI() {
-        initTitles();
+        initItemUI();
         // 管理者用の表示
         const params = new URLSearchParams(location.search);
         isAdmin = params.has("admin");
-        if (!isAdmin) {
+        if (isAdmin) {
           const elem = document.getElementById("help-link");
-          elem.style.display = "none";
+          elem.style.display = "block";
         }
 
         // オペレーター名
@@ -729,7 +742,7 @@
           .addEventListener("input", (event) => {
             let newValue = event.target.value.trim();
             if (newValue === "") {
-              // #operator-name-inputが空の時は、#operator-name-inputのbackground-colorを赤にする
+              // #operator-name-inputが空の時は、#operator-name-inputのbackground-colorを赤にする。
               // input.style.backgroundColor = "#ffcccc";
               newValue = initialOperatorName;
             } else {
@@ -745,6 +758,10 @@
         document.getElementById("datetime-format-input").value =
           CONFIG.datetimeFormat;
       }
+
+      // DomUtilsから関数を取得
+      const { dispatchEventBySelector } = window.DomUtils;
+
       // UI初期化
       initUI();
 
@@ -756,10 +773,9 @@
         // showCopyIcon: false,  // コピーアイコンを非表示
         includeTh: false, // th要素をコピー対象外
       });
-      copyHandler.init();
 
       // SearchFilterを初期化
-      const searchFilter = new SearchFilter().init();
+      const searchFilter = new SearchFilter();
 
       /**
        * カテゴリフィルターボタンのイベントリスナーを設定
@@ -813,99 +829,14 @@
 
       initKeywordButtons();
 
-      // Libs
       // 日時表示を初期化
       new Clock({
         format: CONFIG.datetimeFormat,
         // format: "YYYY/MM/DD HH:mm:ss"
       });
-      // FormUpdaterを初期化
-      const formUpdater = new FormUpdater();
-      formUpdater.init();
 
-      /**
-       * 故障内容のラジオボタンの値からHTMLメッセージを取得
-       * @param {string} key - ラジオボタンの値
-       * @returns {string} HTMLメッセージ
-       */
-      function getOutboundKoshonaiyoHtml(key) {
-        const messages = {
-          "outbound-koshonaiyo-ok": "故障内容一致を確認。",
-          "outbound-koshonaiyo-change": "故障内容変更:<br />■<br />↓<br />■",
-          "outbound-koshonaiyo-add": "故障内容追記:",
-        };
-        return messages[key] || "";
-      }
-
-      document
-        .querySelectorAll('input[name="outbound-koshonaiyo"]')
-        .forEach((radio) => {
-          radio.addEventListener("change", (event) => {
-            const selectedValue = event.target.value;
-            const html = getOutboundKoshonaiyoHtml(selectedValue);
-            document.getElementById("outbound-koshonaiyo").innerHTML = html;
-          });
-        });
-
-      function getOutboundAnnaiHtml(key) {
-        console.log("key", key);
-        const htmlMap = {
-          "outbound-annai-yusho": `有償警告案内済`,
-          "outbound-annai-maker": `メーカー保証期間内の有償警告案内済`,
-          "outbound-annai-taishogai": `保証対象外部位案内済`,
-        };
-        return htmlMap[key] || null;
-      }
-
-      document
-        .querySelectorAll('input[name="outbound-annai"]')
-        .forEach((radio) => {
-          radio.addEventListener("change", (event) => {
-            const html = getOutboundAnnaiHtml(event.target.value);
-            document.getElementById("outbound-annai").innerHTML = html;
-          });
-        });
-
-      /**
-       * セレクターで要素を取得してイベントをディスパッチ
-       * @param {string} selector - CSSセレクター
-       * @param {string} eventType - イベントタイプ
-       * @returns {boolean} 要素が見つかってイベントをディスパッチできたらtrue
-       */
-      function dispatchEventBySelector(selector, eventType) {
-        const element = document.querySelector(selector);
-        if (!element) {
-          console.warn(`Element not found: ${selector}`);
-          return false;
-        }
-        element.dispatchEvent(new Event(eventType));
-        return true;
-      }
-
-      document
-        .getElementById("fude-kaisu-select")
-        .addEventListener("change", (e) => {
-          const select = e.target;
-          const selectedOption = select.options[select.selectedIndex];
-          document.querySelectorAll(".fude-kaisu").forEach((el) => {
-            el.textContent = selectedOption.textContent;
-          });
-        });
-
-      document
-        .getElementById("fude-type-select")
-        .addEventListener("change", (e) => {
-          // fude-type-override が空の場合のみ反映
-          const overrideInput = document.getElementById("fude-type-override");
-          if (overrideInput.value.trim()) {
-            return;
-          }
-          const select = e.target;
-          const selectedOption = select.options[select.selectedIndex];
-          document.querySelectorAll(".fude-type").forEach((el) => {
-            el.textContent = selectedOption.textContent;
-          });
-        });
+      // FormBinderを初期化
+      const formBinder = new FormBinder();
 
       document
         .getElementById("fude-type-override")
@@ -965,19 +896,7 @@
         //
         updateDelayNoticeUI();
         updateIsMitsubishiUI();
-        // 不出
-        dispatchEventBySelector("#fude-kaisu-select", "change");
-        dispatchEventBySelector("#fude-type-select", "change");
 
-        //
-        dispatchEventBySelector(
-          'input[name="outbound-annai"]:checked',
-          "change",
-        );
-        dispatchEventBySelector(
-          'input[name="outbound-koshonaiyo"]:checked',
-          "change",
-        );
         document.getElementById("delay-notice-input").value =
           CONFIG.ohinichiText;
         // dispatchEventBySelector('input[id="delay-notice-input"]', "input");

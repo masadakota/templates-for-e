@@ -14,7 +14,12 @@
       "Bash(move libdatetime-display libclock)",
       "Bash(cmd /c \"move /Y lib\\\\datetime-display lib\\\\clock\")",
       "Bash(cmd /c \"if exist lib\\\\clock echo SUCCESS || echo FAILED\")",
-      "Bash(cmd /c \"dir /b lib\")"
+      "Bash(cmd /c \"dir /b lib\")",
+      "Bash(cat:*)",
+      "Bash(node -c:*)",
+      "Bash(cmd /c \"move /Y lib\\\\form-updater lib\\\\form-binder\")",
+      "Bash(cmd /c \"if exist lib\\\\form-binder echo SUCCESS || echo FAILED\")",
+      "Bash(git mv:*)"
     ]
   }
 }

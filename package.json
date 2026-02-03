@@ -17,9 +17,24 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^27.0.0",
-    "live-server": "^1.2.1"
+    "live-server": "^1.2.1",
+    "tailwindcss": "^4.1.18"
   },
   "dependencies": {
     "bootstrap-icons": "^1.13.1"
-  }
+  },
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masadakota/templates-for-e.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/masadakota/templates-for-e/issues"
+  },
+  "homepage": "https://github.com/masadakota/templates-for-e#readme"
 }

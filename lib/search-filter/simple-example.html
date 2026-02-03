@@ -112,7 +112,7 @@
     import SearchFilter from './SearchFilter.js';
 
     // たった1行で動作！
-    new SearchFilter().init();
+    new SearchFilter();
   </script>
 
   <hr style="margin: 2rem 0;">
@@ -140,7 +140,7 @@
 &lt;!-- 3. たった1行のJavaScript --&gt;
 &lt;script type="module"&gt;
   import SearchFilter from './SearchFilter.js';
-  new SearchFilter().init();
+  new SearchFilter();
 &lt;/script&gt;</code></pre>
 
   <h3>デフォルト設定（kebab-case）</h3>
@@ -160,6 +160,6 @@
   <pre style="background: #f5f5f5; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>new SearchFilter({
   itemSelector: '.custom-item',  // カスタムクラス
   debounceMs: 300               // 大量データ用
-}).init();</code></pre>
+});</code></pre>
 </body>
 </html>

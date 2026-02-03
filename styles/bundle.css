@@ -17,7 +17,8 @@
 /* 外部ライブラリ */
 @import url("../vendor/bootstrap/bootstrap.min.css");
 @import url("../vendor/bootstrap-icons/font/bootstrap-icons.min.css");
-@import url("../vendor/prism-js/prism.css");
+/* @import url("../vendor/prism-js/prism.css"); */
+@import url("../vendor/prism-js/prism-custom.css");
 
 /* カスタムライブラリ（lib/） */
 @import url("../lib/tabs/styles.css");
