@@ -186,106 +186,119 @@
 }
 
 /* =============================================================================
-   Message Boxes - 情報ボックスのバリエーション
+   Alert - 情報ボックスのバリエーション (shadcn/ui Alert inspired)
    ============================================================================= */
 
-/* 共通スタイル */
-.info-box,
-.success-box,
-.warning-box,
-.tips-box,
-.danger-box,
-.note-box {
+/* Alert 共通スタイル */
+.alert {
+  position: relative;
   padding: 1rem;
   border-radius: 4px;
   margin: 1.5rem 0;
-  border-left: 4px solid;
+  border: 1px solid;
+  border-left-width: 4px;
 }
 
-/* 情報（青） */
-.info-box {
+/* Alert Title */
+.alert-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+/* Alert Description */
+.alert-description {
+  line-height: 1.6;
+  font-size: 0.875rem;
+}
+
+/* Variant: Default (情報・青) */
+.alert[data-variant="default"],
+.alert-default {
   background-color: #cfe2ff;
+  border-color: #0d6efd;
   border-left-color: #0d6efd;
 }
 
-.info-box .box-title {
-  font-weight: 700;
+.alert[data-variant="default"] .alert-title,
+.alert-default .alert-title {
   color: #084298;
-  margin-bottom: 0.5rem;
 }
 
-.info-box .box-content {
+.alert[data-variant="default"] .alert-description,
+.alert-default .alert-description {
   color: #084298;
-  line-height: 1.6;
 }
 
-/* 成功（緑） */
-.success-box {
+/* Variant: Success (成功・緑) */
+.alert[data-variant="success"],
+.alert-success {
   background-color: #d1e7dd;
+  border-color: #198754;
   border-left-color: #198754;
 }
 
-.success-box .box-title {
-  font-weight: 700;
+.alert[data-variant="success"] .alert-title,
+.alert-success .alert-title {
   color: #0f5132;
-  margin-bottom: 0.5rem;
 }
 
-.success-box .box-content {
+.alert[data-variant="success"] .alert-description,
+.alert-success .alert-description {
   color: #0f5132;
-  line-height: 1.6;
 }
 
-/* 警告（オレンジ） - 既存の.tips-boxと統合 */
-.warning-box,
-.tips-box {
+/* Variant: Warning (警告・オレンジ) */
+.alert[data-variant="warning"],
+.alert-warning {
   background-color: #fff3cd;
+  border-color: #ffc107;
   border-left-color: #ffc107;
 }
 
-.warning-box .box-title,
-.tips-box .box-title {
-  font-weight: 700;
+.alert[data-variant="warning"] .alert-title,
+.alert-warning .alert-title {
   color: #856404;
-  margin-bottom: 0.5rem;
 }
 
-.warning-box .box-content,
-.tips-box .box-content {
+.alert[data-variant="warning"] .alert-description,
+.alert-warning .alert-description {
   color: #856404;
-  line-height: 1.6;
 }
 
-/* 危険・エラー（赤） */
-.danger-box {
+/* Variant: Destructive (危険・エラー・赤) */
+.alert[data-variant="destructive"],
+.alert-destructive {
   background-color: #f8d7da;
+  border-color: #dc3545;
   border-left-color: #dc3545;
 }
 
-.danger-box .box-title {
-  font-weight: 700;
+.alert[data-variant="destructive"] .alert-title,
+.alert-destructive .alert-title {
   color: #842029;
-  margin-bottom: 0.5rem;
 }
 
-.danger-box .box-content {
+.alert[data-variant="destructive"] .alert-description,
+.alert-destructive .alert-description {
   color: #842029;
-  line-height: 1.6;
 }
 
-/* メモ（グレー） */
-.note-box {
+/* Variant: Note (メモ・グレー) */
+.alert[data-variant="note"],
+.alert-note {
   background-color: #e2e3e5;
+  border-color: #6c757d;
   border-left-color: #6c757d;
 }
 
-.note-box .box-title {
-  font-weight: 700;
+.alert[data-variant="note"] .alert-title,
+.alert-note .alert-title {
   color: #383d41;
-  margin-bottom: 0.5rem;
 }
 
-.note-box .box-content {
+.alert[data-variant="note"] .alert-description,
+.alert-note .alert-description {
   color: #383d41;
-  line-height: 1.6;
 }
+

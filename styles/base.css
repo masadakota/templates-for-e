@@ -65,6 +65,12 @@ label {
   white-space: nowrap;
 }
 
+/* checkbox/radio要素を含むlabelにカーソルポインター */
+label:has(input[type="checkbox"]),
+label:has(input[type="radio"]) {
+  cursor: pointer;
+}
+
 a {
   color: var(--muted-foreground);
   /* color: var(--accent); */

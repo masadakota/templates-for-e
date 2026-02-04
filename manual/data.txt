@@ -1,0 +1,22 @@
+title: 有償警告
+categories: 受電
+[col][copy]・有償警告案内未
+・[ohinichi]未[/copy]
+[copy]・有償警告案内済
+・[ohinichi]済[/copy][/col]
+[col][copy]・メーカー保証期間中の有償警告案内未
+・[ohinichi]未[/copy]
+[copy]・メーカー保証期間中の有償警告案内済
+・[ohinichi]済[/copy][/col]
+--
+title: 保証対象外
+categories: 受電
+[col][copy]・保証対象外部位案内未
+・[ohinichi]未[/copy]
+[copy]・保証対象外部位案内済
+・[ohinichi]済[/copy][/col]
+--
+title: 浴室暖房乾燥機
+categories: 受電
+[copy]店舗にて製品が10年保証に入っていることを確認済み。[/copy]
+[copy]テスト[/copy]

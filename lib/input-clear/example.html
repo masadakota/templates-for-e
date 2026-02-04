@@ -78,11 +78,20 @@
       color: #d63384;
     }
 
-    .info-box {
-      background: #e7f3ff;
-      border-left: 4px solid #007bff;
+    .alert {
+      position: relative;
       padding: 1rem;
+      border-radius: 4px;
       margin: 1rem 0;
+      border: 1px solid;
+      border-left-width: 4px;
+    }
+
+    .alert-default {
+      background: #e7f3ff;
+      border-color: #007bff;
+      border-left-color: #007bff;
+      color: #084298;
     }
 
     .event-log {
@@ -128,7 +137,7 @@
 <body>
   <h1>InputClear Library - デモページ</h1>
 
-  <div class="info-box">
+  <div class="alert alert-default">
     <strong>InputClear</strong> は、テキストボックスに自動的にクリアボタンを追加するライブラリです。<br>
     指定したclass名またはdata属性を持つinput要素に対して、値をクリアするボタンを表示します。
   </div>

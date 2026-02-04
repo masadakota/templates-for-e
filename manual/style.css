@@ -133,9 +133,9 @@ h1 {
   }
 }
 
-.card .copyable {
+/* .card .copyable {
   margin-bottom: 8px;
-}
+} */
 
 /* 設定アイコンボタン */
 .settings-icon-btn {
@@ -199,4 +199,8 @@ h1 {
   background-color: var(--muted-foreground);
   color: var(--background) !important;
   font-weight: bold !important;
+}
+
+.warning-box {
+  margin-top: 0;
 }
