@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-vendor/
+vendor/bootstrap-icons
 
 # Package manager files
 package-lock.json
