@@ -154,10 +154,10 @@ h1 {
 }
 
 /* 設定が開いている時のスタイル */
-.settings-icon-btn.active {
-  color: var(--background);
+.settings-icon-btn[aria-expanded="true"] {
+  color: var(--accent);
   border-radius: 8px 8px 0 0;
-  background-color: var(--muted-foreground);
+  background-color: transparent;
 }
 
 /* .settings-icon-btn:hover:not(.active) {
@@ -165,20 +165,10 @@ h1 {
         color: var(--foreground);
       } */
 
-.settings-icon-btn img {
-  width: 24px;
-  height: 24px;
-  padding: 6px;
-  /* background-color: #6c757d; */
-  border-radius: 6px;
+.settings-icon-btn svg {
+  width: 20px;
+  height: 20px;
   transition: transform 0.3s ease;
-}
-
-/* アクティブ時はSVGの背景を白に */
-.settings-icon-btn.active img {
-  background-color: transparent;
-  filter: brightness(0) invert(1);
-  /* SVGを白色に変換 */
 }
 
 .keyword-btn {
