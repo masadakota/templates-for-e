@@ -81,7 +81,7 @@
 
           <button
             id="settings-toggle"
-            class="settings-icon-btn"
+            class="settings-icon-btn pushable"
             title="設定"
             type="button"
             data-bs-toggle="collapse"
@@ -180,7 +180,7 @@
             <button class="tabs-trigger" data-tabs-value="受電">受電</button>
             <button class="tabs-trigger" data-tabs-value="CB">CB</button>
           </div> -->
-          <label class="flex items-center w-fit hidden">
+          <label class="flex items-center w-fit" style="display: none">
             <input type="checkbox" id="is-begginer-checkbox" />
             新人
           </label>
@@ -811,6 +811,8 @@
     <script src="../lib/file-drop/index.js"></script>
     <!-- タブ -->
     <!-- <script src="../lib/tabs/index.js"></script> -->
+    <!-- 上に戻るボタン -->
+    <script src="../lib/scroll-to-top/index.js"></script>
     <!-- 状態管理 -->
     <script src="./state.js"></script>
 
@@ -1136,6 +1138,9 @@
         });
       }
       init();
+
+      // 上に戻るボタンを初期化
+      new ScrollToTop();
     </script>
   </body>
 </html>
